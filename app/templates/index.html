@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Mecze</h1>
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>Data</th>
+        <th>Rodzaj</th>
+        <th>Gracze</th>
+        <th>Wynik</th>
+    </tr>
+    {% for match in matches %}
+    <tr>
+        <td>{{ match.date.strftime('%Y-%m-%d') }}</td>
+        <td>{{ "Multi" if match.multi_game else "Single" }}</td>
+        <td>
+            {% if match.multi_game %}
+            Team 1: {{ match.players1 }}<br>
+            Team 2: {{ match.players2 }}
+            {% else %}
+            Gracz 1: {{ match.player1id }}<br>
+            Gracz 2: {{ match.player2id }}
+            {% endif %}
+        </td>
+        <td>{{ match.who_won }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

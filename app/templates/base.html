@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+  <title>ZMiTAC 2</title>
+</head>
+
+<body>
+  <nav>
+    <a href="{{ url_for('index') }}">
+
+
+      <div class="logo-container">
+        <img src="{{ url_for('static', filename='logo.gif') }}" alt="logo" class="logo">
+        <h1 class="title">ZMiTAC 2</h1>
+      </div>
+
+    </a>
+  </nav>
+
+  <nav>
+    <a href="{{ url_for('index') }}">Mecze</a>
+    {% if session.get('logged_in') %}
+    <a href="{{ url_for('add_player_route') }}">Dodaj gracza</a>
+    <a href="{{ url_for('add_match_route') }}">Dodaj mecz</a>
+    <a href="{{ url_for('logout') }}">Wyloguj</a>
+    {% else %}
+    <a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
+  </nav>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <ul>
+    {% for category, message in messages %}
+    <li style="color:red;">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  <div>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+
+</html>
