@@ -1,10 +1,10 @@
 # ZMiTAC 2
 
 ### todo:
+- docker (almost)
 - finish it
 - i need goofy css
 - basic stats
-- docker
 
 ### in future:
 - goofy bot for fandom dziekana

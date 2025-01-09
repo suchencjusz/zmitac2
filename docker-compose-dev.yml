@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=
+      - ADMIN_PASSWORD=dupa1234
+    volumes:
+      - .:/app
+      # - ./custom.css:/app/app/static/styles.css
+    restart: unless-stopped
