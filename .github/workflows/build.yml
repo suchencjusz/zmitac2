@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         include:
-        - image: suchencjusz/zmitac2:latest
+        - image: suchencjusz/zmitac2
           dockerfile: Dockerfile
     steps:
       -
