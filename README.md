@@ -1,7 +1,6 @@
 # ZMiTAC 2
 
 ### todo:
-- show nicknames, not ids
 - finish it
 - i need goofy css
 - basic stats

@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Mecze</h1>
-<table border="1" cellpadding="5" cellspacing="0">
+<table border="1" cellpadding="5" cellspacing="0s">
     <tr>
         <th>Data</th>
         <th>Rodzaj</th>
@@ -11,18 +11,74 @@
     </tr>
     {% for match in matches %}
     <tr>
-        <td>{{ match.date.strftime('%Y-%m-%d') }}</td>
-        <td>{{ "Multi" if match.multi_game else "Single" }}</td>
         <td>
-            {% if match.multi_game %}
-            Team 1: {{ match.players1 }}<br>
-            Team 2: {{ match.players2 }}
+            {% if match.datetime %}
+                {{ match.datetime.strftime('%Y-%m-%d %H:%M') }}
+            {% elif match.date %}
+                {% if match.date is string %}
+                    {{ match.date }}
+                {% else %}
+                    {{ match.date.strftime('%Y-%m-%d %H:%M') }}
+                {% endif %}
             {% else %}
-            Gracz 1: {{ match.player1id }}<br>
-            Gracz 2: {{ match.player2id }}
+                Nie wiem
             {% endif %}
         </td>
-        <td>{{ match.who_won }}</td>
+        <td>{{ "multifrutti" if match.multi_game else "solóweczka" }}</td>
+        <td style="text-align: center;">
+            {% if match.multi_game %}
+                {% for player in match.players if player._id in match.players1 %}
+                    <strong>{{ player.nickname }}</strong>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+                vs
+                {% for player in match.players if player._id in match.players2 %}
+                    <strong>{{ player.nickname }}</strong>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                <strong>
+                    {% for player in match.players if player._id == match.player1id %}
+                        {{ player.nickname }}
+                    {% endfor %}
+                </strong>
+                vs
+                <strong>
+                    {% for player in match.players if player._id == match.player2id %}
+                        {{ player.nickname }}
+                    {% endfor %}
+                </strong>
+            {% endif %}
+        </td>
+        <td>
+            {% if match.multi_game %}
+                {% if match.who_won == 'players1' %}
+                    {% for player in match.players if player._id in match.players1 %}
+                        {{ player.nickname }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                {% elif match.who_won == 'players2' %}
+                    {% for player in match.players if player._id in match.players2 %}
+                        {{ player.nickname }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                {% elif match.who_won == 'draw' %}
+                    <i>Remis</i>
+                {% else %}
+                    <i>0-0 :/</i>
+                {% endif %}
+            {% else %}
+                {% if match.who_won == 'player1' %}
+                    {% for player in match.players if player._id == match.player1id %}
+                        {{ player.nickname }}
+                    {% endfor %}
+                {% elif match.who_won == 'player2' %}
+                    {% for player in match.players if player._id == match.player2id %}
+                        {{ player.nickname }}
+                    {% endfor %}
+                {% elif match.who_won == 'draw' %}
+                    <i>Remis</i>
+                {% else %}
+                    <i>0-0 :/</i>
+                {% endif %}
+            {% endif %}
+        </td>
     </tr>
     {% endfor %}
 </table>

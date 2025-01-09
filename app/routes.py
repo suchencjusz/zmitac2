@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 
 from flask import flash, redirect, render_template, request, session, url_for
 
@@ -39,6 +39,7 @@ def add_match_route():
             game_type = request.form["game_type"]
             who_won = request.form["who_won"]
             date_val = request.form["date"]
+            time_val = request.form["time"]
 
             if game_type == "multi":
                 players1 = request.form.getlist("players1[]")
@@ -60,12 +61,12 @@ def add_match_route():
                     player2id=None,
                     who_won=who_won,
                     date=date_val,
+                    time=time_val,
                     multi_game=True,
                     players1=players1,
-                    players2=players2,
+                    players2=players2
                 )
             else:
-                # single game
                 player1id = request.form["player1id"]
                 player2id = request.form["player2id"]
                 add_match(
@@ -73,15 +74,20 @@ def add_match_route():
                     player2id=player2id,
                     who_won=who_won,
                     date=date_val,
+                    time=time_val
                 )
 
             flash("Mecz dodany sukcesywnie!!!!", "success")
             return redirect(url_for("add_match_route"))
         except Exception as e:
             flash(str(e), "error")
-    players = list(get_all_players())
+            
+    now = datetime.now()
     return render_template(
-        "add_match.html", players=players, today=date.today().isoformat()
+        "add_match.html", 
+        players=list(get_all_players()), 
+        today=now.date().isoformat(),
+        now=now.strftime("%H:%M")
     )
 
 

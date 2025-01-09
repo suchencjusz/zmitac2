@@ -10,104 +10,109 @@
             <option value="multi">multifrutti (>1 vs >1)</option>
         </select>
     </div>
-    
+
     <!-- soloweczka -->
     <div id="single_fields">
-        <label>Player 1:</label>
+        <label>Gracz 1:</label>
         <select name="player1id" id="player1id" required>
-            <option value="">Select Player</option>
+            <option value="">Wybierz gracz</option>
             {% for player in players %}
             <option value="{{ player._id }}">{{ player.nickname }}</option>
             {% endfor %}
         </select>
         <br>
-        <label>Player 2:</label>
+        <label>Gracz 2:</label>
         <select name="player2id" id="player2id" required>
-            <option value="">Select Player</option>
+            <option value="">Wybierz gracz</option>
             {% for player in players %}
             <option value="{{ player._id }}">{{ player.nickname }}</option>
             {% endfor %}
         </select>
     </div>
-    
+
     <!-- multifruti -->
     <div id="multi_fields" style="display:none;">
-        <p>Select multiple players for each group</p>
-        <label>Group 1:</label>
+        <p>Wybierz graczy</p>
+        <label>Team 1:</label>
         <select name="players1[]" id="players1" multiple size="4">
             {% for player in players %}
             <option value="{{ player._id }}">{{ player.nickname }}</option>
             {% endfor %}
         </select>
         <br>
-        <label>Group 2:</label>
+        <label>Team 2:</label>
         <select name="players2[]" id="players2" multiple size="4">
             {% for player in players %}
             <option value="{{ player._id }}">{{ player.nickname }}</option>
             {% endfor %}
         </select>
     </div>
-    
+
     <br>
-    <label for="who_won">Result:</label>
+    <label for="who_won">Wynik:</label>
 
     <select name="who_won" id="who_won" required>
         <!-- js jazda -->
     </select>
 
     <br>
-    <label for="date">Date:</label>
-    <input type="date" name="date" required value="{{ today }}" />
+    <div>
+        <label for="date">Data:</label>
+        <input type="date" name="date" required value="{{ today }}" />
+
+        <label for="time">Godzinka:</label>
+        <input type="time" name="time" value="{{ now }}" required />
+    </div>
 
     <br><br>
-    <button type="submit">Add Match</button>
+    <button type="submit">Dodaj mecz</button>
 </form>
 
 <script>
-function toggleFields() {
-    const gameType = document.getElementById('game_type').value;
-    const singleFields = document.getElementById('single_fields');
-    const multiFields = document.getElementById('multi_fields');
-    
-    const p1 = document.getElementById('player1id');
-    const p2 = document.getElementById('player2id');
-    const p1multi = document.getElementById('players1');
-    const p2multi = document.getElementById('players2');
-    
-    if (gameType === 'multi') {
-        singleFields.style.display = 'none';
-        multiFields.style.display = 'block';
+    function toggleFields() {
+        const gameType = document.getElementById('game_type').value;
+        const singleFields = document.getElementById('single_fields');
+        const multiFields = document.getElementById('multi_fields');
 
-        p1.removeAttribute('required');
-        p2.removeAttribute('required');
+        const p1 = document.getElementById('player1id');
+        const p2 = document.getElementById('player2id');
+        const p1multi = document.getElementById('players1');
+        const p2multi = document.getElementById('players2');
 
-        p1multi.setAttribute('required', true);
-        p2multi.setAttribute('required', true);
-    } else {
-        singleFields.style.display = 'block';
-        multiFields.style.display = 'none';
-        p1.setAttribute('required', true);
-        p2.setAttribute('required', true);
-        p1multi.removeAttribute('required');
-        p2multi.removeAttribute('required');
+        if (gameType === 'multi') {
+            singleFields.style.display = 'none';
+            multiFields.style.display = 'block';
+
+            p1.removeAttribute('required');
+            p2.removeAttribute('required');
+
+            p1multi.setAttribute('required', true);
+            p2multi.setAttribute('required', true);
+        } else {
+            singleFields.style.display = 'block';
+            multiFields.style.display = 'none';
+            p1.setAttribute('required', true);
+            p2.setAttribute('required', true);
+            p1multi.removeAttribute('required');
+            p2multi.removeAttribute('required');
+        }
+
+        const whoWon = document.getElementById('who_won');
+        whoWon.innerHTML = '';
+
+        whoWon.add(new Option('Wybierz wynik', ''));
+        
+        if (gameType === 'single') {
+            whoWon.add(new Option('Gracz 1 Wygrał', 'player1'));
+            whoWon.add(new Option('Gracz 2 Wygrał', 'player2'));
+        } else {
+            whoWon.add(new Option('Drużyna 1 Wygrała', 'players1'));
+            whoWon.add(new Option('Drużyna 2 Wygrała', 'players2'));
+        }
+        whoWon.add(new Option('Remis (1-1)', 'draw'));
+        whoWon.add(new Option('Nierozstrzygnięty (0-0)', 'none'));
     }
 
-    const whoWon = document.getElementById('who_won');
-    whoWon.innerHTML = '';
-
-    whoWon.add(new Option('Select Result', ''));
-    
-    if (gameType === 'single') {
-        whoWon.add(new Option('Player 1 Won', 'player1'));
-        whoWon.add(new Option('Player 2 Won', 'player2'));
-    } else {
-        whoWon.add(new Option('Group 1 Won', 'players1'));
-        whoWon.add(new Option('Group 2 Won', 'players2'));
-    }
-    whoWon.add(new Option('Draw (1-1)', 'draw'));
-    whoWon.add(new Option('Not Finished (0-0)', 'none'));
-}
-
-document.addEventListener('DOMContentLoaded', toggleFields);
+    document.addEventListener('DOMContentLoaded', toggleFields);
 </script>
 {% endblock %}
