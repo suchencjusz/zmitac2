@@ -66,11 +66,11 @@
             {% else %}
                 {% if match.who_won == 'player1' %}
                     {% for player in match.players if player._id == match.player1id %}
-                        {{ player.nickname }}
+                        <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
                     {% endfor %}
                 {% elif match.who_won == 'player2' %}
                     {% for player in match.players if player._id == match.player2id %}
-                        {{ player.nickname }}
+                        <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
                     {% endfor %}
                 {% elif match.who_won == 'draw' %}
                     <i>Remis</i>

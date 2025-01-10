@@ -3,7 +3,9 @@ from datetime import datetime
 from flask import flash, redirect, render_template, request, session, url_for
 
 from app import app
-from app.queries import add_match, add_player, get_all_matches, get_all_players
+from app.queries import (add_match, add_player, check_player_exists,
+                         get_all_matches, get_all_player_matches_by_nickname,
+                         get_all_players, get_player_matches_data_by_nickname)
 from config import Config
 
 
@@ -56,6 +58,13 @@ def add_match_route():
                     )
                     return redirect(url_for("add_match_route"))
 
+                if players1 == players2:
+                    flash(
+                        "Panocku grali sami ze sobą? Nie oszukuj!",
+                        "error",
+                    )
+                    return redirect(url_for("add_match_route"))
+
                 add_match(
                     player1id=None,
                     player2id=None,
@@ -64,7 +73,7 @@ def add_match_route():
                     time=time_val,
                     multi_game=True,
                     players1=players1,
-                    players2=players2
+                    players2=players2,
                 )
             else:
                 player1id = request.form["player1id"]
@@ -74,20 +83,34 @@ def add_match_route():
                     player2id=player2id,
                     who_won=who_won,
                     date=date_val,
-                    time=time_val
+                    time=time_val,
                 )
 
             flash("Mecz dodany sukcesywnie!!!!", "success")
             return redirect(url_for("add_match_route"))
         except Exception as e:
             flash(str(e), "error")
-            
+
     now = datetime.now()
     return render_template(
-        "add_match.html", 
-        players=list(get_all_players()), 
+        "add_match.html",
+        players=list(get_all_players()),
         today=now.date().isoformat(),
-        now=now.strftime("%H:%M")
+        now=now.strftime("%H:%M"),
+    )
+
+
+@app.route("/player/<nickname>")
+def player(nickname):
+    if not check_player_exists(nickname):
+        flash("Nie znaleziono gracza!", "error")
+        return redirect(url_for("index"))
+
+    stats = get_player_matches_data_by_nickname(nickname)
+    matches = get_all_player_matches_by_nickname(nickname)
+
+    return render_template(
+        "player.html", player=player, stats=stats, matches=list(matches)
     )
 
 
@@ -97,7 +120,7 @@ def login():
         if request.form["password"] == Config.ADMIN_PASSWORD:
             session["logged_in"] = True
             return redirect(url_for("index"))
-        flash("złe masło!!!!!!!!!!!!!!!!!", "error")
+        flash("złe masło!!!", "error")
     return render_template("login.html")
 
 

@@ -6,6 +6,7 @@
 - finish it
 - i need goofy css
 - basic stats
+- najbardziej zdeklasowani przeciwnicy
 
 ### in future:
 - goofy bot for fandom dziekana
@@ -25,7 +26,7 @@ services:
   web:
     build: suchencjusz/zmitac2:main
     ports:
-      - "5000:5000"
+      - "5000:5000"wtf i want t
     environment:
       - MONGO_URI=mongodb+srv://
       - ADMIN_PASSWORD=dupa1234
