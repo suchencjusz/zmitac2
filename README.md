@@ -1,6 +1,7 @@
 # ZMiTAC 2
 
 ### todo:
+- fix: match between x vs x should not be possible
 - docker (almost)
 - finish it
 - i need goofy css
