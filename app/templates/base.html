@@ -46,7 +46,9 @@
         <div class="logo-text">
 
           <h1 class="title">ZMiTAC 2</h1>
-          <h2 class="subtitle">Bilard Babiloński!</h2>
+          <h2 class="subtitle">Bilard Babiloński! <img src="https://emots.yetihehe.com/1/kotek.gif" alt="kotek"
+              class="kotek" width="45" height="20"></h2>
+
         </div>
       </div>
 
@@ -56,7 +58,9 @@
     </nav>
 
     <nav>
-      <a href="{{ url_for('index') }}">Mecze</a>
+      <a href="{{ url_for('index') }}">Strona główna</a>
+      <a href="{{ url_for('matches') }}">Wszystkie mecze</a>
+
       {% if session.get('logged_in') %}
       <a href="{{ url_for('add_player_route') }}">Dodaj gracza</a>
       <a href="{{ url_for('add_match_route') }}">Dodaj mecz</a>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% from 'macros.html' import matches_table %}
+
+{% block content %}
+
+<h1>Wszystkie mecze</h1>
+
+{{ matches_table(matches) }}
+
+{% endblock %}

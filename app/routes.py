@@ -4,9 +4,15 @@ from flask import flash, redirect, render_template, request, session, url_for
 from pytz import timezone
 
 from app import app
-from app.queries import (add_match, add_player, check_player_exists,
-                         get_all_matches, get_all_player_matches_by_nickname,
-                         get_all_players, get_player_matches_data_by_nickname)
+from app.queries import (
+    add_match,
+    add_player,
+    check_player_exists,
+    get_all_matches,
+    get_all_player_matches_by_nickname,
+    get_all_players,
+    get_player_matches_data_by_nickname,
+)
 from config import Config
 
 
@@ -102,6 +108,12 @@ def player(nickname):
     return render_template(
         "player.html", player=player, stats=stats, matches=list(matches)
     )
+
+
+@app.route("/matches")
+def matches():
+    matches = list(get_all_matches())
+    return render_template("matches.html", matches=matches)
 
 
 @app.route("/login", methods=["GET", "POST"])

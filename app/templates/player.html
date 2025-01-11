@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% from 'macros.html' import matches_table %}
 
+{% block content %}
 
 <div class="player-header">
     <h1>{{ stats.nickname }}</h1>
@@ -10,7 +11,7 @@
 <div class="player-grid">
 
     <div class="stats-box">
-        <h2>Statystyki</h2>
+        <h2>Statystyki <img src="http://emots.yetihehe.com/1/gool.gif"></h2>
         <table class="invisible-table">
             <tr>
                 <th>Wszystkie mecze</th>
@@ -36,7 +37,7 @@
     </div>
 
     <div class="stats-box">
-        <h2>Ostatni mecz</h2>
+        <h2>Ostatni mecz <img src="http://emots.yetihehe.com/1/gra.gif"></h2>
         <table class="invisible-table">
             {% if stats.last_match_date %}
             <tr>
@@ -60,7 +61,7 @@
     </div>
 
     <div class="stats-box">
-        <h2>Najczęstsi przeciwnicy</h2>
+        <h2>Najczęstsi przeciwnicy <img src="http://emots.yetihehe.com/2/piwo.gif"></h2>
         <table class="invisible-table">
             {% if stats.top_opponents %}
             {% for opponent in stats.top_opponents %}
@@ -79,7 +80,7 @@
 
 
     <div class="stats-box">
-        <h2>Osobiste relacje</h2>
+        <h2>Osobiste relacje <img src="http://emots.yetihehe.com/3/uscisk.gif"></h2>
         <table class="invisible-table">
             {% if stats.nemesis %}
             <tr>
@@ -119,58 +120,8 @@
 
 <div class="stats-box">
     <h2>Historia meczy</h2>
-    <table class="matches-table">
-        <tr>
-            <th>Data</th>
-            <th>Typ</th>
-            <th>Gracze</th>
-            <th>Wynik</th>
-        </tr>
-        {% for match in matches %}
-        <tr>
-            <td>{{ match.date.strftime('%Y-%m-%d %H:%M') }}</td>
-            <td>{{ "multifrutti" if match.multi_game else "solóweczka" }}</td>
-            <td>
-                {% if match.multi_game %}
-                {% for p in match.players if p._id in match.players1 %}
-                {{ p.nickname }}{% if not loop.last %}, {% endif %}
-                {% endfor %}
-                vs
-                {% for p in match.players if p._id in match.players2 %}
-                {{ p.nickname }}{% if not loop.last %}, {% endif %}
-                {% endfor %}
-                {% else %}
-                {% for p in match.players if p._id == match.player1id %}{{ p.nickname }}{% endfor %}
-                vs
-                {% for p in match.players if p._id == match.player2id %}{{ p.nickname }}{% endfor %}
-                {% endif %}
-            </td>
-            <td>
-                {% if match.multi_game %}
-                {% if match.who_won == 'players1' %}
-                Team 1 Wygrał
-                {% elif match.who_won == 'players2' %}
-                Team 2 Wygrał
-                {% elif match.who_won == 'draw' %}
-                Remis
-                {% else %}
-                Nierozstrzygnięty
-                {% endif %}
-                {% else %}
-                {% if match.who_won == 'player1' %}
-                {% for p in match.players if p._id == match.player1id %}{{ p.nickname }}{% endfor %}
-                {% elif match.who_won == 'player2' %}
-                {% for p in match.players if p._id == match.player2id %}{{ p.nickname }}{% endfor %}
-                {% elif match.who_won == 'draw' %}
-                Remis
-                {% else %}
-                Nierozstrzygnięty
-                {% endif %}
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    
+    {{ matches_table(matches) }}
 
 </div>
 {% endblock %}
