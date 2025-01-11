@@ -3,6 +3,9 @@ from datetime import datetime, timedelta
 from flask import flash, redirect, render_template, request, session, url_for
 from pytz import timezone
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 from app import app
 from app.queries import (
     add_match,
@@ -12,8 +15,15 @@ from app.queries import (
     get_all_player_matches_by_nickname,
     get_all_players,
     get_player_matches_data_by_nickname,
+    get_players_with_best_win_ratio,
 )
 from config import Config
+
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address,
+    default_limits=["10000 per day", "1000 per hour"]
+)
 
 
 @app.route("/")
@@ -115,8 +125,20 @@ def matches():
     matches = list(get_all_matches())
     return render_template("matches.html", matches=matches)
 
+@app.route("/info")
+def info():
+    return render_template("info.html")
+
+
+@app.route("/ranking")
+def ranking():
+    best_ratio_players = get_players_with_best_win_ratio(5)
+    
+    return render_template("ranking.html", players=best_ratio_players)
+
 
 @app.route("/login", methods=["GET", "POST"])
+@limiter.limit("3 per minute")
 def login():
     if request.method == "POST":
         if request.form["password"] == Config.ADMIN_PASSWORD:

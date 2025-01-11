@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Ranking graczy</h1>
+
+<table class="matches-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Gracz</th>
+            <th>Mecze</th>
+            <th>Wygrane</th>
+            <th>Win ratio</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr>
+            <td data-label="Pozycja">{{ loop.index }}</td>
+            <td data-label="Gracz">
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
+            </td>
+            <td data-label="Mecze">{{ player.total_matches }}</td>
+            <td data-label="Wygrane">{{ player.wins }}</td>
+            <td data-label="Win ratio">{{ "%.1f"|format(player.win_ratio) }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

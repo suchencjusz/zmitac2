@@ -483,3 +483,114 @@ def get_player_matches_data_by_nickname(nickname) -> dict:
         "nemesis": nemesis_victim["nemesis"],
         "victim": nemesis_victim["victim"],
     }
+
+def get_players_with_best_win_ratio(limit=5):
+    pipeline = [
+        # Match all games
+        {
+            "$match": {
+                "$or": [
+                    {"player1id": {"$exists": True}},
+                    {"players1": {"$exists": True}}
+                ]
+            }
+        },
+        # Lookup player details
+        {
+            "$lookup": {
+                "from": "players",
+                "let": {
+                    "player1_id": "$player1id",
+                    "player2_id": "$player2id",
+                    "team1_players": {"$ifNull": ["$players1", []]},
+                    "team2_players": {"$ifNull": ["$players2", []]}
+                },
+                "pipeline": [
+                    {
+                        "$match": {
+                            "$expr": {
+                                "$or": [
+                                    {"$eq": ["$_id", "$$player1_id"]},
+                                    {"$eq": ["$_id", "$$player2_id"]},
+                                    {"$in": ["$_id", "$$team1_players"]},
+                                    {"$in": ["$_id", "$$team2_players"]}
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "as": "players"
+            }
+        },
+        {"$unwind": "$players"},
+        {
+            "$group": {
+                "_id": "$players.nickname",
+                "total_matches": {"$sum": 1},
+                "wins": {
+                    "$sum": {
+                        "$switch": {
+                            "branches": [
+                                {
+                                    "case": {
+                                        "$and": [
+                                            {"$eq": ["$multi_game", False]},
+                                            {"$eq": ["$who_won", "player1"]},
+                                            {"$eq": ["$player1id", "$players._id"]}
+                                        ]
+                                    },
+                                    "then": 1
+                                },
+                                {
+                                    "case": {
+                                        "$and": [
+                                            {"$eq": ["$multi_game", False]},
+                                            {"$eq": ["$who_won", "player2"]},
+                                            {"$eq": ["$player2id", "$players._id"]}
+                                        ]
+                                    },
+                                    "then": 1
+                                },
+                                {
+                                    "case": {
+                                        "$and": [
+                                            {"$eq": ["$multi_game", True]},
+                                            {"$eq": ["$who_won", "players1"]},
+                                            {"$in": ["$players._id", "$players1"]}
+                                        ]
+                                    },
+                                    "then": 1
+                                },
+                                {
+                                    "case": {
+                                        "$and": [
+                                            {"$eq": ["$multi_game", True]},
+                                            {"$eq": ["$who_won", "players2"]},
+                                            {"$in": ["$players._id", "$players2"]}
+                                        ]
+                                    },
+                                    "then": 1
+                                }
+                            ],
+                            "default": 0
+                        }
+                    }
+                }
+            }
+        },
+        {"$match": {"total_matches": {"$gt": 0}}}
+    ]
+
+    results = list(db.matches.aggregate(pipeline))
+    
+    # Calculate win ratio and sort
+    for player in results:
+        player['win_ratio'] = round((player['wins'] / player['total_matches']) * 100, 2)
+        player['nickname'] = player['_id']
+    
+    sorted_results = sorted(
+        results, 
+        key=lambda x: (-x['win_ratio'], -x['total_matches'])
+    )[:limit]
+
+    return sorted_results
