@@ -1,28 +1,21 @@
 from datetime import datetime, timedelta
 
 from flask import flash, redirect, render_template, request, session, url_for
-from pytz import timezone
-
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from pytz import timezone
 
 from app import app
-from app.queries import (
-    add_match,
-    add_player,
-    check_player_exists,
-    get_all_matches,
-    get_all_player_matches_by_nickname,
-    get_all_players,
-    get_player_matches_data_by_nickname,
-    get_players_with_best_win_ratio,
-)
+from app.queries import (add_match, add_player, check_player_exists,
+                         get_all_matches, get_all_player_matches_by_nickname,
+                         get_all_players, get_player_matches_data_by_nickname,
+                         get_players_with_best_win_ratio)
 from config import Config
 
 limiter = Limiter(
     app=app,
     key_func=get_remote_address,
-    default_limits=["10000 per day", "1000 per hour"]
+    default_limits=["10000 per day", "1000 per hour"],
 )
 
 
@@ -61,9 +54,7 @@ def add_match_route():
             date_val = request.form["date"]
             time_val = request.form["time"]
 
-            match_datetime = datetime.strptime(
-                f"{date_val} {time_val}", "%Y-%m-%d %H:%M"
-            )
+            match_datetime = datetime.strptime(f"{date_val} {time_val}", "%Y-%m-%d %H:%M")
 
             if game_type == "multi":
                 players1 = request.form.getlist("players1[]")
@@ -115,9 +106,7 @@ def player(nickname):
     stats = get_player_matches_data_by_nickname(nickname)
     matches = list(get_all_player_matches_by_nickname(nickname))
 
-    return render_template(
-        "player.html", player=player, stats=stats, matches=list(matches)
-    )
+    return render_template("player.html", player=player, stats=stats, matches=list(matches))
 
 
 @app.route("/matches")
@@ -125,9 +114,11 @@ def matches():
     matches = list(get_all_matches())
     return render_template("matches.html", matches=matches)
 
+
 @app.route("/info")
 def info():
     return render_template("info.html")
+
 
 @app.route("/players")
 def players():
@@ -138,7 +129,7 @@ def players():
 @app.route("/ranking")
 def ranking():
     best_ratio_players = get_players_with_best_win_ratio(10)
-    
+
     return render_template("ranking.html", players=best_ratio_players)
 
 

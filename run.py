@@ -1,5 +1,6 @@
-import uvicorn
 import multiprocessing
+
+import uvicorn
 
 if __name__ == "__main__":
     uvicorn.run(
@@ -12,5 +13,5 @@ if __name__ == "__main__":
         access_log=True,
         proxy_headers=True,
         forwarded_allow_ips="*",
-        interface="wsgi"
+        interface="wsgi",
     )

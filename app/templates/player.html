@@ -50,7 +50,17 @@
             </tr>
             <tr>
                 <th>Wynik:</th>
-                <td>{% if stats.last_match_who_won == player.nickname %}Wygrana{% else %}Przegrana{% endif %}</td>
+                <td>
+                    {% if stats.last_match_who_won == "draw" %}
+                        Remis
+                    {% elif stats.last_match_who_won == "none" %}
+                        Nierozstrzygnięty
+                    {% elif stats.last_match_who_won == stats.nickname %}
+                        Wygrana
+                    {% else %}
+                        Przegrana (wygrał {{ stats.last_match_who_won }})
+                    {% endif %}
+                </td>
             </tr>
             {% else %}
             <tr>
