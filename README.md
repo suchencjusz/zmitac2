@@ -24,9 +24,8 @@ services:
     environment:
       - MONGO_URI=mongodb+srv://
       - ADMIN_PASSWORD=dupa1234
-    volumes:
-      - .:/app
-      # - ./custom.css:/app/app/static/styles.css
+    #volumes:
+    # - ./custom.css:/app/app/static/styles.css
     restart: unless-stopped
 
   cloudflared:
