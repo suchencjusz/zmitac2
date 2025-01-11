@@ -42,6 +42,7 @@ services:
 ```
 git clone https://github.com/suchencjusz/zmitac2
 cd zmitac2
+pip install -r requirements.txt
 python3 -m venv venv
 ```
 
