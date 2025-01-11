@@ -129,10 +129,15 @@ def matches():
 def info():
     return render_template("info.html")
 
+@app.route("/players")
+def players():
+    players = list(get_all_players())
+    return render_template("players.html", players=players)
+
 
 @app.route("/ranking")
 def ranking():
-    best_ratio_players = get_players_with_best_win_ratio(5)
+    best_ratio_players = get_players_with_best_win_ratio(10)
     
     return render_template("ranking.html", players=best_ratio_players)
 

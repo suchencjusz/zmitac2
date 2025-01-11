@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Wszyscy gracze</h1>
+
+<table class="matches-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nick</th>
+            <th>Zobacz profil</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr>
+            <td data-label="Nr">{{ loop.index }}</td>
+            <td data-label="Nick">{{ player.nickname }}</td>
+            <td data-label="Profil">
+                <a href="{{ url_for('player', nickname=player.nickname) }}">Pokaż profil</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

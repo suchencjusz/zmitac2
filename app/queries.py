@@ -88,7 +88,7 @@ def get_all_matches() -> list:
 
 
 def get_all_players() -> list:
-    return db.players.find().sort("nickname")
+    return db.players.find().sort("nickname", 1)
 
 
 def get_all_player_matches_by_nickname(nickname) -> list:
