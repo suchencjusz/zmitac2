@@ -1,12 +1,8 @@
 # ZMiTAC 2
 
 ### todo:
-- fix: match between x vs x should not be possible
-- docker (almost)
-- finish it
-- i need goofy css
-- basic stats
-- najbardziej zdeklasowani przeciwnicy
+- better ranking
+- rules
 
 ### in future:
 - goofy bot for fandom dziekana
@@ -20,13 +16,11 @@ ZMiTAC 2 is a simple application written in one (two) evenings, used to track po
 ### docker compose
 
 ```
-version: '3.8'
-
 services:
   web:
-    build: suchencjusz/zmitac2:main
+    image: suchencjusz/zmitac2:main
     ports:
-      - "5000:5000"wtf i want t
+      - "5000:5000"
     environment:
       - MONGO_URI=mongodb+srv://
       - ADMIN_PASSWORD=dupa1234
@@ -39,7 +33,7 @@ services:
     image: cloudflare/cloudflared
     command: tunnel --url http://web:5000
     environment:
-      - TUNNEL_HOSTNAME=example.com
+      - TUNNEL_TOKEN=
     restart: unless-stopped
 ```
 
