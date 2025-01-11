@@ -18,6 +18,17 @@ body {
 .stats-box {
     border: 2px dotted #ff00ff;
     padding: 15px;
+    min-height: fit-content;
+    height: auto;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-box table {
+    width: 100%;
+    flex: 1;
+    
 }
 
 .stats-box h2 {
@@ -81,7 +92,8 @@ body {
         padding: 0.5em;
     }
 
-    .matches-table td {
+    /* co sie tu dupcy na mobile */
+    .matches-table td { 
         display: block;
         text-align: right;
         border: none;

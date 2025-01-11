@@ -1,6 +1,7 @@
 # ZMiTAC 2
 
 ### todo:
+- fix css tables on mobile
 - better ranking
 - rules
 

@@ -152,8 +152,7 @@ def get_all_player_matches_by_id(player_id) -> list:
 def get_nemesis_and_victim(nickname):
 
     #
-    # dziekuje chatugpt za pomoc w tym query
-    # i tak cos nie dziala cos przez te teamy musze zerknac
+    # dziekuje chatugpt za pomoc w tym query <3
     #
 
     player = db.players.find_one({"nickname": nickname})
@@ -345,7 +344,68 @@ def get_nemesis_and_victim(nickname):
     }
 
 
-# def get_top_opponents(nickname, limit=5):
+def get_top_opponents(nickname, limit=5):
+    player = db.players.find_one({"nickname": nickname})
+    if not player:
+        return None
+
+    pipeline = [
+        # Match all games where our player participated
+        {
+            "$match": {
+                "$or": [
+                    {"player1id": player["_id"]},
+                    {"player2id": player["_id"]},
+                    {"players1": player["_id"]},
+                    {"players2": player["_id"]}
+                ]
+            }
+        },
+        # Lookup player details
+        {
+            "$lookup": {
+                "from": "players",
+                "let": {
+                    "player1_id": "$player1id",
+                    "player2_id": "$player2id",
+                    "team1_players": {"$ifNull": ["$players1", []]},
+                    "team2_players": {"$ifNull": ["$players2", []]}
+                },
+                "pipeline": [
+                    {
+                        "$match": {
+                            "$expr": {
+                                "$or": [
+                                    {"$eq": ["$_id", "$$player1_id"]},
+                                    {"$eq": ["$_id", "$$player2_id"]},
+                                    {"$in": ["$_id", "$$team1_players"]},
+                                    {"$in": ["$_id", "$$team2_players"]}
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "as": "players"
+            }
+        },
+        # Unwind players array
+        {"$unwind": "$players"},
+        # Remove self from opponents
+        {"$match": {"players.nickname": {"$ne": nickname}}},
+        # Group by opponent and count games together
+        {
+            "$group": {
+                "_id": "$players.nickname",
+                "games_together": {"$sum": 1}
+            }
+        },
+        # Sort by number of games descending
+        {"$sort": {"games_together": -1}},
+        # Limit results
+        {"$limit": limit}
+    ]
+
+    return list(db.matches.aggregate(pipeline))
 
 
 def get_player_matches_data_by_nickname(nickname) -> dict:
@@ -353,7 +413,7 @@ def get_player_matches_data_by_nickname(nickname) -> dict:
         return {}
 
     player_all_matches = list(get_all_player_matches_by_nickname(nickname))
-    top_opponents = None
+    top_opponents = get_top_opponents(nickname)
     nemesis_victim = get_nemesis_and_victim(nickname)
 
     matches_count = len(player_all_matches)
