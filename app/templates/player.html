@@ -2,174 +2,175 @@
 
 {% block content %}
 
+
+<div class="player-header">
+    <h1>{{ stats.nickname }}</h1>
+</div>
+
 <div class="player-grid">
-    <div class="player-header">
-        <h1>{{ stats.nickname }}</h1>
-    </div>
 
-    <div class="player-stats">
+    <div class="stats-box">
         <h2>Statystyki</h2>
-        <div class="stats-box">
-            <table class="invisible-table">
-                <tr>
-                    <th>Wszystkie mecze</th>
-                    <td>{{ stats.matches_count }}</td>
-                </tr>
-                <tr>
-                    <th>Wygrane</th>
-                    <td>{{ stats.wins_count }}</td>
-                </tr>
-                <tr>
-                    <th>Przegrane</th>
-                    <td>{{ stats.losses_count }}</td>
-                </tr>
-                <tr>
-                    <th>Remisy</th>
-                    <td>{{ stats.draws_count }}</td>
-                </tr>
-                <tr>
-                    <th>Win ratio</th>
-                    <td>{{ stats.win_ratio }}%</td>
-                </tr>
-            </table>
-        </div>
-
-        <h2>Ostatni mecz</h2>
-        <div class="stats-box">
-            <table class="invisible-table">
-                {% if stats.last_match_date %}
-                <tr>
-                    <th>Data:</th>
-                    <td>{{ stats.last_match_date.strftime('%Y-%m-%d %H:%M') }}</td>
-                </tr>
-                <tr>
-                    <th>Przeciwnik:</th>
-                    <td>{{ stats.last_match_opponent }}</td>
-                </tr>
-                <tr>
-                    <th>Wynik:</th>
-                    <td>{% if stats.last_match_who_won == player.nickname %}Wygrana{% else %}Przegrana{% endif %}</td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="2">Brak meczy</td>
-                </tr>
-                {% endif %}
-            </table>
-        </div>
-    </div>
-
-    <div class="player-opponents">
-        <div class="stats-box">
-            <h2>Najczęstsi przeciwnicy</h2>
-            <table class="invisible-table">
-                {% if stats.top_opponents %}
-                {% for opponent in stats.top_opponents %}
-                <tr>
-                    <th>{{ opponent._id }}:</th>
-                    <td>{{ opponent.games_together }} meczy</td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="2">Brak danych</td>
-                </tr>
-                {% endif %}
-            </table>
-        </div>
-
-        <h2>Osobiste relacje (solo)</h2>
-        <div class="stats-box">
-            <table class="invisible-table">
-                {% if stats.nemesis %}
-                <tr>
-                    <th>
-                        <span class="relation-label">Nemezis:</span>
-                    </th>
-                    <td>
-                        <a href="{{ url_for('player', nickname=stats.nemesis.nickname) }}">
-                            {{ stats.nemesis.nickname }}
-                        </a>
-                        <span class="stats-detail">({{ stats.nemesis.losses }}/{{ stats.nemesis.total }} przegranych)</span>
-                    </td>
-                </tr>
-                {% endif %}
-                {% if stats.victim %}
-                <tr>
-                    <th>
-                        <span class="relation-label">Ofiara:</span>
-                    </th>
-                    <td>
-                        <a href="{{ url_for('player', nickname=stats.victim.nickname) }}">
-                            {{ stats.victim.nickname }}
-                        </a>
-                        <span class="stats-detail">({{ stats.victim.wins }}/{{ stats.victim.total }} wygranych)</span>
-                    </td>
-                </tr>
-                {% endif %}
-                {% if not stats.nemesis and not stats.victim %}
-                <tr>
-                    <td colspan="2" class="no-data">Brak danych</td>
-                </tr>
-                {% endif %}
-            </table>
-        </div>
-    </div>
-
-    <div class="player-history">
-        <h2>Historia meczy</h2>
-        <table class="matches-table">
+        <table class="invisible-table">
             <tr>
-                <th>Data</th>
-                <th>Typ</th>
-                <th>Gracze</th>
-                <th>Wynik</th>
+                <th>Wszystkie mecze</th>
+                <td>{{ stats.matches_count }}</td>
             </tr>
-            {% for match in matches %}
             <tr>
-                <td>{{ match.date.strftime('%Y-%m-%d %H:%M') }}</td>
-                <td>{{ "multifrutti" if match.multi_game else "solóweczka" }}</td>
-                <td>
-                    {% if match.multi_game %}
-                    {% for p in match.players if p._id in match.players1 %}
-                    {{ p.nickname }}{% if not loop.last %}, {% endif %}
-                    {% endfor %}
-                    vs
-                    {% for p in match.players if p._id in match.players2 %}
-                    {{ p.nickname }}{% if not loop.last %}, {% endif %}
-                    {% endfor %}
-                    {% else %}
-                    {% for p in match.players if p._id == match.player1id %}{{ p.nickname }}{% endfor %}
-                    vs
-                    {% for p in match.players if p._id == match.player2id %}{{ p.nickname }}{% endfor %}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if match.multi_game %}
-                    {% if match.who_won == 'players1' %}
-                    Team 1 Wygrał
-                    {% elif match.who_won == 'players2' %}
-                    Team 2 Wygrał
-                    {% elif match.who_won == 'draw' %}
-                    Remis
-                    {% else %}
-                    Nierozstrzygnięty
-                    {% endif %}
-                    {% else %}
-                    {% if match.who_won == 'player1' %}
-                    {% for p in match.players if p._id == match.player1id %}{{ p.nickname }}{% endfor %}
-                    {% elif match.who_won == 'player2' %}
-                    {% for p in match.players if p._id == match.player2id %}{{ p.nickname }}{% endfor %}
-                    {% elif match.who_won == 'draw' %}
-                    Remis
-                    {% else %}
-                    Nierozstrzygnięty
-                    {% endif %}
-                    {% endif %}
-                </td>
+                <th>Wygrane</th>
+                <td>{{ stats.wins_count }}</td>
             </tr>
-            {% endfor %}
+            <tr>
+                <th>Przegrane</th>
+                <td>{{ stats.losses_count }}</td>
+            </tr>
+            <tr>
+                <th>Remisy</th>
+                <td>{{ stats.draws_count }}</td>
+            </tr>
+            <tr>
+                <th>Win ratio</th>
+                <td>{{ stats.win_ratio }}%</td>
+            </tr>
         </table>
     </div>
+
+    <div class="stats-box">
+        <h2>Ostatni mecz</h2>
+        <table class="invisible-table">
+            {% if stats.last_match_date %}
+            <tr>
+                <th>Data:</th>
+                <td>{{ stats.last_match_date.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            <tr>
+                <th>Przeciwnik:</th>
+                <td>{{ stats.last_match_opponent }}</td>
+            </tr>
+            <tr>
+                <th>Wynik:</th>
+                <td>{% if stats.last_match_who_won == player.nickname %}Wygrana{% else %}Przegrana{% endif %}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2">Brak meczy</td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+
+    <div class="stats-box">
+        <h2>Najczęstsi przeciwnicy</h2>
+        <table class="invisible-table">
+            {% if stats.top_opponents %}
+            {% for opponent in stats.top_opponents %}
+            <tr>
+                <th>{{ opponent._id }}:</th>
+                <td>{{ opponent.games_together }} meczy</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="2">Brak danych</td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+
+
+    <div class="stats-box">
+        <h2>Osobiste relacje</h2>
+        <table class="invisible-table">
+            {% if stats.nemesis %}
+            <tr>
+                <th>
+                    <span class="relation-label">Nemezis:</span>
+                </th>
+                <td>
+                    <a href="{{ url_for('player', nickname=stats.nemesis.nickname) }}">
+                        {{ stats.nemesis.nickname }}
+                    </a>
+                    <span class="stats-detail">({{ stats.nemesis.losses }}/{{ stats.nemesis.total }}
+                        przegranych)</span>
+                </td>
+            </tr>
+            {% endif %}
+            {% if stats.victim %}
+            <tr>
+                <th>
+                    <span class="relation-label">Ofiara:</span>
+                </th>
+                <td>
+                    <a href="{{ url_for('player', nickname=stats.victim.nickname) }}">
+                        {{ stats.victim.nickname }}
+                    </a>
+                    <span class="stats-detail">({{ stats.victim.wins }}/{{ stats.victim.total }} wygranych)</span>
+                </td>
+            </tr>
+            {% endif %}
+            {% if not stats.nemesis and not stats.victim %}
+            <tr>
+                <td colspan="2" class="no-data">Brak danych</td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+</div>
+
+<div class="stats-box">
+    <h2>Historia meczy</h2>
+    <table class="matches-table">
+        <tr>
+            <th>Data</th>
+            <th>Typ</th>
+            <th>Gracze</th>
+            <th>Wynik</th>
+        </tr>
+        {% for match in matches %}
+        <tr>
+            <td>{{ match.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ "multifrutti" if match.multi_game else "solóweczka" }}</td>
+            <td>
+                {% if match.multi_game %}
+                {% for p in match.players if p._id in match.players1 %}
+                {{ p.nickname }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+                vs
+                {% for p in match.players if p._id in match.players2 %}
+                {{ p.nickname }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+                {% else %}
+                {% for p in match.players if p._id == match.player1id %}{{ p.nickname }}{% endfor %}
+                vs
+                {% for p in match.players if p._id == match.player2id %}{{ p.nickname }}{% endfor %}
+                {% endif %}
+            </td>
+            <td>
+                {% if match.multi_game %}
+                {% if match.who_won == 'players1' %}
+                Team 1 Wygrał
+                {% elif match.who_won == 'players2' %}
+                Team 2 Wygrał
+                {% elif match.who_won == 'draw' %}
+                Remis
+                {% else %}
+                Nierozstrzygnięty
+                {% endif %}
+                {% else %}
+                {% if match.who_won == 'player1' %}
+                {% for p in match.players if p._id == match.player1id %}{{ p.nickname }}{% endfor %}
+                {% elif match.who_won == 'player2' %}
+                {% for p in match.players if p._id == match.player2id %}{{ p.nickname }}{% endfor %}
+                {% elif match.who_won == 'draw' %}
+                Remis
+                {% else %}
+                Nierozstrzygnięty
+                {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
 </div>
 {% endblock %}

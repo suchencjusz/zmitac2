@@ -20,17 +20,11 @@ def add_match(
     player2id=None,
     who_won=None,
     date=None,
-    time=None,
     multi_game=False,
     players1=None,
     players2=None,
 ) -> ObjectId:
-    if date and time:
-        match_datetime = datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M")
-    elif date:
-        match_datetime = datetime.strptime(date, "%Y-%m-%d")
-    else:
-        match_datetime = datetime.now()
+    match_datetime = date if date else None
 
     match = Match(
         player1id=player1id,
@@ -88,7 +82,7 @@ def get_all_matches() -> list:
                 "as": "players",
             }
         },
-        {"$sort": {"datetime": -1}},
+        {"$sort": {"date": -1}},
     ]
     return db.matches.aggregate(pipeline)
 
@@ -158,7 +152,7 @@ def get_all_player_matches_by_id(player_id) -> list:
                 "as": "players",
             }
         },
-        {"$sort": {"datetime": -1}},  # Newest first
+        {"$sort": {"date": -1}},
     ]
     return db.matches.aggregate(pipeline)
 
@@ -465,7 +459,7 @@ def get_player_matches_data_by_nickname(nickname) -> dict:
                     elif match["who_won"] != "none":
                         losses_count += 1
 
-        last_match = player_all_matches[0]  # to trzeba narpawic z tym -1 i 1 w sort
+        last_match = player_all_matches[0]
         last_match_date = last_match.get("date") or last_match.get("datetime")
         last_match_who_won = last_match["who_won"]
         last_match_opponent = next(

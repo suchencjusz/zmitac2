@@ -1,6 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import flash, redirect, render_template, request, session, url_for
+from pytz import timezone
 
 from app import app
 from app.queries import (add_match, add_player, check_player_exists,
@@ -36,12 +37,17 @@ def add_match_route():
     if not session.get("logged_in"):
         flash("Panocku zaloguj się!", "error")
         return redirect(url_for("login"))
+
     if request.method == "POST":
         try:
             game_type = request.form["game_type"]
             who_won = request.form["who_won"]
             date_val = request.form["date"]
             time_val = request.form["time"]
+
+            match_datetime = datetime.strptime(
+                f"{date_val} {time_val}", "%Y-%m-%d %H:%M"
+            )
 
             if game_type == "multi":
                 players1 = request.form.getlist("players1[]")
@@ -51,26 +57,9 @@ def add_match_route():
                     flash("Panocku wybierz tych graczy!", "error")
                     return redirect(url_for("add_match_route"))
 
-                if set(players1) & set(players2):
-                    flash(
-                        "Panocku nie oszukuj jeden gracz jedna druzyna! Nie oszukuj!",
-                        "error",
-                    )
-                    return redirect(url_for("add_match_route"))
-
-                if players1 == players2:
-                    flash(
-                        "Panocku grali sami ze sobą? Nie oszukuj!",
-                        "error",
-                    )
-                    return redirect(url_for("add_match_route"))
-
                 add_match(
-                    player1id=None,
-                    player2id=None,
                     who_won=who_won,
-                    date=date_val,
-                    time=time_val,
+                    date=match_datetime,
                     multi_game=True,
                     players1=players1,
                     players2=players2,
@@ -78,20 +67,21 @@ def add_match_route():
             else:
                 player1id = request.form["player1id"]
                 player2id = request.form["player2id"]
+
                 add_match(
                     player1id=player1id,
                     player2id=player2id,
                     who_won=who_won,
-                    date=date_val,
-                    time=time_val,
+                    date=match_datetime,
                 )
 
             flash("Mecz dodany sukcesywnie!!!!", "success")
             return redirect(url_for("add_match_route"))
+
         except Exception as e:
             flash(str(e), "error")
 
-    now = datetime.now()
+    now = datetime.now(app.config["TIMEZONE"])
     return render_template(
         "add_match.html",
         players=list(get_all_players()),
@@ -107,7 +97,7 @@ def player(nickname):
         return redirect(url_for("index"))
 
     stats = get_player_matches_data_by_nickname(nickname)
-    matches = get_all_player_matches_by_nickname(nickname)
+    matches = list(get_all_player_matches_by_nickname(nickname))
 
     return render_template(
         "player.html", player=player, stats=stats, matches=list(matches)
