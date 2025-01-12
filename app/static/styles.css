@@ -75,12 +75,7 @@ body {
         height: 100px;
         white-space: nowrap;
     }
-
-    .matches-table {
-        display: block;
-        width: 100%;
-    }
-
+    
     .matches-table thead {
         display: none;
     }
@@ -92,12 +87,17 @@ body {
         padding: 0.5em;
     }
 
-    /* co sie tu dupcy na mobile */
     .matches-table td { 
         display: block;
         text-align: right;
         border: none;
         position: relative;
+    }
+
+    .matches-table td[data-label="Gracze"] {
+        white-space: normal;
+        word-wrap: break-word;
+        word-break: break-word;
     }
 
     .matches-table td:before {

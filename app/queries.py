@@ -357,7 +357,7 @@ def get_top_opponents(nickname, limit=5):
                     {"player1id": player["_id"]},
                     {"player2id": player["_id"]},
                     {"players1": player["_id"]},
-                    {"players2": player["_id"]}
+                    {"players2": player["_id"]},
                 ]
             }
         },
@@ -369,7 +369,7 @@ def get_top_opponents(nickname, limit=5):
                     "player1_id": "$player1id",
                     "player2_id": "$player2id",
                     "team1_players": {"$ifNull": ["$players1", []]},
-                    "team2_players": {"$ifNull": ["$players2", []]}
+                    "team2_players": {"$ifNull": ["$players2", []]},
                 },
                 "pipeline": [
                     {
@@ -379,13 +379,13 @@ def get_top_opponents(nickname, limit=5):
                                     {"$eq": ["$_id", "$$player1_id"]},
                                     {"$eq": ["$_id", "$$player2_id"]},
                                     {"$in": ["$_id", "$$team1_players"]},
-                                    {"$in": ["$_id", "$$team2_players"]}
+                                    {"$in": ["$_id", "$$team2_players"]},
                                 ]
                             }
                         }
                     }
                 ],
-                "as": "players"
+                "as": "players",
             }
         },
         # Unwind players array
@@ -393,16 +393,11 @@ def get_top_opponents(nickname, limit=5):
         # Remove self from opponents
         {"$match": {"players.nickname": {"$ne": nickname}}},
         # Group by opponent and count games together
-        {
-            "$group": {
-                "_id": "$players.nickname",
-                "games_together": {"$sum": 1}
-            }
-        },
+        {"$group": {"_id": "$players.nickname", "games_together": {"$sum": 1}}},
         # Sort by number of games descending
         {"$sort": {"games_together": -1}},
         # Limit results
-        {"$limit": limit}
+        {"$limit": limit},
     ]
 
     return list(db.matches.aggregate(pipeline))

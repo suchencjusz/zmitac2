@@ -1,7 +1,6 @@
 # ZMiTAC 2
 
 ### todo:
-- fix css tables on mobile
 - better ranking
 - rules
 
@@ -31,9 +30,7 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared
-    command: tunnel --url http://web:5000
-    environment:
-      - TUNNEL_TOKEN=
+    command: tunnel --token ${TOKEN}
     restart: unless-stopped
 ```
 

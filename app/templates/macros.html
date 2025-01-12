@@ -9,76 +9,80 @@
         </tr>
     </thead>
     <tbody>
-    {% for match in (matches[:limit] if limit else matches) %}
-    <tr>
-        <td data-label="Data">
-            {% if match.datetime %}
+        {% for match in (matches[:limit] if limit else matches) %}
+        <tr>
+            <td data-label="Data">
+                {% if match.datetime %}
                 {{ match.datetime.strftime('%Y-%m-%d %H:%M') }}
-            {% elif match.date %}
+                {% elif match.date %}
                 {% if match.date is string %}
-                    {{ match.date }}
+                {{ match.date }}
                 {% else %}
-                    {{ match.date.strftime('%Y-%m-%d %H:%M') }}
+                {{ match.date.strftime('%Y-%m-%d %H:%M') }}
                 {% endif %}
-            {% else %}
+                {% else %}
                 Nie wiem
+                {% endif %}
+            </td>
+            {% if show_type %}
+            <td data-label="Rodzaj">{{ "multifrutti" if match.multi_game else "solóweczka" }}</td>
             {% endif %}
-        </td>
-        {% if show_type %}
-        <td data-label="Rodzaj">{{ "multifrutti" if match.multi_game else "solóweczka" }}</td>
-        {% endif %}
-        <td data-label="Gracze">
-            {% if match.multi_game %}
+            <td data-label="Gracze">
+                {% if match.multi_game %}
                 {% for player in match.players if player._id in match.players1 %}
-                    <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last %}, {% endif %}
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last
+                %}, {% endif %}
                 {% endfor %}
                 vs
                 {% for player in match.players if player._id in match.players2 %}
-                    <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last %}, {% endif %}
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last
+                %}, {% endif %}
                 {% endfor %}
-            {% else %}
+                {% else %}
                 {% for player in match.players if player._id == match.player1id %}
-                    <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
                 {% endfor %}
                 vs
                 {% for player in match.players if player._id == match.player2id %}
-                    <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
                 {% endfor %}
-            {% endif %}
-        </td>
-        <td data-label="Wynik">
-            {% if match.multi_game %}
+                {% endif %}
+            </td>
+            <td data-label="Wynik">
+                {% if match.multi_game %}
                 {% if match.who_won == 'players1' %}
-                    {% for player in match.players if player._id in match.players1 %}
-                        <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last %}, {% endif %}
-                    {% endfor %}
+                {% for player in match.players if player._id in match.players1 %}
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last
+                %}, {% endif %}
+                {% endfor %}
                 {% elif match.who_won == 'players2' %}
-                    {% for player in match.players if player._id in match.players2 %}
-                        <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last %}, {% endif %}
-                    {% endfor %}
+                {% for player in match.players if player._id in match.players2 %}
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>{% if not loop.last
+                %}, {% endif %}
+                {% endfor %}
                 {% elif match.who_won == 'draw' %}
-                    <i>Remis</i>
+                <i>Remis</i>
                 {% else %}
-                    <i>0-0 :/</i>
+                <i>0-0 :/</i>
                 {% endif %}
-            {% else %}
+                {% else %}
                 {% if match.who_won == 'player1' %}
-                    {% for player in match.players if player._id == match.player1id %}
-                        <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
-                    {% endfor %}
+                {% for player in match.players if player._id == match.player1id %}
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
+                {% endfor %}
                 {% elif match.who_won == 'player2' %}
-                    {% for player in match.players if player._id == match.player2id %}
-                        <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
-                    {% endfor %}
+                {% for player in match.players if player._id == match.player2id %}
+                <a href="{{ url_for('player', nickname=player.nickname) }}">{{ player.nickname }}</a>
+                {% endfor %}
                 {% elif match.who_won == 'draw' %}
-                    <i>Remis</i>
+                <i>Remis</i>
                 {% else %}
-                    <i>0-0 :/</i>
+                <i>0-0 :/</i>
                 {% endif %}
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endmacro %}
