@@ -4,10 +4,37 @@
 {% block content %}
 <h1>Strona główna</h1>
 
-<h2>Witaj na ZMiTAC2 !!!</h2>
+<br>
 
+{% if matches_today|length > 0 %}
 
-<h2>5 ostatnich meczy</h2>
+<div style="text-align: center; margin: 0 auto; width: 50%;">
 
-{{ matches_table(matches, limit=5) }}
-{% endblock %}
+    Dzisiaj zostało rozegranych {{ matches_today|length }} meczy!
+
+    <br>
+
+    Najwięcej meczy wygrał <a href="{{ url_for('player', nickname=winner_today.nickname) }}"
+        style="margin: 0;"><strong>{{ winner_today.nickname }}</strong></a> ({{ winner_today.wins }})!
+    <br>
+    Najwięcej meczy zagrał <a href="{{ url_for('player', nickname=most_active_today.nickname) }}"
+        style="margin: 0;"><strong>{{ most_active_today.nickname }}</strong></a> ({{ most_active_today.matches }})!
+
+    <br>
+
+</div>
+
+{% endif %}
+
+<h2>5 ostatnich meczy z dzisiaj </h2>
+
+{% if matches_today|length == 0 %}
+<p>Brak meczy dzisiaj :c</p>
+{% else %}
+{{ matches_table(matches_today, limit=5) }}
+{% endif %}
+
+<!-- {% from 'footer.html' import footer %}
+{{ footer() }}
+
+{% endblock %} -->

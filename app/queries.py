@@ -1,9 +1,10 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from bson import ObjectId
 
 from app import db
 from app.models import Match, Player
+from config import Config
 
 
 def add_player(nickname) -> ObjectId:
@@ -85,6 +86,118 @@ def get_all_matches() -> list:
 
 def get_all_players() -> list:
     return db.players.find().sort("nickname", 1)
+
+def get_most_active_player_today() -> dict:
+    matches = get_matches_from_today()
+    player_matches = {}
+    
+    for match in matches:
+        for player in match["players"]:
+            player_id = player["_id"]
+            if player_id not in player_matches:
+                player_matches[player_id] = {
+                    "nickname": player["nickname"],
+                    "matches": 0
+                }
+            player_matches[player_id]["matches"] += 1
+    
+    if not player_matches:
+        return {"nickname": "No matches", "matches": 0}
+        
+    most_active = max(player_matches.values(), key=lambda x: x["matches"])
+    return most_active
+
+def get_most_winning_player_today() -> dict:
+    now = datetime.now(Config.TIMEZONE)
+    return get_most_winning_player_by_date(now.date())
+
+def get_most_winning_player_by_date(date: datetime) -> dict:
+    start_date = datetime.combine(date, datetime.min.time())
+    end_date = datetime.combine(date, datetime.max.time())
+
+    pipeline = [
+        {"$match": {"date": {"$gte": start_date, "$lte": end_date}}},
+        
+        {"$project": {
+            "winners": {
+                "$cond": {
+                    "if": {"$eq": ["$winner", 1]},
+                    "then": {"$concatArrays": [["$player1id"], {"$ifNull": ["$players1", []]}]},
+                    "else": {"$concatArrays": [["$player2id"], {"$ifNull": ["$players2", []]}]}
+                }
+            }
+        }},
+        {"$unwind": "$winners"},
+        
+        {"$group": {
+            "_id": "$winners",
+            "wins": {"$sum": 1}
+        }},
+        
+        {"$sort": {"wins": -1}},
+        
+        {"$limit": 1},
+        
+        {"$lookup": {
+            "from": "players",
+            "localField": "_id",
+            "foreignField": "_id",
+            "as": "player"
+        }},
+        {"$unwind": "$player"},
+        
+        {"$project": {
+            "_id": 1,
+            "nickname": "$player.nickname",
+            "wins": 1
+        }}
+    ]
+
+    result = list(db.matches.aggregate(pipeline))
+    return result[0] if result else {"nickname": "No matches", "wins": 0}
+
+def get_matches_from_today() -> list:
+    now = datetime.now(Config.TIMEZONE)
+    return get_matches_by_date(now.date())
+
+
+
+def get_matches_by_date(date: datetime) -> list:
+    start_date = datetime.combine(date, datetime.min.time())
+    end_date = datetime.combine(date, datetime.max.time())
+
+    pipeline = [
+        {"$match": {"date": {"$gte": start_date, "$lte": end_date}}},
+        {
+            "$lookup": {
+                "from": "players",
+                "let": {
+                    "player1_id": "$player1id",
+                    "player2_id": "$player2id",
+                    "team1_players": {"$ifNull": ["$players1", []]},
+                    "team2_players": {"$ifNull": ["$players2", []]},
+                },
+                "pipeline": [
+                    {
+                        "$match": {
+                            "$expr": {
+                                "$or": [
+                                    {"$eq": ["$_id", "$$player1_id"]},
+                                    {"$eq": ["$_id", "$$player2_id"]},
+                                    {"$in": ["$_id", "$$team1_players"]},
+                                    {"$in": ["$_id", "$$team2_players"]},
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "as": "players",
+            }
+        },
+        {"$sort": {"date": -1}},
+    ]
+
+    return list(db.matches.aggregate(pipeline))
 
 
 def get_all_player_matches_by_nickname(nickname) -> list:
@@ -516,7 +629,7 @@ def get_player_matches_data_by_nickname(nickname) -> dict:
     }
 
 
-def get_players_with_best_win_ratio(limit=5):
+def get_players_with_best_win_ratio():
     pipeline = [
         # Match all games
         {
@@ -620,6 +733,6 @@ def get_players_with_best_win_ratio(limit=5):
         player["win_ratio"] = round((player["wins"] / player["total_matches"]) * 100, 2)
         player["nickname"] = player["_id"]
 
-    sorted_results = sorted(results, key=lambda x: (-x["win_ratio"], -x["total_matches"]))[:limit]
+    sorted_results = sorted(results, key=lambda x: (-x["win_ratio"], -x["total_matches"]))
 
     return sorted_results

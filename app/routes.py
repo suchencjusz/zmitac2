@@ -6,10 +6,19 @@ from flask_limiter.util import get_remote_address
 from pytz import timezone
 
 from app import app
-from app.queries import (add_match, add_player, check_player_exists,
-                         get_all_matches, get_all_player_matches_by_nickname,
-                         get_all_players, get_player_matches_data_by_nickname,
-                         get_players_with_best_win_ratio)
+from app.queries import (
+    add_match,
+    add_player,
+    check_player_exists,
+    get_all_matches,
+    get_all_player_matches_by_nickname,
+    get_all_players,
+    get_matches_from_today,
+    get_player_matches_data_by_nickname,
+    get_players_with_best_win_ratio,
+    get_most_winning_player_today,
+    get_most_active_player_today,
+)
 from config import Config
 
 limiter = Limiter(
@@ -21,8 +30,11 @@ limiter = Limiter(
 
 @app.route("/")
 def index():
-    matches = list(get_all_matches())
-    return render_template("index.html", matches=matches)
+    matches_today = list(get_matches_from_today())
+    winner_today = get_most_winning_player_today()
+    most_active_today = get_most_active_player_today()
+
+    return render_template("index.html", matches_today=matches_today, winner_today=winner_today, most_active_today=most_active_today)
 
 
 @app.route("/add_player", methods=["GET", "POST"])
@@ -128,7 +140,7 @@ def players():
 
 @app.route("/ranking")
 def ranking():
-    best_ratio_players = get_players_with_best_win_ratio(10)
+    best_ratio_players = get_players_with_best_win_ratio()
 
     return render_template("ranking.html", players=best_ratio_players)
 

@@ -1,8 +1,12 @@
 # ZMiTAC 2
 
 ### todo:
-- better ranking
+- nickname change
 - rules
+- player streak
+- player matches today (count)
+- better ranking
+
 
 ### in future:
 - goofy bot for fandom dziekana
