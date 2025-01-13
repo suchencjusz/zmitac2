@@ -2,6 +2,7 @@ body {
     background-image: url("/static/bg.webp");
     background-size: cover;
     background-size: 100%;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .player-grid {
