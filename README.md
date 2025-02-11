@@ -1,17 +1,32 @@
 # ZMiTAC 2
 
 ### todo:
-- nickname change
+- judges
+- players mgmt
 - rules
 - player streak
 - player matches today (count)
-- better ranking
+- better ranking (elo maybe?)
+- additional info about match
 
+### db:
+- matches
+  - winner(s)
+  - losser(s)
+  - billard gamemode
+
+- player
+  - points
+  - judge
+  - admin
+  - password
+  - description
+  - achivements
 
 ### in future:
-- goofy bot for fandom dziekana
-
-ZMiTAC 2 is a simple application written in one (two) evenings, used to track pool games in DS. BABILON!!!
+- api?
+- notifactions (about new matches)
+- bot for fandom dziekana (at least info about matches)
 
 ![ZMiTAC 2](https://raw.githubusercontent.com/suchencjusz/zmitac2/refs/heads/main/zmitac2.gif)
 ![kasia](https://raw.githubusercontent.com/suchencjusz/zmitac2/refs/heads/main/kasia-bilardzistka.gif)
