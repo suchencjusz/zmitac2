@@ -213,7 +213,11 @@ a:visited {
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
-    background: #420d55;
+    
+    /* todo: dev */
+    background-color: #805f19;
+    
+    /* background: #420d55; */
     min-height: 100vh;
     height: auto;
     overflow: auto;
