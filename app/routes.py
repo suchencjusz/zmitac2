@@ -1,6 +1,9 @@
+import csv
+import os
+import tempfile
 from datetime import datetime, timedelta
 
-from flask import flash, redirect, render_template, request, session, url_for
+from flask import flash, redirect, render_template, request, send_file, session, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from pytz import timezone
@@ -14,10 +17,11 @@ from app.queries import (
     get_all_player_matches_by_nickname,
     get_all_players,
     get_matches_from_today,
+    get_most_active_player_today,
+    get_most_winning_player_today,
+    get_player_by_id,
     get_player_matches_data_by_nickname,
     get_players_with_best_win_ratio,
-    get_most_winning_player_today,
-    get_most_active_player_today,
 )
 from config import Config
 
@@ -34,7 +38,9 @@ def index():
     winner_today = get_most_winning_player_today()
     most_active_today = get_most_active_player_today()
 
-    return render_template("index.html", matches_today=matches_today, winner_today=winner_today, most_active_today=most_active_today)
+    return render_template(
+        "index.html", matches_today=matches_today, winner_today=winner_today, most_active_today=most_active_today
+    )
 
 
 @app.route("/add_player", methods=["GET", "POST"])
@@ -145,8 +151,46 @@ def ranking():
     return render_template("ranking.html", players=best_ratio_players)
 
 
+import os
+import tempfile
+
+
+@app.route("/export", methods=["GET"])
+def export():
+    if not session.get("logged_in"):
+        flash("Panocku zaloguj się!", "error")
+        return redirect(url_for("login"))
+
+    all_matches = list(get_all_matches())
+
+    temp_dir = tempfile.gettempdir()
+    csv_path = os.path.join(temp_dir, "matches.csv")
+
+    with open(csv_path, mode="w") as file:
+        writer = csv.writer(file, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["id", "a", "b", "winner", "date", "multi_game"])
+
+        for m in all_matches:
+            a = []
+            b = []
+
+            if m["multi_game"]:
+                for i in range(len(m["players1"])):
+                    player1 = get_player_by_id(m["players1"][i])
+                    player2 = get_player_by_id(m["players2"][i])
+                    a.append(player1["nickname"])
+                    b.append(player2["nickname"])
+            else:
+                a.append(get_player_by_id(m["player1id"])["nickname"])
+                b.append(get_player_by_id(m["player2id"])["nickname"])
+
+            writer.writerow([m["_id"], a, b, "a" if m["who_won"] == "player1" else "b", m["date"], m["multi_game"]])
+
+    return send_file(csv_path, as_attachment=True, download_name="matches.csv")
+
+
 @app.route("/login", methods=["GET", "POST"])
-@limiter.limit("3 per minute")
+@limiter.limit("5 per minute")
 def login():
     if request.method == "POST":
         if request.form["password"] == Config.ADMIN_PASSWORD:

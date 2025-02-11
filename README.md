@@ -1,15 +1,7 @@
 # ZMiTAC 2
 
-### todo:
-- nickname change
-- rules
-- player streak
-- player matches today (count)
-- better ranking
-
-
-### in future:
-- goofy bot for fandom dziekana
+# project is being rewritten (branch: turbo)
+https://github.com/suchencjusz/zmitac2/tree/turbo
 
 ZMiTAC 2 is a simple application written in one (two) evenings, used to track pool games in DS. BABILON!!!
 
