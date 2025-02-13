@@ -1,16 +1,21 @@
-import os
 from datetime import timedelta
+from typing import Optional
 
-from dotenv import load_dotenv
+from pydantic import BaseSettings, Field
 from pytz import timezone
 
-load_dotenv()
+
+class Config(BaseSettings):
+    SECRET_KEY: str = Field("123", description="Secret key for Flask sessions")  # todo: dev only
+    MONGO_URI: str = Field(..., description="MongoDB connection string")
+    ADMIN_PASSWORD: str = Field("dupa1234", description="Admin password")
+    TIMEZONE: timezone = Field(default_factory=lambda: timezone("Europe/Warsaw"))
+    PERMANENT_SESSION_LIFETIME: timedelta = Field(default_factory=lambda: timedelta(days=3))
+    DEBUG: bool = Field(False, description="Debug mode flag")
+
+    class Config:
+        env_file = ".env"
+        case_sensitive = True
 
 
-class Config:
-    SECRET_KEY = os.urandom(24)
-    MONGO_URI = os.getenv("MONGO_URI")
-    ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "dupa1234")
-    TIMEZONE = timezone("Europe/Warsaw")
-    PERMANENT_SESSION_LIFETIME = timedelta(hours=6)
-    DEBUG = os.getenv("DEBUG", False)
+settings = Config()

@@ -1,92 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-
-  <!-- Basic Meta -->
-  <title>ZMiTAC 2 - System do zarządzania meczami bilardowymi</title>
-  <meta name="description" content="Nowoczesny system do zarządzania meczami bilardowymi">
-  <meta name="keywords" content="bilard, pool, mecze, turniej, DS Babilon, ZMiTAC, kranus.pro, kranus">
-  <meta name="author" content="suchencjusz">
-  <meta name="robots" content="index">
-  <meta name="language" content="pl">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/gif" href="{{ url_for('static', filename='icon.png') }}">
-  <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon.png') }}">
-
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#4CAF50">
-  <meta name="msapplication-navbutton-color" content="#4CAF50">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#4CAF50">
-
-  <!-- OpenGraph -->
-  <meta property="og:title" content="ZMiTAC 2 - Bilard">
-  <meta property="og:description" content="Nowoczesny system do zarządzania meczami bilardowymi">
-  <meta property="og:image" content="{{ url_for('static', filename='logo.gif') }}">
-  <meta property="og:url" content="{{ url_for('index') }}">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="pl_PL">
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <title>ZMiTAC 2</title>
-</head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  
+    <!-- Basic Meta -->
+    <title>ZMiTAC 2 - System do zarządzania meczami bilardowymi</title>
+    <meta name="description" content="Nowoczesny system do zarządzania meczami bilardowymi">
+    <meta name="keywords" content="bilard, pool, mecze, turniej, DS Babilon, ZMiTAC, kranus.pro, kranus">
+    <meta name="author" content="suchencjusz">
+    <meta name="robots" content="index">
+    <meta name="language" content="pl">
+  
+    <!-- Favicon -->
+    <link rel="icon" type="image/gif" href="{{ url_for('static', path='icon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', path='icon.png') }}">
+  
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="msapplication-navbutton-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#4CAF50">
+  
+    <!-- OpenGraph -->
+    <meta property="og:title" content="ZMiTAC 2 - Bilard">
+    <meta property="og:description" content="Nowoczesny system do zarządzania meczami bilardowymi">
+    <meta property="og:image" content="{{ url_for('static', path='logo.gif') }}">
+    <meta property="og:url" content="{{ url_for('index') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pl_PL">
+  
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <title>ZMiTAC 2</title>
+  </head>
+  
 
 <body>
-  <div class="zmitac">
     <nav>
-      <!-- <a href="{{ url_for('index') }}"> -->
-
-      <div class="logo-container">
-        <img src="{{ url_for('static', filename='logo.gif') }}" alt="logo" class="logo">
-        <div class="logo-text">
-
-          <h1 class="title">ZMiTAC 2</h1>
-          <h2 class="subtitle">Bilard Babiloński! <img src="https://emots.yetihehe.com/1/kotek.gif" alt="kotek"
-              class="kotek" width="45" height="20"></h2>
-
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Zmitac2</a>
+            <ul class="nav-links">
+                <li><a href="/">Strona główna</a></li>
+                <li><a href="/players">Gracz</a></li>
+                <li><a href="/matches">Mecze</a></li>
+            </ul>
         </div>
-      </div>
-
-      <br>
-
-      <!-- </a> -->
     </nav>
 
-    <nav>
-      <a href="{{ url_for('index') }}">Strona główna</a>
-      <a href="{{ url_for('matches') }}">Wszystkie mecze</a>
-      <a href="{{ url_for('ranking') }}">Ranking graczy</a>
-      <a href="{{ url_for('players') }}">Wszyscy gracze</a>
-      <a href="{{ url_for('info') }}">Info</a>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
 
-      {% if session.get('logged_in') %}
-      <a href="{{ url_for('add_player_route') }}">Dodaj gracza</a>
-      <a href="{{ url_for('add_match_route') }}">Dodaj mecz</a>
-      <a href="{{ url_for('logout') }}">Wyloguj</a>
-      {% else %}
-      <a href="{{ url_for('login') }}">Login</a>
-      {% endif %}
-    </nav>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul>
-      {% for category, message in messages %}
-      <li style="color:red;">{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-
-    <div>
-      {% block content %}{% endblock %}
-    </div>
-  </div>
+    <footer>
+        <p>&copy; 2025 Zmitac2</p>
+    </footer>
 </body>
-
 </html>
