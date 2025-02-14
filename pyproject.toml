@@ -1,2 +1,6 @@
+[tool.pytest]
+pythonpath = "."
+testpaths = ["tests"]
+
 [tool.black]
 line-length = 120
