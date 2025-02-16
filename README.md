@@ -72,5 +72,11 @@ Linux
 Windows
 ```.\venv\Scripts\activate```
 
+# .env
 
-
+```
+DEBUG=True
+PYTHONPATH=app
+SECRET_KEY=
+ADMIN_PASSWORD=
+```

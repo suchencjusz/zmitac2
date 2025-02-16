@@ -1,18 +1,17 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models.models import Base
+from extensions import db
 
 TEST_DATABASE_URL = "postgresql://postgres:postgres@127.0.0.1:5432/zmitac_test"
 
 @pytest.fixture(scope="session")
 def engine():
     engine = create_engine(TEST_DATABASE_URL)
-    Base.metadata.create_all(engine)
+    db.Model.metadata.create_all(engine)
     yield engine
-    Base.metadata.drop_all(engine)
+    db.Model.metadata.drop_all(engine)
 
-# clean db for each test
 @pytest.fixture(scope="function")
 def db_session(engine):
     connection = engine.connect()

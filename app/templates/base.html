@@ -15,8 +15,8 @@
     <meta name="language" content="pl">
   
     <!-- Favicon -->
-    <link rel="icon" type="image/gif" href="{{ url_for('static', path='icon.png') }}">
-    <link rel="apple-touch-icon" href="{{ url_for('static', path='icon.png') }}">
+    <link rel="icon" type="image/gif" href="{{ url_for('static', filename='icon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon.png') }}">
   
     <!-- Theme Color -->
     <meta name="theme-color" content="#4CAF50">
@@ -26,30 +26,39 @@
     <!-- OpenGraph -->
     <meta property="og:title" content="ZMiTAC 2 - Bilard">
     <meta property="og:description" content="Nowoczesny system do zarządzania meczami bilardowymi">
-    <meta property="og:image" content="{{ url_for('static', path='logo.gif') }}">
+    <meta property="og:image" content="{{ url_for('static', filename='logo.gif') }}">
     <meta property="og:url" content="{{ url_for('index') }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pl_PL">
   
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>ZMiTAC 2</title>
   </head>
   
 
 <body>
     <nav>
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo">Zmitac2</a>
-            <ul class="nav-links">
-                <li><a href="/">Strona główna</a></li>
-                <li><a href="/players">Gracz</a></li>
-                <li><a href="/matches">Mecze</a></li>
-            </ul>
-        </div>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+        </ul>
     </nav>
 
     <main class="container">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+            {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">
+                {{ message }}
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
         {% block content %}{% endblock %}
     </main>
 

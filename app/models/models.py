@@ -1,58 +1,52 @@
 import datetime
-from sqlalchemy import Column, Integer, String, Boolean, Float, DateTime, ForeignKey
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import relationship, declarative_base
+from flask_login import UserMixin
+from extensions import db
 
-Base = declarative_base()
-
-
-class GameMode(Base):
+class GameMode(db.Model):
     __tablename__ = "game_modes"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True, nullable=False)  # "8-ball", "9-ball"
-    description = Column(String, nullable=True)  
 
-    matches = relationship("Match", back_populates="game_mode")
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    name = db.Column(db.String, unique=True, nullable=False)  # e.g. "8-ball", "9-ball"
+    description = db.Column(db.String, nullable=True)
+
+    matches = db.relationship("Match", back_populates="game_mode")
 
 
-class Player(Base):
+class Player(UserMixin, db.Model):
     __tablename__ = "players"
 
-    id = Column(Integer, primary_key=True, index=True)
-    nick = Column(String, unique=True, index=True, nullable=False)
-    password = Column(String, nullable=False)
-    keys = Column(JSONB, nullable=True)  # webauthn/fido2 keys
-    judge = Column(Boolean, default=False)
-    admin = Column(Boolean, default=False)
-    elo = Column(Float, default=1000.0)
-    # wins = Column(Integer, default=0) redundancja
-    # loses = Column(Integer, default=0)
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    nick = db.Column(db.String, unique=True, index=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    keys = db.Column(db.JSON, nullable=True)  # For webauthn/fido2 keys
+    judge = db.Column(db.Boolean, default=False)
+    admin = db.Column(db.Boolean, default=False)
+    elo = db.Column(db.Float, default=1000.0)
 
-    matches = relationship("MatchPlayer", back_populates="player")
+    matches = db.relationship("MatchPlayer", back_populates="player")
 
 
-class Match(Base):
+class Match(db.Model):
     __tablename__ = "matches"
 
-    id = Column(Integer, primary_key=True, index=True)
-    date = Column(DateTime, default=datetime.timezone.utc)
-    is_ranked = Column(Boolean, default=True)
-    additional_info = Column(String, nullable=True)    
-    game_mode_id = Column(Integer, ForeignKey("game_modes.id"), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    date = db.Column(db.DateTime, default=datetime.timezone.utc)
+    is_ranked = db.Column(db.Boolean, default=True)
+    additional_info = db.Column(db.String, nullable=True)
+    game_mode_id = db.Column(db.Integer, db.ForeignKey("game_modes.id"), nullable=False)
 
-    game_mode = relationship("GameMode", back_populates="matches")
-    players = relationship("MatchPlayer", back_populates="match")
+    game_mode = db.relationship("GameMode", back_populates="matches")
+    players = db.relationship("MatchPlayer", back_populates="match")
 
 
-class MatchPlayer(Base):
+class MatchPlayer(db.Model):
     __tablename__ = "match_players"
 
-    id = Column(Integer, primary_key=True, index=True)
-    match_id = Column(Integer, ForeignKey("matches.id"), nullable=False)
-    player_id = Column(Integer, ForeignKey("players.id"), nullable=False)
-    is_winner = Column(Boolean, nullable=False)
-    elo_change = Column(Float, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    match_id = db.Column(db.Integer, db.ForeignKey("matches.id"), nullable=False)
+    player_id = db.Column(db.Integer, db.ForeignKey("players.id"), nullable=False)
+    is_winner = db.Column(db.Boolean, nullable=False)
+    elo_change = db.Column(db.Float, nullable=False)
 
-    match = relationship("Match", back_populates="players")
-    player = relationship("Player", back_populates="matches")
+    match = db.relationship("Match", back_populates="players")
+    player = db.relationship("Player", back_populates="matches")

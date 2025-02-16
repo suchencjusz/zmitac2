@@ -1,6 +1,7 @@
 import datetime
-from typing import List, Optional, Any, Dict
-from pydantic import BaseModel
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, ConfigDict
 
 #
 # --- GAME MODE ---
@@ -16,8 +17,7 @@ class GameModeCreate(GameModeBase):
 class GameModeOut(GameModeBase):
     id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 #
 # --- PLAYER ---
@@ -36,8 +36,7 @@ class PlayerCreate(PlayerBase):
 class PlayerOut(PlayerBase):
     id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 #
 # --- MATCH ---
@@ -56,8 +55,7 @@ class MatchOut(MatchBase):
     id: int
     game_mode: GameModeOut
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 #
 # --- MATCH_PLAYER ---
@@ -75,5 +73,4 @@ class MatchPlayerCreate(MatchPlayerBase):
 class MatchPlayerOut(MatchPlayerBase):
     id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
