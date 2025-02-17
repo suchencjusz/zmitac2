@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from urllib.parse import urlparse
 from flask_login import login_user, logout_user, login_required, current_user
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from models.models import Player
 from crud.player import get_player_by_nick
@@ -33,6 +33,42 @@ def login():
         flash('Nieprawidłowy nick lub hasło!', 'error')
     
     return render_template('auth/login.html')
+
+# @auth_bp.route('/edit', methods=['GET', 'POST'])
+# @login_required
+# def edit():
+
+@auth_bp.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    if request.method == 'POST':
+        old_password = request.form.get('old_password')
+        new_password = request.form.get('new_password')
+        new_password2 = request.form.get('new_password2')
+        
+        if not old_password or not new_password or not new_password2:
+            flash('Proszę wypełnić wszystkie pola!', 'error')
+            return render_template('auth/change_password.html')
+        
+        if not check_password_hash(current_user.password, old_password):
+            flash('Nieprawidłowe stare hasło!', 'error')
+            return render_template('auth/change_password.html')
+        
+        if new_password != new_password2:
+            flash('Nowe hasła nie są takie same!', 'error')
+            return render_template('auth/change_password.html')
+        
+        if len(new_password) < 10:
+            flash('Nowe hasło musi mieć co najmniej 10 znaków!', 'error')
+            return render_template('auth/change_password.html')
+        
+        current_user.password = generate_password_hash(new_password)
+        
+        db.session.commit()
+        flash('Hasło zostało zmienione!', 'success')
+        return redirect(url_for('index'))
+    
+    return render_template('auth/change_password.html')
 
 @auth_bp.route('/logout')
 @login_required

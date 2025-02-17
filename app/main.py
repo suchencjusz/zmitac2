@@ -49,8 +49,10 @@ def create_app(config_class=Config):
     # blueprints
     #
     from routes.auth_bp import auth_bp
+    from routes.info_bp import info_bp
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(info_bp)
 
     #
     # deafault routes

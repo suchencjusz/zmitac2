@@ -34,25 +34,32 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>ZMiTAC 2</title>
-  </head>
+</head>
   
-
 <body>
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('info.actions') }}">Akcje</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+            {% endif %}
+
+            <li><a href="{{ url_for('info.rules') }}">Zasady</a></li>
+            <li><a href="{{ url_for('info.about') }}">Info</a></li>
         </ul>
     </nav>
 
     <main class="container">
-
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-container">
             {% for category, message in messages %}
                 <div class="flash flash-{{ category }}">
-                {{ message }}
+                    {{ message }}
                 </div>
             {% endfor %}
             </div>

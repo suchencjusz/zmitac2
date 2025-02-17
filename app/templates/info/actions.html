@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="actions-container">
+    <h2>Autoryzacja</h2>
+    <ul>
+        <li><a href="{{ url_for('auth.change_password') }}">Zmień hasło</a></li>
+        <li><a href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
+    </ul>
+
+    {% if current_user.admin %}
+    <h2>Admin</h2>
+    <ul>
+        <!-- zmień czyjeś hasło -->
+        <!-- zmień czyjeś permisje -->
+        <!-- zmień czyjś nick -->
+    </ul>
+    {% endif %}
+
+    {% if current_user.judge %}
+    <h2>Sędzia</h2>
+    <ul>
+        <!-- dodaj mecz -->
+        <!-- dodaj gracza -->
+    </ul>
+    {% endif %}
+
+{% endblock %}
+
