@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
+from urllib.parse import urlparse
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
 
@@ -22,8 +23,12 @@ def login():
         if player and check_password_hash(player.password, password):
             login_user(player)
             flash('Zalogowano pomyślnie!', 'success')
-            next_page = request.args.get('next')
-            return redirect(next_page or url_for('index'))
+            next_page = request.args.get('next', '')
+            if next_page:
+                next_page = next_page.replace('\\', '')
+                if not urlparse(next_page).netloc and not urlparse(next_page).scheme:
+                    return redirect(next_page)
+            return redirect(url_for('index'))
         
         flash('Nieprawidłowy nick lub hasło!', 'error')
     
