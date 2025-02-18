@@ -19,11 +19,11 @@ def create_player(db: Session, player: PlayerCreate) -> Player:
     db_player = Player(
         nick=player.nick,
         password=player.password,
-        keys=player.keys,
-        judge=player.judge,
         admin=player.admin,
+        judge=player.judge,
         elo=player.elo,
     )
+
     db.add(db_player)
     db.commit()
     db.refresh(db_player)
