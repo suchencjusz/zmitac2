@@ -1,6 +1,6 @@
-from flask import Flask, render_template
 from config import Config
-from extensions import db, login_manager, init_db, ensure_admin_user
+from extensions import db, ensure_admin_user, init_db, login_manager
+from flask import Flask, render_template
 from models.models import Player
 
 
@@ -12,16 +12,27 @@ def create_app(config_class=Config):
         static_url_path="/static",
     )
 
-    config = config_class()
+    #
+    # config & patch for tests
+    #
+    if isinstance(config_class, type):
+        config = config_class()
+    else:
+        config = config_class
+
     app.config.update(
         SECRET_KEY=config.SECRET_KEY.get_secret_value(),
         SQLALCHEMY_DATABASE_URI=config.DATABASE_URL,
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         PERMANENT_SESSION_LIFETIME=config.get_session_lifetime(),
         DEBUG=config.DEBUG,
+        WTF_CSRF_ENABLED=config.WTF_CSRF_ENABLED,
     )
 
-    # 
+    # Debug: print the final database URI used
+    print("DEBUG: SQLALCHEMY_DATABASE_URI is set to:", app.config.get("SQLALCHEMY_DATABASE_URI"))
+
+    #
     # basic flask and db
     #
     db.init_app(app)
@@ -48,11 +59,15 @@ def create_app(config_class=Config):
     #
     # blueprints
     #
+    from routes.admin_bp import admin_bp
     from routes.auth_bp import auth_bp
     from routes.info_bp import info_bp
+    from routes.judge_bp import judge_bp
 
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(info_bp)
+    app.register_blueprint(admin_bp, url_prefix="/admin")
+    app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(info_bp, url_prefix="/info")
+    app.register_blueprint(judge_bp, url_prefix="/judge")
 
     #
     # deafault routes

@@ -1,26 +1,30 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from werkzeug.security import generate_password_hash
 import os
+
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 
+
 def init_db(app) -> None:
     """Create all database tables."""
-    
+
     with app.app_context():
         db.create_all()
         print("Database tables created.")
+
 
 def get_db() -> SQLAlchemy:
     """Get the database session."""
 
     return db.session
 
+
 def ensure_admin_user():
     """Ensure that admin user exists, auto-create if not."""
-    
+
     admin_nick = os.environ.get("ADMIN_NICK")
     admin_pass = os.environ.get("ADMIN_PASSWORD", "admin")
 

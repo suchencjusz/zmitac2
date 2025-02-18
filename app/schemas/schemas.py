@@ -7,21 +7,26 @@ from pydantic import BaseModel, ConfigDict
 # --- GAME MODE ---
 #
 
+
 class GameModeBase(BaseModel):
     name: str
     description: Optional[str] = None
 
+
 class GameModeCreate(GameModeBase):
     pass
+
 
 class GameModeOut(GameModeBase):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
 
+
 #
 # --- PLAYER ---
 #
+
 
 class PlayerBase(BaseModel):
     nick: str
@@ -30,26 +35,32 @@ class PlayerBase(BaseModel):
     elo: float = 1000.0
     keys: Optional[List[Dict[str, Any]]] = []
 
+
 class PlayerCreate(PlayerBase):
     password: str
+
 
 class PlayerOut(PlayerBase):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
 
+
 #
 # --- MATCH ---
 #
+
 
 class MatchBase(BaseModel):
     date: datetime.datetime = datetime.timezone.utc
     is_ranked: bool = True
     additional_info: Optional[str] = None
-    game_mode_id: int  
+    game_mode_id: int
+
 
 class MatchCreate(MatchBase):
     pass
+
 
 class MatchOut(MatchBase):
     id: int
@@ -57,9 +68,11 @@ class MatchOut(MatchBase):
 
     model_config = ConfigDict(from_attributes=True)
 
+
 #
 # --- MATCH_PLAYER ---
 #
+
 
 class MatchPlayerBase(BaseModel):
     match_id: int
@@ -67,8 +80,10 @@ class MatchPlayerBase(BaseModel):
     is_winner: bool
     elo_change: float
 
+
 class MatchPlayerCreate(MatchPlayerBase):
     pass
+
 
 class MatchPlayerOut(MatchPlayerBase):
     id: int

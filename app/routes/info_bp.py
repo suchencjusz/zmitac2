@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template
-
 from flask_login import login_required
-
 
 info_bp = Blueprint("info", __name__)
 

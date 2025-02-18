@@ -1,6 +1,8 @@
 import datetime
-from flask_login import UserMixin
+
 from extensions import db
+from flask_login import UserMixin
+
 
 class GameMode(db.Model):
     __tablename__ = "game_modes"
@@ -26,7 +28,7 @@ class Player(UserMixin, db.Model):
     matches = db.relationship("MatchPlayer", back_populates="player")
 
 
-# todo: 
+# todo:
 # class Player(UserMixin, db.Model):
 #     __tablename__ = "players"
 #     id = db.Column(db.Integer, primary_key=True, index=True)
@@ -51,10 +53,11 @@ class Player(UserMixin, db.Model):
 #     credential_id = db.Column(db.LargeBinary, unique=True, nullable=False)
 #     public_key = db.Column(db.LargeBinary, nullable=False)
 #     sign_count = db.Column(db.Integer, nullable=False, default=0)
-#     
+#
 #       https://flask-security-too.readthedocs.io/en/stable/webauthn.html
 #
 #     player = db.relationship("Player", back_populates="webauthn_credentials")
+
 
 class Match(db.Model):
     __tablename__ = "matches"

@@ -1,10 +1,11 @@
 import os
+
 import pytest
+from extensions import db, ensure_admin_user, get_db, init_db, login_manager
 from flask import Flask
+from models.models import Player
 from werkzeug.security import check_password_hash
 
-from extensions import db, login_manager, init_db, ensure_admin_user, get_db
-from models.models import Player
 
 def create_test_app():
     app = Flask(__name__)
@@ -19,17 +20,15 @@ def create_test_app():
         init_db(app)
     return app
 
-def test_db_initialization():
-    """Ensure that the database tables were created and are initially empty."""
 
+def test_db_initialization():
     app = create_test_app()
     with app.app_context():
         players = Player.query.all()
         assert players == []
 
-def test_get_db():
-    """Verify that get_db returns a valid session and that we can add objects."""
 
+def test_get_db():
     app = create_test_app()
     with app.app_context():
         session = get_db()
@@ -42,9 +41,8 @@ def test_get_db():
         assert fetched is not None
         assert fetched.nick == "test"
 
-def test_ensure_admin_user(monkeypatch):
-    """Ensure that ensure_admin_user creates the admin user when environment variables are set."""
 
+def test_ensure_admin_user(monkeypatch):
     monkeypatch.setenv("ADMIN_NICK", "admin")
     monkeypatch.setenv("ADMIN_PASSWORD", "adminpass")
 
@@ -52,9 +50,9 @@ def test_ensure_admin_user(monkeypatch):
     with app.app_context():
         admin = Player.query.filter_by(nick="admin").first()
         assert admin is None
-        
+
         ensure_admin_user()
-        
+
         admin = Player.query.filter_by(nick="admin").first()
         assert admin is not None
         assert check_password_hash(admin.password, "adminpass")

@@ -1,0 +1,18 @@
+<form 
+    action="{{ url_for('admin.update_player_permissions') }}"
+    method="POST"
+    hx-post="{{ url_for('admin.update_player_permissions') }}"
+    hx-target="body"
+    hx-push-url="true"
+    hx-swap="outerHTML">
+    <input type="hidden" name="player_id" value="{{ player.id }}">
+    <div>
+        <label for="admin">Admin:</label>
+        <input type="checkbox" name="admin" id="admin" {% if player.admin %}checked{% endif %}>
+    </div>
+    <div>
+        <label for="judge">Sędzia:</label>
+        <input type="checkbox" name="judge" id="judge" {% if player.judge %}checked{% endif %}>
+    </div>
+    <button type="submit">Zapisz uprawnienia</button>
+</form>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="new-player-container">
+    <h2>Dodaj gracza</h2>
+    <form method="POST" class="new-player-form">
+        <div class="form-group">
+            <label for="nick">Nick:</label>
+            <input type="text" id="nick" name="nick" required>
+        </div>
+
+        <button type="submit">Dodaj gracza</button>
+    </form>
+</div>
+{% endblock %}
+        
+

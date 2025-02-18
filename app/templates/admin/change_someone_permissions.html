@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="permissions-container">
+    <h2>Zmień uprawnienia gracza</h2>
+    
+    <div class="form-group">
+        <label for="player-select">Wybierz gracza:</label>
+        <select 
+            name="player_id" 
+            id="player-select"
+            hx-get="{{ url_for('admin.update_player_permissions') }}"
+            hx-target="#permissions-content"
+            hx-trigger="change"
+            required>
+            <option value="" disabled selected>Wybierz gracza</option>
+            {% for player in players %}
+                <option value="{{ player.id }}">{{ player.nick }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div id="permissions-content">
+        
+    </div>
+</div>
+{% endblock %}
