@@ -56,40 +56,17 @@ class PlayerOut(PlayerBase):
 
 class WebauthnCredentialBase(BaseModel):
     player_id: int
-    credential_id: str
-    public_key: bytes
-    sign_count: int = 0
-    aaguid: Optional[str] = None  # authenticator identifier
-    attestation_type: Optional[str] = None
-    transport: Optional[str] = None  # how the authenticator connects
-    name: Optional[str] = None
-    created_at: datetime.datetime = datetime.timezone.utc
-    last_used_at: datetime.datetime = datetime.timezone.utc
+    credential_id: bytes
+    credential_public_key: bytes
+    current_sign_count: int = 0
 
 class WebauthnCredentialCreate(WebauthnCredentialBase):
     pass
 
 class WebauthnCredentialOut(WebauthnCredentialBase):
     id: int
+
     model_config = ConfigDict(from_attributes=True)
-
-class WebauthnRegistrationOptions(BaseModel):
-    rp_name: str  # app name
-    rp_id: str    # domain
-    user_id: str
-    user_name: str
-    challenge: bytes
-    pubkey_cred_params: List[Dict[str, Any]]
-    timeout: Optional[int] = 60000
-    attestation: str = "direct"
-    authenticator_selection: Optional[Dict[str, Any]] = None
-
-class WebauthnAuthenticationOptions(BaseModel):
-    challenge: bytes
-    timeout: Optional[int] = 60000
-    rp_id: str
-    allow_credentials: Optional[List[Dict[str, Any]]] = None
-    user_verification: str = "preferred"
 
 #
 # --- MATCH ---

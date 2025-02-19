@@ -42,7 +42,6 @@ def ensure_admin_user():
             password=generate_password_hash(admin_pass),
             admin=True,
             judge=True,
-            # idk something is fucked up here
         )
         db.session.add(admin)
         db.session.commit()

@@ -36,15 +36,20 @@ class Config(BaseSettings):
 
 
 class TestConfig(Config):
-    TESTING: bool = True
-    DATABASE_URL: str = "postgresql://postgres:postgres@127.0.0.1:5432/zmitac_test"
-    SECRET_KEY: SecretStr = Field(default="test_secret_key")
-    WTF_CSRF_ENABLED: bool = False
-    DEBUG: bool = False
-    ADMIN_PASSWORD: SecretStr = Field(default="admin123")
-
     model_config = SettingsConfigDict(
         env_file=None,
+        env_prefix="",
         validate_assignment=True,
         extra="ignore",
     )
+    
+    def __init__(self, **kwargs):
+        super().__init__(
+            TESTING=True,
+            DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:5432/zmitac_test",
+            SECRET_KEY="test_secret_key",
+            WTF_CSRF_ENABLED=False,
+            DEBUG=False,
+            ADMIN_PASSWORD="admin123",
+            **kwargs
+        )

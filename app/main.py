@@ -1,10 +1,12 @@
-from config import Config
+from config import TestConfig, Config
 from extensions import db, ensure_admin_user, init_db, login_manager
 from flask import Flask, render_template
 from models.models import Player
 
+import os
 
-def create_app(config_class=Config):
+
+def create_app(config: Config) -> Flask:
     app = Flask(
         __name__,
         template_folder="templates",
@@ -15,11 +17,6 @@ def create_app(config_class=Config):
     #
     # config & patch for tests
     #
-    if isinstance(config_class, type):
-        config = config_class()
-    else:
-        config = config_class
-
     app.config.update(
         SECRET_KEY=config.SECRET_KEY.get_secret_value(),
         SQLALCHEMY_DATABASE_URI=config.DATABASE_URL,
@@ -87,4 +84,7 @@ def create_app(config_class=Config):
     return app
 
 
-app = create_app()
+if os.getenv("TESTING") == "True":
+    app = create_app(TestConfig())
+else:
+    app = create_app(Config())
