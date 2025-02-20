@@ -1,5 +1,9 @@
 from flask import Blueprint, render_template
 from flask_login import login_required
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect()
+
 
 info_bp = Blueprint("info", __name__)
 

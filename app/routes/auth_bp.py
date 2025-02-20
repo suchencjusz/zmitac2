@@ -13,6 +13,10 @@ from webauthn.helpers.exceptions import InvalidRegistrationResponse
 from webauthn.helpers.structs import RegistrationCredential
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect()
+
 auth_bp = Blueprint("auth", __name__)
 
 
@@ -52,11 +56,8 @@ def add_webauth():
 @login_required
 def add_webauth_partial():
 
-    pcco_json, pcco = prepare_credential_creation(current_user)
+    pcco_json = prepare_credential_creation(current_user)
 
-    print(pcco_json)
-
-    session["webauthn_challenge"] = pcco.challenge
     session["registration_user_id"] = current_user.id
     
     res = make_response(
@@ -77,13 +78,6 @@ def save_webauthn():
 
     if not credential_data:
         return make_response({"verified": False, "error": "No data provided"}, 400)
-    
-    expected_challenge = session.get("webauthn_challenge") # todo: remove this it is not used (it is in pymemory)
-    if not expected_challenge:
-        return make_response(
-            {"verified": False, "error": "No challenge found"}, 
-            400
-        )
 
     try:
         verify_and_save_credential(
@@ -92,12 +86,11 @@ def save_webauthn():
         )
         
         session.pop("registration_user_id", None)
-        session.pop("webauthn_challenge", None)
         
         return make_response({"verified": True}, 201)
     except InvalidRegistrationResponse as e:
         print(f"Registration error: {str(e)}")
-        return make_response({"verified": False, "error": str(e)}, 400)
+        return make_response({"verified": False, "error": "error"}, 400)
 
 # 1st to do: write verifiaction to check if this shit works (does it even? )
 

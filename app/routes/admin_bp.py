@@ -6,6 +6,10 @@ from flask_login import current_user, login_required
 from models.models import Player
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect()
+
 admin_bp = Blueprint("admin", __name__)
 
 

@@ -13,7 +13,7 @@ def _hostname():
     return str(urlparse(request.base_url).hostname)
 
 
-def prepare_credential_creation(player: Player) -> tuple:
+def prepare_credential_creation(player: Player):
     """Generate the configuration needed by the client to start registering a new WebAuthn credential."""
 
     public_credential_creation_options = webauthn.generate_registration_options(
@@ -28,7 +28,7 @@ def prepare_credential_creation(player: Player) -> tuple:
         "expires_at": datetime.datetime.now() + datetime.timedelta(minutes=10),
     }
 
-    return (webauthn.options_to_json(public_credential_creation_options), public_credential_creation_options)
+    return webauthn.options_to_json(public_credential_creation_options)
 
 
 

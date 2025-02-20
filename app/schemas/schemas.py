@@ -45,29 +45,27 @@ class PlayerOut(PlayerBase):
 
     model_config = ConfigDict(from_attributes=True)
 
+class PlayerLogin(BaseModel):
+    nick: str
+    password: str
+
 
 #
 # --- WEBAUTHN CREDENTIAL ---
 #
 
-# todo
-# read about webauthn
-# do login with it
-# fix default admin account
-
-
-class WebauthnCredentialBase(BaseModel):
+class WebAuthnCredentialBase(BaseModel):
     player_id: int
     credential_id: bytes
     credential_public_key: bytes
     current_sign_count: int = 0
 
 
-class WebauthnCredentialCreate(WebauthnCredentialBase):
+class WebAuthnCredentialCreate(WebAuthnCredentialBase):
     pass
 
 
-class WebauthnCredentialOut(WebauthnCredentialBase):
+class WebAuthnCredentialOut(WebAuthnCredentialBase):
     id: int
 
     model_config = ConfigDict(from_attributes=True)
