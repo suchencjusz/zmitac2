@@ -25,10 +25,11 @@
         console.error(error);
       }
   
-      const verificationResp = await fetch('{{ url_for("auth.save_webauthn") }}', {
+      const verificationResp = await fetch('{{ url_for("webauthn.save_webauthn") }}', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token() }}'
         },
         body: JSON.stringify(attResp)
       });

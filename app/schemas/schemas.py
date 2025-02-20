@@ -45,6 +45,7 @@ class PlayerOut(PlayerBase):
 
     model_config = ConfigDict(from_attributes=True)
 
+
 class PlayerLogin(BaseModel):
     nick: str
     password: str
@@ -53,6 +54,7 @@ class PlayerLogin(BaseModel):
 #
 # --- WEBAUTHN CREDENTIAL ---
 #
+
 
 class WebAuthnCredentialBase(BaseModel):
     player_id: int

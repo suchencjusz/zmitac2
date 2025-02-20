@@ -37,6 +37,8 @@ class WebAuthnCredential(db.Model):
     credential_id = db.Column(db.LargeBinary, nullable=False)
     credential_public_key = db.Column(db.LargeBinary, nullable=False)
     current_sign_count = db.Column(db.Integer, default=0)
+    date_created = db.Column(db.DateTime, default=datetime.datetime.now)
+    date_last_used = db.Column(db.DateTime, default=datetime.datetime.now)
 
     player = db.relationship("Player", back_populates="webauthn_credentials")
 

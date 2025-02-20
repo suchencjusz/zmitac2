@@ -5,8 +5,8 @@
     <h2>Usuń gracza</h2>
 
     <form method="POST" action="{{ url_for('admin.delete_player') }}">
-        
-        {{ form.csrf_token }}
+
+                <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
         
         <div class="form-group">
             <select name="player_id" required>

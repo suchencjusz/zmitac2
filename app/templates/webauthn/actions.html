@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="webauthn-container">
+    <h2>Zarządzanie kluczami</h2>
+    
+    <div class="info-box">
+        <p>Tutaj możesz zarządzać swoimi kluczami bezpieczeństwa.</p>
+    </div>
+
+    <div class="actions">
+        <a href="{{ url_for('webauthn.add_webauthn') }}">Dodaj klucz</a>
+    </div>
+
+    <div class="credentials-list">
+        <h3>Zarejestrowane klucze</h3>
+        {% if credentials %}
+            <ul>
+                {% for credential in credentials %}
+                <li>
+                    <div class="credential-info">
+                        <span>Klucz #{{ loop.index }}</span>
+                        <small>
+                            Użyty: {{ credential.current_sign_count }} razy |
+                            Utworzony: {{ credential.date_created.strftime('%Y-%m-%d %H:%M') }}
+                            {% if credential.date_last_used %}
+                                | Ostatnio użyty: {{ credential.date_last_used.strftime('%Y-%m-%d %H:%M') }}
+                            {% endif %}
+                        </small>
+                    </div>
+                    <form 
+                        method="POST" 
+                        action="{{ url_for('webauthn.remove_credential', credential_id=credential.id) }}"
+                    >
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <button type="submit" onclick="return confirm('Czy na pewno chcesz usunąć ten klucz?');">
+                            Usuń
+                        </button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nie masz jeszcze żadnych zarejestrowanych kluczy.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

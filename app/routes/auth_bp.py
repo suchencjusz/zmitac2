@@ -1,21 +1,16 @@
 import datetime
 from urllib.parse import urlparse
 
-from flask_login import current_user
-
 from crud.player import get_player, get_player_by_nick
 from extensions import db
-from flask import Blueprint, abort, flash, make_response, redirect, render_template, request, session, url_for
+from flask import (Blueprint, abort, flash, make_response, redirect,
+                   render_template, request, session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
 from models.models import Player
 from utils.auth import prepare_credential_creation, verify_and_save_credential
 from webauthn.helpers.exceptions import InvalidRegistrationResponse
 from webauthn.helpers.structs import RegistrationCredential
 from werkzeug.security import check_password_hash, generate_password_hash
-
-from flask_wtf.csrf import CSRFProtect
-
-csrf = CSRFProtect()
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -46,52 +41,6 @@ def login():
     return render_template("auth/login.html")
 
 
-@auth_bp.route("/add_webauthn", methods=["GET", "POST"])
-@login_required
-def add_webauth():
-    return render_template("auth/add_webauthn.html")
-
-
-@auth_bp.route("/add_webauthn_partial", methods=["GET", "POST"])
-@login_required
-def add_webauth_partial():
-
-    pcco_json = prepare_credential_creation(current_user)
-
-    session["registration_user_id"] = current_user.id
-    
-    res = make_response(
-        render_template(
-            "auth/_register_webauthn_fragment.html",
-            public_credential_creation_options=pcco_json,
-        )
-    )
-    session["registration_user_id"] = current_user.id
-
-    return res
-
-@auth_bp.route("/save_webauthn", methods=["POST"])
-@login_required
-def save_webauthn():
-    player = current_user
-    credential_data = request.get_json()
-
-    if not credential_data:
-        return make_response({"verified": False, "error": "No data provided"}, 400)
-
-    try:
-        verify_and_save_credential(
-            player, 
-            credential_data
-        )
-        
-        session.pop("registration_user_id", None)
-        
-        return make_response({"verified": True}, 201)
-    except InvalidRegistrationResponse as e:
-        print(f"Registration error: {str(e)}")
-        return make_response({"verified": False, "error": "error"}, 400)
-
 # 1st to do: write verifiaction to check if this shit works (does it even? )
 
 # @auth_bp.route("/save_webauthn", methods=["POST"])
@@ -101,7 +50,7 @@ def save_webauthn():
 
 #     if not request:
 #         return make_response('{"verified": false, "error": "No data provided"}', 400)
-    
+
 #     print(request.get_json())
 
 #     registration_credential = RegistrationCredential(request.get_json())

@@ -4,8 +4,8 @@
 <div class="new-player-container">
     <h2>Dodaj gracza</h2>
     <form method="POST" class="new-player-form">
-        
-        {{ form.csrf_token }}
+
+                <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
 
         <div class="form-group">
             <label for="nick">Nick:</label>

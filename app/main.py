@@ -3,6 +3,7 @@ import os
 from config import Config, TestConfig
 from extensions import db, ensure_admin_user, init_db, login_manager
 from flask import Flask, render_template
+from flask_wtf.csrf import CSRFProtect
 from models.models import Player
 
 
@@ -13,6 +14,8 @@ def create_app(config: Config) -> Flask:
         static_folder="static",
         static_url_path="/static",
     )
+
+    csrf = CSRFProtect(app)
 
     #
     # config & patch for tests
@@ -60,11 +63,13 @@ def create_app(config: Config) -> Flask:
     from routes.auth_bp import auth_bp
     from routes.info_bp import info_bp
     from routes.judge_bp import judge_bp
+    from routes.webauthn_bp import webauthn_bp
 
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(info_bp, url_prefix="/info")
     app.register_blueprint(judge_bp, url_prefix="/judge")
+    app.register_blueprint(webauthn_bp, url_prefix="/webauthn")
 
     #
     # deafault routes
