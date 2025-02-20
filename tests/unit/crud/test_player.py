@@ -1,5 +1,5 @@
 import pytest
-from crud.player import get_player, get_players, create_player, delete_player, get_player_by_nick
+from crud.player import create_player, delete_player, get_player, get_player_by_nick, get_players
 from schemas.schemas import PlayerCreate
 
 

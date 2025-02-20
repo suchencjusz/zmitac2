@@ -1,9 +1,9 @@
-from config import TestConfig, Config
+import os
+
+from config import Config, TestConfig
 from extensions import db, ensure_admin_user, init_db, login_manager
 from flask import Flask, render_template
 from models.models import Player
-
-import os
 
 
 def create_app(config: Config) -> Flask:

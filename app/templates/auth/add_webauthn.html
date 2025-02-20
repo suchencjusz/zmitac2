@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="webauthn-container">
+    <h2>Dodaj uwierzytelnianie urządzenia</h2>
+    
+    <div class="info-box">
+        <p>Możesz skonfigurować to urządzenie do szybkiego logowania za pomocą:</p>
+        <ul>
+            <li>Czytnika linii papilarnych</li>
+            <li>Rozpoznawania twarzy</li>
+            <li>Klucza bezpieczeństwa</li>
+        </ul>
+    </div>
+
+    <div 
+        id="webauthn-content"
+        hx-get="{{ url_for('auth.add_webauth_partial') }}"
+        hx-trigger="load"
+        hx-swap="innerHTML">
+        <div class="loading">Ładowanie...</div>
+    </div>
+</div>
+{% endblock %}

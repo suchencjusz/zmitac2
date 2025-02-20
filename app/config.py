@@ -42,7 +42,7 @@ class TestConfig(Config):
         validate_assignment=True,
         extra="ignore",
     )
-    
+
     def __init__(self, **kwargs):
         super().__init__(
             TESTING=True,

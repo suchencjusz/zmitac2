@@ -1,8 +1,7 @@
 from crud.player import get_player_by_nick, get_players
 from decorators import admin_required
 from extensions import db
-from flask import (Blueprint, flash, jsonify, redirect, render_template,
-                   request, url_for)
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from models.models import Player
 from werkzeug.security import check_password_hash, generate_password_hash
