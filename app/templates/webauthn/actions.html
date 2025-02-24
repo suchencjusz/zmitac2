@@ -26,6 +26,7 @@
                             {% if credential.date_last_used %}
                                 | Ostatnio użyty: {{ credential.date_last_used.strftime('%Y-%m-%d %H:%M') }}
                             {% endif %}
+                            ID Klucza: {{ credential.credential_id }} |
                         </small>
                     </div>
                     <form 

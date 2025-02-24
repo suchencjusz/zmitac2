@@ -7,7 +7,9 @@ from flask import (Blueprint, abort, flash, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
 from models.models import Player
-from utils.auth import prepare_credential_creation, verify_and_save_credential
+from utils.auth import (prepare_credential_authentication,
+                        prepare_credential_creation,
+                        verify_and_save_credential)
 from webauthn.helpers.exceptions import InvalidRegistrationResponse
 from webauthn.helpers.structs import RegistrationCredential
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -43,38 +45,8 @@ def login():
 
 # 1st to do: write verifiaction to check if this shit works (does it even? )
 
-# @auth_bp.route("/save_webauthn", methods=["POST"])
-# @login_required
-# def save_webauthn():
-#     player = current_user
-
-#     if not request:
-#         return make_response('{"verified": false, "error": "No data provided"}', 400)
-
-#     print(request.get_json())
-
-#     registration_credential = RegistrationCredential(request.get_json())
-
-#     try:
-#         verify_and_save_credential(player, registration_credential)
-#         session["registration_user_id"] = None
-#         res = make_response('{"verified": true}', 201)
-#         res.set_cookie(
-#             "user_id",
-#             player.id,
-#             httponly=True,
-#             secure=True,
-#             samesite="strict",
-#             max_age=datetime.timedelta(days=30),
-#         )
-#         return res
-#     except InvalidRegistrationResponse:
-#         abort(make_response('{"verified": false}', 400))
-
-
-# @auth_bp.route('/edit', methods=['GET', 'POST'])
-# @login_required
-# def edit():
+# @auth_bp.route("/login_webauthn", methods=["GET", "POST"])
+# def login_webauthn():
 
 
 @auth_bp.route("/change_password", methods=["GET", "POST"])

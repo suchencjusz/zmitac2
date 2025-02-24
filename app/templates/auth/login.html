@@ -3,9 +3,8 @@
 {% block content %}
 <div class="login-container">
     <h2>Login</h2>
-    <form method="POST" class="login-form">
-
-        <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
+    <form method="POST" class="login-form" id="login-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />  
 
         <div class="form-group">
             <label for="nick">Nick:</label>
@@ -18,20 +17,55 @@
         </div>
 
         <button type="submit">Login</button>
-
-        <div class="form-actions">
-            <button type="submit">Webauthn</button>
-            <button 
-                type="button" 
-                id="webauthn-button"
-                class="webauthn-button"
-            >
-                Login with Device
-
-                # to do: implement it (webauthlovign function js)
-            </button>
-        </div>
-        
+        <button type="button" id="webauthn-button">Login with Device</button>
     </form>
+
+    <div id="webauthn-content"></div>
+
+    <script>
+        document.getElementById('webauthn-button').addEventListener('click', async function(){
+            const nick = document.getElementById('nick').value;
+            if (!nick) {
+                alert("Please provide your nick.");
+                return;
+            }
+            try {
+                const optionsResponse = await fetch("{{ url_for('webauthn.login_webauthn_partial') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({ nick: nick })
+                });
+                if (!optionsResponse.ok) {
+                    const errorData = await optionsResponse.json();
+                    alert("Error: " + (errorData.error || "Error fetching options"));
+                    return;
+                }
+                const options = await optionsResponse.json();
+                
+                const asseResp = await startAuthentication(options);
+                
+                const verificationResp = await fetch("{{ url_for('webauthn.verify_webauthn') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify(asseResp)
+                });
+                const verificationJSON = await verificationResp.json();
+                if (verificationJSON && verificationJSON.verified) {
+                    window.location.href = "{{ url_for('index') }}";
+                } else {
+                    alert("Authentication failed");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Authentication failed: " + error.message);
+            }
+        });
+    </script>
 </div>
 {% endblock %}

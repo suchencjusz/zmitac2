@@ -1,0 +1,33 @@
+<div>
+    <script>
+        async function performWebAuthnLogin() {
+            const options = {{ public_credential_authentication_options | safe }};
+
+            try {
+                const asseResp = await startAuthentication(options);
+                
+                const verificationResp = await fetch('{{ url_for("webauthn.verify_webauthn") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(asseResp)
+                });
+                
+                const verificationJSON = await verificationResp.json();
+                
+                if (verificationJSON && verificationJSON.verified) {
+                    window.location.href = "{{ url_for('index') }}";
+                } else {
+                    alert("Authentication failed");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Authentication failed: " + error.message);
+            }
+        }
+
+        performWebAuthnLogin();
+    </script>
+</div>

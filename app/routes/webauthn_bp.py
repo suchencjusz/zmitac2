@@ -7,7 +7,9 @@ from flask import (Blueprint, abort, flash, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
 from models.models import Player, WebAuthnCredential
-from utils.auth import prepare_credential_creation, verify_and_save_credential
+from utils.auth import (prepare_credential_authentication,
+                        prepare_credential_creation,
+                        verify_and_save_credential, verify_credential)
 from webauthn.helpers.exceptions import InvalidRegistrationResponse
 from webauthn.helpers.structs import RegistrationCredential
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -15,21 +17,46 @@ from werkzeug.security import check_password_hash, generate_password_hash
 webauthn_bp = Blueprint("webauthn", __name__)
 
 
-# @webauthn_bp.route("/login", methods=["GET", "POST"])
-# def login():
-#     if request.method == "POST":
-#         nick = request.form.get("nick")
-
-#         pass
-
-
-#     return render_template("auth/_login_webauthn_fragment.html.html")
-
-
 @webauthn_bp.route("/add_webauthn", methods=["GET", "POST"])
 @login_required
 def add_webauthn():
     return render_template("webauthn/add_webauthn.html")
+
+
+@webauthn_bp.route("/verify_webauthn", methods=["GET", "POST"])
+def verify_webauthn():
+    credential_data = request.get_json()
+    session_login_challenge = session.get("login_challenge")
+
+    if not credential_data:
+        return make_response({"verified": False, "error": "No data provided"}, 400)
+
+    try:
+        player = verify_credential(credential_data, session_login_challenge)
+        login_user(player)
+        return make_response({"verified": True}, 201)
+    except InvalidRegistrationResponse as e:
+        print(f"Registration error: {str(e)}")
+        return make_response({"verified": False, "error": "error"}, 400)
+
+
+@webauthn_bp.route("/login_webauthn_partial", methods=["POST"])
+def login_webauthn_partial():
+    data = request.get_json()
+    nick = data.get("nick")
+
+    if not nick:
+        return make_response({"error": "Nick is required"}, 400)
+
+    player = get_player_by_nick(db.session, nick)
+
+    if not player:
+        return make_response({"error": "User not found"}, 404)
+
+    options, to_session = prepare_credential_authentication(player)
+    session["login_challenge"] = to_session
+
+    return make_response(options, 200)
 
 
 @webauthn_bp.route("/add_webauthn_partial", methods=["GET", "POST"])

@@ -9,6 +9,9 @@ from models.models import Player, WebAuthnCredential
 
 REGISTRATION_CHALLENGES = {}
 
+from webauthn.helpers.structs import (PublicKeyCredentialDescriptor,
+                                      PublicKeyCredentialType)
+
 
 def _hostname():
     return str(urlparse(request.base_url).hostname)
@@ -18,6 +21,28 @@ def _get_current_time():
     """Get current time in application's configured timezone"""
     config = Config()
     return datetime.datetime.now(config.get_timezone())
+
+
+def prepare_credential_authentication(player: Player):
+    """Generate the configuration needed by the client to start authenticating with an existing WebAuthn credential.
+
+    This now includes a list of allowed credentials to let the user select among their registered passkeys.
+    """
+
+    credentials = WebAuthnCredential.query.filter_by(player_id=player.id).all()
+
+    allow_credentials = [
+        PublicKeyCredentialDescriptor(id=cred.credential_id, type=PublicKeyCredentialType.PUBLIC_KEY)
+        for cred in credentials
+    ]
+
+    public_credential_authentication_options = webauthn.generate_authentication_options(
+        rp_id=_hostname(), allow_credentials=allow_credentials  # include the allowed credentials
+    )
+
+    to_session = public_credential_authentication_options.challenge
+
+    return webauthn.options_to_json(public_credential_authentication_options), to_session
 
 
 def prepare_credential_creation(player: Player):
@@ -72,3 +97,32 @@ def verify_and_save_credential(player: Player, registration_credential):
 
     db.session.add(credential)
     db.session.commit()
+
+
+import base64
+
+
+def verify_credential(authentication_credential, session_login_challenge):
+    """Verify WebAuthn authentication credential and return the player if valid."""
+
+    credential_id = base64.urlsafe_b64decode(authentication_credential["id"] + "==")
+
+    credential = WebAuthnCredential.query.filter_by(credential_id=credential_id).first()
+
+    if not credential or not session_login_challenge:
+        return None
+
+    auth_verification = webauthn.verify_authentication_response(
+        credential=authentication_credential,
+        expected_challenge=session_login_challenge,
+        expected_origin=f"https://localhost:8001",
+        expected_rp_id=_hostname(),
+        credential_public_key=credential.credential_public_key,
+        credential_current_sign_count=credential.current_sign_count,
+    )
+
+    credential.current_sign_count = auth_verification.new_sign_count
+    credential.date_last_used = _get_current_time()
+    db.session.commit()
+
+    return credential.player
