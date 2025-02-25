@@ -12,6 +12,7 @@ from pytz import timezone
 class Config(BaseSettings):
     SECRET_KEY: SecretStr = Field(None, description="Secret key for sessions")
     DATABASE_URL: str = Field("", description="Database connection string")
+    ADMIN_NICK: str = Field(None, description="Admin nick")
     ADMIN_PASSWORD: SecretStr = Field(None, description="Admin password")
     TIMEZONE: str = Field(default="Europe/Warsaw", description="Application timezone")
     PERMANENT_SESSION_LIFETIME: int = Field(default=259200, description="Session lifetime in seconds")  # 3 days
@@ -51,6 +52,7 @@ class TestConfig(Config):
             SECRET_KEY="test_secret_key",
             WTF_CSRF_ENABLED=False,
             DEBUG=False,
+            ADMIN_NICK="admin",
             ADMIN_PASSWORD="admin123",
             **kwargs
         )
