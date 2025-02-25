@@ -56,21 +56,26 @@ class PlayerLogin(BaseModel):
 #
 
 
-class WebAuthnCredentialBase(BaseModel):
-    player_id: int
-    credential_id: bytes
-    credential_public_key: bytes
-    current_sign_count: int = 0
+# class WebAuthnCredentialBase(BaseModel):
+#     player_id: int
+#     credential_id: bytes
+#     credential_public_key: bytes
+#     current_sign_count: int = 0
 
 
-class WebAuthnCredentialCreate(WebAuthnCredentialBase):
-    pass
+# class WebAuthnCredentialCreate(WebAuthnCredentialBase):
+#     date_created: datetime.datetime = datetime.datetime.now()
+
+#     pass
 
 
-class WebAuthnCredentialOut(WebAuthnCredentialBase):
-    id: int
+# class WebAuthnCredentialOut(WebAuthnCredentialBase):
+#     id: int
 
-    model_config = ConfigDict(from_attributes=True)
+#     date_created: datetime.datetime
+#     date_last_used: datetime.datetime
+
+#     model_config = ConfigDict(from_attributes=True)
 
 
 #

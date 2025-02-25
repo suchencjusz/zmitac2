@@ -46,6 +46,7 @@ class TestConfig(Config):
     def __init__(self, **kwargs):
         super().__init__(
             TESTING=True,
+            # DATABASE_URL="sqlite+pysqlite:///:memory:",
             DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:5432/zmitac_test",
             SECRET_KEY="test_secret_key",
             WTF_CSRF_ENABLED=False,

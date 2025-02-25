@@ -6,12 +6,6 @@ from extensions import db
 from flask import (Blueprint, abort, flash, make_response, redirect,
                    render_template, request, session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
-from models.models import Player
-from utils.auth import (prepare_credential_authentication,
-                        prepare_credential_creation,
-                        verify_and_save_credential)
-from webauthn.helpers.exceptions import InvalidRegistrationResponse
-from webauthn.helpers.structs import RegistrationCredential
 from werkzeug.security import check_password_hash, generate_password_hash
 
 auth_bp = Blueprint("auth", __name__)
@@ -41,12 +35,6 @@ def login():
         flash("Nieprawidłowy nick lub hasło!", "error")
 
     return render_template("auth/login.html")
-
-
-# 1st to do: write verifiaction to check if this shit works (does it even? )
-
-# @auth_bp.route("/login_webauthn", methods=["GET", "POST"])
-# def login_webauthn():
 
 
 @auth_bp.route("/change_password", methods=["GET", "POST"])
