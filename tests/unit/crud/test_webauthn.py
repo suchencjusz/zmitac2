@@ -1,16 +1,8 @@
-import pytest
-from crud.webauthn import create_webauthncredential, get_webauthncredential, update_webauthncredential
-from models.models import WebAuthnCredential
 import datetime
 
 import pytest
-
-from crud.webauthn import (
-    create_webauthncredential,
-    get_webauthncredential,
-    update_webauthncredential,
-)
-from models.models import WebAuthnCredential, Player
+from crud.webauthn import create_webauthncredential, get_webauthncredential, update_webauthncredential
+from models.models import Player, WebAuthnCredential
 
 
 @pytest.fixture

@@ -3,13 +3,15 @@ from urllib.parse import urlparse
 
 from crud.player import get_player, get_player_by_nick
 from extensions import db
-from flask import (Blueprint, abort, flash, make_response, redirect,
-                   render_template, request, session, url_for)
+from flask import Blueprint, abort, flash, make_response, redirect, render_template, request, session, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 from models.models import Player, WebAuthnCredential
-from utils.auth import (prepare_credential_authentication,
-                        prepare_credential_creation,
-                        verify_and_save_credential, verify_credential)
+from utils.auth import (
+    prepare_credential_authentication,
+    prepare_credential_creation,
+    verify_and_save_credential,
+    verify_credential,
+)
 from webauthn.helpers.exceptions import InvalidRegistrationResponse
 from webauthn.helpers.structs import RegistrationCredential
 from werkzeug.security import check_password_hash, generate_password_hash

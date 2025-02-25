@@ -2,7 +2,7 @@ import os
 
 from config import Config, TestConfig
 from extensions import db, ensure_admin_user, init_db, login_manager
-from flask import Flask, render_template
+from flask import Flask, flash, render_template
 from flask_wtf.csrf import CSRFProtect
 from models.models import Player
 
@@ -76,6 +76,11 @@ def create_app(config: Config) -> Flask:
     #
     @app.route("/")
     def index():
+        return render_template("index.html")
+
+    @app.route("/test_flash")
+    def test_flash():
+        flash("Test flash message", "success")
         return render_template("index.html")
 
     @app.errorhandler(404)

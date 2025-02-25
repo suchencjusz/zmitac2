@@ -2,28 +2,35 @@
 
 {% block content %}
 <div class="actions-container">
-    <h2>Autoryzacja</h2>
-    <ul>
-        <li><a href="{{ url_for('auth.change_password') }}">Zmień hasło</a></li>
-        <li><a href="{{ url_for('webauthn.actions') }}">Autoryzacaj WebAuthn</a></li></li>
-        <li><a href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
-    </ul>
+    <div id="action-item">
+        <h2>Autoryzacja</h2>
+        <ul>
+            <li><a href="{{ url_for('auth.change_password') }}">Zmień hasło</a></li>
+            <li><a href="{{ url_for('webauthn.actions') }}">Autoryzacaj WebAuthn</a></li></li>
+            <li><a href="{{ url_for('auth.logout') }}">Wyloguj</a></li>
+        </ul>
+    </div>
 
+    
     {% if current_user.admin %}
-    <h2>Admin</h2>
-    <ul>
-        <li><a href="{{ url_for('admin.change_someone_password') }}">Zmień czyjeś hasło</a></li>
-        <li><a href="{{ url_for('admin.change_someone_permissions') }}">Zmień czyjeś permisje</a></li>
-        <!-- zmień czyjś nick -->
-    </ul>
+    <div id="action-item">
+        <h2>Admin</h2>
+        <ul>
+            <li><a href="{{ url_for('admin.change_someone_password') }}">Zmień czyjeś hasło</a></li>
+            <li><a href="{{ url_for('admin.change_someone_permissions') }}">Zmień czyjeś permisje</a></li>
+            <!-- zmień czyjś nick -->
+        </ul>
+    </div>
     {% endif %}
 
     {% if current_user.judge %}
-    <h2>Sędzia</h2>
-    <ul>
-        <!-- dodaj mecz -->
-        <li><a href="{{ url_for('judge.new_player') }}">Dodaj gracza</a></li>
-    </ul>
+    <div id="action-item">
+        <h2>Sędzia</h2>
+        <ul>
+            <!-- dodaj mecz -->
+            <li><a href="{{ url_for('judge.new_player') }}">Dodaj gracza</a></li>
+        </ul>
+    </div>
     {% endif %}
 
 {% endblock %}

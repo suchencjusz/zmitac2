@@ -17,9 +17,9 @@ test_config = TestConfig()
 
 @pytest.fixture(autouse=True)
 def mock_env_variables():
-    os.environ['SECRET_KEY'] = 'test_secret_key'
-    os.environ['ADMIN_NICK'] = 'admin'
-    os.environ['ADMIN_PASSWORD'] = 'admin123'
+    os.environ["SECRET_KEY"] = "test_secret_key"
+    os.environ["ADMIN_NICK"] = "admin"
+    os.environ["ADMIN_PASSWORD"] = "admin123"
 
 
 @pytest.fixture(scope="session")
