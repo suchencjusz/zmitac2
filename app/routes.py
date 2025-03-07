@@ -3,6 +3,9 @@ import os
 import tempfile
 from datetime import datetime, timedelta
 
+import os
+import tempfile
+
 from flask import flash, redirect, render_template, request, send_file, session, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -151,10 +154,6 @@ def ranking():
     return render_template("ranking.html", players=best_ratio_players)
 
 
-import os
-import tempfile
-
-
 @app.route("/export", methods=["GET"])
 def export():
     if not session.get("logged_in"):
@@ -190,7 +189,7 @@ def export():
 
 
 @app.route("/login", methods=["GET", "POST"])
-@limiter.limit("5 per minute")
+@limiter.limit("8 per minute")
 def login():
     if request.method == "POST":
         if request.form["password"] == Config.ADMIN_PASSWORD:

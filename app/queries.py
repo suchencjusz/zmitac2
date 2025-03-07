@@ -107,8 +107,31 @@ def get_most_active_player_today() -> dict:
 
 
 def get_most_winning_player_today() -> dict:
-    now = datetime.now(Config.TIMEZONE)
-    return get_most_winning_player_by_date(now.date())
+    matches = get_matches_from_today()
+    player_wins = {}
+
+    for match in matches:
+        for player in match["players"]:
+            player_id = player["_id"]
+            if player_id not in player_wins:
+                player_wins[player_id] = {"nickname": player["nickname"], "wins": 0}
+            if match["multi_game"]:
+                if player_id in match["players1"] and match["who_won"] == "players1":
+                    player_wins[player_id]["wins"] += 1
+                elif player_id in match["players2"] and match["who_won"] == "players2":
+                    player_wins[player_id]["wins"] += 1
+            else:
+                if match["player1id"] == player_id and match["who_won"] == "player1":
+                    player_wins[player_id]["wins"] += 1
+                elif match["player2id"] == player_id and match["who_won"] == "player2":
+                    player_wins[player_id]["wins"] += 1
+
+    if not player_wins:
+        return {"nickname": "No matches", "wins": 0}
+
+    most_winning = max(player_wins.values(), key=lambda x: x["wins"])
+
+    return most_winning
 
 
 def get_most_winning_player_by_date(date: datetime) -> dict:
