@@ -50,6 +50,7 @@ class Match(db.Model):
     __tablename__ = "matches"
 
     id = db.Column(db.Integer, primary_key=True, index=True)
+    creator_id = db.Column(db.Integer, db.ForeignKey("players.id"), nullable=False)
     date = db.Column(db.DateTime, default=datetime.timezone.utc)
     is_ranked = db.Column(db.Boolean, default=True)
     additional_info = db.Column(db.String, nullable=True)
@@ -57,6 +58,7 @@ class Match(db.Model):
 
     game_mode = db.relationship("GameMode", back_populates="matches")
     players = db.relationship("MatchPlayer", back_populates="match")
+
 
 
 class MatchPlayer(db.Model):

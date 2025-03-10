@@ -60,19 +60,23 @@
         {% endwith %}
 
         <div id="welcome-section">
-            <h1>ZMiTAC2</h1>
+            <h1>
+                <img src="{{ url_for('static', filename='piwo.gif') }}" alt="piwo" class="piwo"> 
+                ZMiTAC 2 
+                <img src="{{ url_for('static', filename='kotek.gif') }}" alt="kotek" class="kotek"> </h1>
         </div>
 
         <div id="menu">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('info.rules') }}">Zasady</a>
+            <a href="{{ url_for('match.info') }}">Mecze</a>
             <a href="{{ url_for('info.about') }}">Info</a>
 
             {% if current_user.is_authenticated %}
                 <a href="{{ url_for('info.actions') }}" style="margin-left: 20px">Akcje</a>
                 <a href="{{ url_for('auth.logout') }}">Logout</a>
             {% else %}
-                <a href="{{ url_for('auth.login') }}">Login</a>
+                <a href="{{ url_for('auth.login') }}" style="margin-left: 20px">Login</a>
             {% endif %}
         </div>
 

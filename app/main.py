@@ -63,12 +63,14 @@ def create_app(config: Config) -> Flask:
     from routes.auth_bp import auth_bp
     from routes.info_bp import info_bp
     from routes.judge_bp import judge_bp
+    from routes.match_bp import match_bp
     from routes.webauthn_bp import webauthn_bp
 
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(info_bp, url_prefix="/info")
     app.register_blueprint(judge_bp, url_prefix="/judge")
+    app.register_blueprint(match_bp, url_prefix="/match")
     app.register_blueprint(webauthn_bp, url_prefix="/webauthn")
 
     #
