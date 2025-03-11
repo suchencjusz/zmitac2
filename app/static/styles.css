@@ -39,6 +39,11 @@ body {
     margin-bottom: 10px;
 }
 
+ul, ol, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 /*              */
 /*  animations  */
 /*              */
@@ -83,7 +88,6 @@ body {
     text-align: center;
 }
 
-/* Media query for smaller screens */
 @media (max-width: 600px) {
     .actions-container {
         grid-template-columns: 1fr;
@@ -96,12 +100,8 @@ body {
 
 table {
     width: 80%;
-    border-collapse: separate;
-    border: 2px outset #C0C0C0;
     margin: 10px auto;
-    background-color: #000000;
-    table-layout: fixed; /* This helps control table width */
-    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    table-layout: auto;
 }
 
 .table-wrapper {
@@ -111,45 +111,54 @@ table {
 }
 
 td, th {
-    max-width: 250px; 
-    overflow: hidden;
-}
-
-
-@media screen and (max-width: 600px) {
-    table {
-        width: 100%;
-        font-size: 14px;
-    }
+    border: 1px solid #444;
+    font-size: 18px;
     
-    td, th {
-        padding: 3px; 
-    }
+    padding: 5px;
+    color: #FFFF00;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+th {
+    background-color: #222; 
+    color:yellowgreen;
+}
+
 
 /*          */
 /*  game    */
 /*          */
 
 #game-solo {
-    width: 90%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin: 20px auto;
     /* max-width: 600px; */
-    
 }
 
 #game-solo .grid-item {
+    font-size: 20px;
     background-color: #000000;
-    border: 2px outset #C0C0C0;
+    flex-direction: column; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px outset #C0C0C0; */
     padding: 10px;
     text-align: center;
     color: #00FF00;
     aspect-ratio: 1 / 1;
-    
 }
+
+#game-solo .info p {
+    margin: 0;
+    text-align: justify;
+}
+
 
 .versus {
     background-color: #000000;
@@ -157,15 +166,30 @@ td, th {
     flex-direction: column; 
     display: flex;
     align-items: center;
-    justify-content: center; 
-    font-size: 4em; 
+    justify-content: center;
     font-weight: bold;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
-.versus p {
+.versus p:first-child {
+    font-size: clamp(26px, 4vw, 28px);
     margin: 0;
+    width: 100%;
 }
 
+.versus p:nth-child(2) {
+    color:#ff0085;
+    font-size: clamp(24px, 4vw, 20px);
+    margin: 0;
+    width: 100%;
+}
+
+.versus p:last-child {
+    font-size: clamp(26px, 4vw, 28px);
+    margin: 0;
+    width: 100%;
+}
 
 @media (max-width: 600px) {
     .versus {
@@ -243,25 +267,13 @@ td, th {
     }
 }
 
-
-th, td {
-    border: 2px inset #808080;
-    padding: 5px;
-    font-weight: bold;
-    color: #FFFF00;
-}
-
-th {
-    background-color: #800080;
-    color: #FFFFFF;
-}
+/* a links */
 
 a {
-    color: #ff0085; /* Cyan */
+    color: #ff0085;
     text-decoration: blink;
     font-weight: bold;
 }
-
 
 
 a:hover {
@@ -284,11 +296,7 @@ a:hover {
     }
 }
 
-/* 
-a:visited {
-    color: #FF00FF; /* Magenta */
-/* } */
-
+/* basic buttons */
 
 button, input[type="submit"] {
     background: linear-gradient(to bottom, #FF00FF, #800080);
@@ -303,6 +311,8 @@ button:hover, input[type="submit"]:hover {
     background: linear-gradient(to bottom, #800080, #FF00FF);
 }
 
+/* inputs forms */
+
 input, select, textarea {
     background-color: #FFFFFF;
     color: #000000;
@@ -315,6 +325,8 @@ input, select, textarea {
     text-align: left;
 }
 
+/* login */
+
 .login-container {
     width: 80%;
     max-width: 400px;
@@ -324,38 +336,7 @@ input, select, textarea {
     border: 4px ridge #C0C0C0;
 }
 
-/* Animated rainbow text - classic 90s feature */
-.blink {
-    animation: blink-animation 1s steps(5, start) infinite;
-}
 
-@keyframes blink-animation {
-    to {
-        visibility: hidden;
-    }
-}
-
-/* Under construction gif area */
-.under-construction {
-    margin: 30px auto;
-    text-align: center;
-    background-color: #FFFF00;
-    padding: 10px;
-    border: 5px dashed #FF0000;
-}
-
-/* Hit counter style */
-.hit-counter {
-    background-color: #000000;
-    color: #FF0000;
-    padding: 5px;
-    border: 2px inset #808080;
-    width: 100px;
-    margin: 10px auto;
-}
-
-
-/* WebAuthn specific styling */
 #webauthn-button {
     background: linear-gradient(to bottom, #00FF00, #008000);
     border: 3px outset #00FF00;
@@ -372,14 +353,10 @@ input, select, textarea {
     background-color: #000000;
 }
 
-/* Footer with classic 90s info */
+/* foot yes */
+
 .footer {
-    font-size: 10px;
-    color: #C0C0C0;
-    margin-top: 30px;
-    padding: 10px;
-    background-color: #000000;
-    border-top: 2px groove #808080;
+    margin-top: 50px;
 }
 
 .footer p {

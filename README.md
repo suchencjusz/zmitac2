@@ -28,8 +28,8 @@
 - notifactions (about new matches)
 - bot for fandom dziekana (at least info about matches)
 
-![ZMiTAC 2](https://raw.githubusercontent.com/suchencjusz/zmitac2/refs/heads/main/zmitac2.gif)
-![kasia](https://raw.githubusercontent.com/suchencjusz/zmitac2/refs/heads/main/kasia-bilardzistka.gif)
+![1](https://raw.githubusercontent.com/suchencjusz/zmitac2/refs/heads/turbo/1.png)
+![2](https://raw.githubusercontent.com/suchencjusz/zmitac2/refs/heads/turbo/2.png)
 
 # Ussage
 
