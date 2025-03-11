@@ -11,8 +11,7 @@ match_bp = Blueprint("match", __name__)
 def info():
     return render_template("match/info.html")
 
-@match_bp.route("/test_match_info", methods=["GET"])
-def test_match_info():
-    return render_template("match/test_match_info.html")
-
-
+# todo: game from db ofc
+@match_bp.route("/game", methods=["GET"])
+def game():
+    return render_template("match/game.html")
