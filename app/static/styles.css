@@ -154,6 +154,13 @@ th {
     aspect-ratio: 1 / 1;
 }
 
+@media screen and (max-width: 600px) {
+    #game-solo .grid-item {
+        font-size: 1.5em;
+        aspect-ratio: auto;
+    }
+}
+
 #game-solo .info p {
     margin: 0;
     text-align: justify;
@@ -207,6 +214,29 @@ th {
 /*           */
 /*  matches  */
 /*           */
+
+#game-add-players {
+    /* align-items: center; */
+    /* display: flex; */
+    /* justify-content: center; */
+    border: 2px solid #C0C0C0;
+    width: 30%;
+    margin: 10px auto;
+    padding: 20px;
+}
+
+#game-add-players p {
+    margin: 10px
+}
+
+
+
+select[multiple] option:checked {
+    background-color: #800080 !important;
+    color: #00FF00;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ff0085 inset;
+}
 
 #stats-matches-short {
     margin-top: 10px;

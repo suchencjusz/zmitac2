@@ -1,6 +1,12 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import login_required
 from flask_wtf.csrf import CSRFProtect
+
+from extensions import get_db
+
+from crud.player import get_players
+
+from decorators import judge_required
 
 csrf = CSRFProtect()
 
@@ -15,3 +21,15 @@ def info():
 @match_bp.route("/game", methods=["GET"])
 def game():
     return render_template("match/game.html")
+
+@match_bp.route("/add", methods=["GET", "POST"])
+@login_required
+@judge_required
+def add():
+
+    if request.method == "POST":
+        pass
+
+    players = get_players(get_db())
+
+    return render_template("match/add.html", players=players)

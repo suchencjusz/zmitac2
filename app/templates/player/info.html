@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="player-info">
+    <p>{{ player.nick }}</p>
+    <p>{{ player.judge }}</p>
+    <p>{{ player.admin }}</p>
+    <p>{{ player.elo }}</p>
+    <p>{{ player.matches }}</p>
+</div>
+
+{% endblock %}

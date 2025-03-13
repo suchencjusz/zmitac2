@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Dodaj mecz</h2>
+
+<div id="game-add">
+
+    <div id="game-add-players">
+
+        <form>
+
+            <div class="toggle-container">
+                <label for="teams" class="toggle-label">Drużynowy</label>
+                <input type="checkbox" name="teams" id="teams" value="1" class="toggle-input">
+                <label for="teams" class="toggle-switch"></label>
+            </div>
+
+            
+            <br>
+
+
+
+                <select name="players1" id="players1" required>
+                    {% for player in players %}
+                    <option value="{{ player.id }}">{{ player.nick }}</option>
+                    {% endfor %}
+                </select>
+
+                <p>vs</p>
+
+                <select name="players2" id="players2" required>
+                    {% for player in players %}
+                    <option value="{{ player.id }}">{{ player.nick }}</option>
+                    {% endfor %}
+                </select>
+
+
+                <input type="submit" value="Dodaj mecz">
+
+                
+
+        
+
+        </form>
+
+    </div>
+
+    <p id="form-info-box">chyba cie pokickalo!</p>
+
+    <script>
+
+        const toggle = document.querySelector('#teams');
+        const players1 = document.querySelector('#players1');
+        const players2 = document.querySelector('#players2');
+
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) {
+                players1.setAttribute('multiple', 'multiple');
+                players2.setAttribute('multiple', 'multiple');
+            } else {
+                players1.removeAttribute('multiple');
+                players2.removeAttribute('multiple');
+            }
+        });
+
+    </script>
+
+</div>
+
+{% endblock %}
