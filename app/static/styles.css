@@ -147,7 +147,6 @@ th {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: 2px outset #C0C0C0; */
     padding: 10px;
     text-align: center;
     color: #00FF00;
@@ -216,19 +215,44 @@ th {
 /*           */
 
 #game-add-players {
-    /* align-items: center; */
-    /* display: flex; */
-    /* justify-content: center; */
-    border: 2px solid #C0C0C0;
-    width: 30%;
+    aspect-ratio: auto; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: auto; 
+    max-width: 100%;
     margin: 10px auto;
-    padding: 20px;
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+
+#game-add-players select {
+    min-width: 120px;
+    flex: 0 1 auto; 
 }
 
 #game-add-players p {
-    margin: 10px
+    margin: 0 10px;
+    color: #ff0085;
+    font-weight: bold;
+    flex-shrink: 0;
 }
 
+
+@media (max-width: 500px) {
+    #game-add-players {
+        flex-direction: column;
+        width: 80%;
+        white-space: normal;
+    }
+    
+    #game-add-players select {
+        margin: 5px 0;
+        width: 100%;
+    }
+}
 
 
 select[multiple] option:checked {
@@ -391,4 +415,26 @@ input, select, textarea {
 
 .footer p {
     margin: 5px 0;
+}
+
+/*  */
+/* utils */
+/*  */
+
+.toggle-container{
+    margin: 5px;
+}
+
+.basic-form {
+    aspect-ratio: auto; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: auto; 
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 10px 20px;
+    white-space: nowrap;
 }

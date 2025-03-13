@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Dodaj/aktualizuj tryb gry</h2>
+
+<div class="basic-form">
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
+
+        <div class="form-group">
+            <label for="name">Nazwa:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Opis:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+
+        <button type="submit">Dodaj/aktualizuj tryb gry</button>
+
+    </form>
+</div>
+
+<h2>Tryby gry w bazie danych</h2>
+
+<div class="basic-form">
+    <ul>
+        {% if gamemodes|length == 0 %}
+            <li>Brak trybów gry w bazie danych</li>
+        {% endif %}
+
+        {% for gamemode in gamemodes %}
+            <li>{{ gamemode.name }} - {{ gamemode.description }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

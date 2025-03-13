@@ -10,33 +10,62 @@
 
         <form>
 
+            <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
+
             <div class="toggle-container">
                 <label for="teams" class="toggle-label">Drużynowy</label>
                 <input type="checkbox" name="teams" id="teams" value="1" class="toggle-input">
                 <label for="teams" class="toggle-switch"></label>
             </div>
 
-            
+            <div class="toggle-container">
+                <label for="ranked" class="toggle-label">Rankingowy</label>
+                <input type="checkbox" name="ranked" id="ranked" value="1" class="toggle-input" checked> 
+                <label for="ranked" class="toggle-switch"></label>
+            </div>
+
+            {% if is_admin %}
+            <div class="toggle-container">
+                <label for="date" class="toggle-label">Data</label>
+                <input type="date" name="date" id="date" required>
+                <input type="time" name="time" id="time" required>
+            </div>
+
+            <script>
+                const date = document.querySelector('#date');
+                const time = document.querySelector('#time');
+
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = now.getMonth() + 1;
+                const day = now.getDate();
+                const hour = now.getHours();
+                const minute = now.getMinutes();
+
+                date.value = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+                time.value = `${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}`;
+            </script>
+            {% endif %}
+
             <br>
 
-
-
+            <div id="game-add-players">
                 <select name="players1" id="players1" required>
                     {% for player in players %}
                     <option value="{{ player.id }}">{{ player.nick }}</option>
                     {% endfor %}
                 </select>
-
+            
                 <p>vs</p>
-
+            
                 <select name="players2" id="players2" required>
                     {% for player in players %}
                     <option value="{{ player.id }}">{{ player.nick }}</option>
                     {% endfor %}
                 </select>
+            </div>
 
-
-                <input type="submit" value="Dodaj mecz">
+            <input type="submit" value="Dodaj mecz">
 
                 
 

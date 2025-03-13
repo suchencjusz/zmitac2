@@ -7,6 +7,10 @@ from flask_wtf.csrf import CSRFProtect
 from models.models import Player
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from crud.game_mode import create_game_mode, get_game_modes, update_game_mode, get_game_mode, get_game_mode_by_name
+
+from models.models import GameMode
+
 csrf = CSRFProtect()
 
 admin_bp = Blueprint("admin", __name__)
@@ -91,3 +95,32 @@ def update_player_permissions():
 
     flash("Uprawnienia zostały zaktualizowane", "success")
     return redirect(url_for("admin.change_someone_permissions"))
+
+@admin_bp.route("/add_gamemode", methods=["GET", "POST"])
+@login_required
+@admin_required
+def add_gamemode():
+    if request.method == "POST":
+        name = request.form.get("name")
+        description = request.form.get("description")
+
+        if not name or not description:
+            flash("Proszę wypełnić wszystkie pola!", "error")
+            return render_template("admin/add_gamemode.html")
+        
+        gamemode_in_db = get_game_mode_by_name(db.session, name)
+
+        if gamemode_in_db:
+            update_game_mode(db.session, gamemode_in_db.id ,GameMode(name=name, description=description))
+        else:
+            create_game_mode(db.session, GameMode(name=name, description=description))
+        
+        flash("Pomyślnie dodano nowy tryb gry!", "success")
+
+        return redirect(url_for("admin.add_gamemode"))
+    
+
+
+    gamemodes = get_game_modes(db.session)
+
+    return render_template("admin/add_gamemode.html", gamemodes=gamemodes)
