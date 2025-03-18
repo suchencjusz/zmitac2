@@ -229,8 +229,12 @@ th {
 }
 
 #game-add-players select {
-    min-width: 120px;
-    flex: 0 1 auto; 
+    min-width: 160px;
+    /* flex: 0 1 auto;  */
+}
+
+#game-add-players input[type="submit"] {
+    margin: 10px;
 }
 
 #game-add-players p {
@@ -385,11 +389,27 @@ input, select, textarea {
     width: 80%;
     max-width: 400px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     background-color: #000000;
     border: 4px ridge #C0C0C0;
+    
 }
 
+#login-form {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#login-button {
+    background: linear-gradient(to bottom, #FF00FF, #800080);
+    border: 3px outset #FF00FF;
+    margin-top: 15px;
+    font-size: 14px;
+    padding: 8px 15px;
+    width: 50%;
+}
 
 #webauthn-button {
     background: linear-gradient(to bottom, #00FF00, #008000);
@@ -397,7 +417,7 @@ input, select, textarea {
     margin-top: 15px;
     font-size: 14px;
     padding: 8px 15px;
-    width: 100%;
+    width: 50%;
 }
 
 #webauthn-content {
@@ -405,6 +425,9 @@ input, select, textarea {
     border: 2px dashed #00FFFF;
     padding: 10px;
     background-color: #000000;
+    width: 80%;
+    padding: 20px;
+    margin: 20px auto;
 }
 
 /* foot yes */

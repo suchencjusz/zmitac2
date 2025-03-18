@@ -7,20 +7,16 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />  
 
         <div class="form-group">
-            <label for="nick">Nick:</label>
-            <input type="text" id="nick" name="nick" required>
+            <input type="text" id="nick" name="nick" placeholder="nick" required>
         </div>
 
         <div class="form-group">
-            <label for="password">Hasło:</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" placeholder="hasło" name="password">
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" id="login-button">Login</button>
         <button type="button" id="webauthn-button">Login with Device</button>
     </form>
-
-    <div id="webauthn-content"></div>
 
     <script>
         document.getElementById('webauthn-button').addEventListener('click', async function(){

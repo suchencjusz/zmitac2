@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="new-player-container">
-    <h2>Dodaj gracza</h2>
-    <form method="POST" class="new-player-form">
 
-                <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
+<h2>Dodaj gracza</h2>
+
+<div class="basic-form">
+    <form method="POST" class="new-player-form">
+        <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
 
         <div class="form-group">
-            <label for="nick">Nick:</label>
-            <input type="text" id="nick" name="nick" required>
+            <input type="text" id="nick" name="nick" placeholder="nick" required>
         </div>
 
         <button type="submit">Dodaj gracza</button>
     </form>
 </div>
+
 {% endblock %}
         
 

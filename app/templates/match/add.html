@@ -8,7 +8,7 @@
 
     <div id="game-add-players">
 
-        <form>
+        <form method="post" id="game-add-form">
 
             <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
 
@@ -50,6 +50,7 @@
             <br>
 
             <div id="game-add-players">
+                <p id="team-letter">A</p>
                 <select name="players1" id="players1" required>
                     {% for player in players %}
                     <option value="{{ player.id }}">{{ player.nick }}</option>
@@ -58,6 +59,7 @@
             
                 <p>vs</p>
             
+                <p id="team-letter">B</p>
                 <select name="players2" id="players2" required>
                     {% for player in players %}
                     <option value="{{ player.id }}">{{ player.nick }}</option>
@@ -65,25 +67,102 @@
                 </select>
             </div>
 
+            <br>
+
+            <div id="game-add-winner">
+                <select name="winner" id="winner" required>
+                    
+                </select>
+            </div>
+
             <input type="submit" value="Dodaj mecz">
-
-                
-
-        
-
         </form>
 
     </div>
 
     <p id="form-info-box">chyba cie pokickalo!</p>
 
+<!-- to do: fix przy inicie danychx przy inicie 
+ tej -->
+
     <script>
 
         const toggle = document.querySelector('#teams');
+        const toggle_team_letters = document.querySelectorAll('#team-letter');
         const players1 = document.querySelector('#players1');
         const players2 = document.querySelector('#players2');
 
+        const winner = document.querySelector('#winner');
+
+        function updateWinner() {
+
+            toggle_team_letters.forEach(letter => {
+                letter.style.display = toggle.checked ? 'block' : 'none';
+            });
+
+            winner.innerHTML = '';
+            
+            if (toggle.checked) {
+                const team1Players = Array.from(players1.selectedOptions).map(option => option.value);
+                const team2Players = Array.from(players2.selectedOptions).map(option => option.value);
+                
+                console.log('Team A players:', team1Players);
+                console.log('Team B players:', team2Players);
+                
+                if ((team1Players.length != team2Players.length) || team1Players.length === 0 || team2Players.length === 0) {
+                    const option0 = document.createElement('option');
+                    option0.value = '';
+                    option0.innerText = 'Wybierz graczy';
+                    winner.appendChild(option0);
+                    return;
+                }
+                
+                const option1 = document.createElement('option');
+                option1.value = 'A';
+                option1.innerText = 'Drużyna A';
+                winner.appendChild(option1);
+                
+                const option2 = document.createElement('option');
+                option2.value = 'B';
+                option2.innerText = 'Drużyna B';
+                winner.appendChild(option2);
+                
+            } else {
+                const players1Value = players1.value;
+                const players2Value = players2.value;
+                
+                if (players1Value === players2Value || !players1Value || !players2Value) {
+                    const option0 = document.createElement('option');
+                    option0.value = '';
+                    option0.innerText = 'Wybierz różnych graczy';
+                    winner.appendChild(option0);
+                    return;
+                }
+                
+                const option0 = document.createElement('option');
+                option0.value = '';
+                option0.innerText = '';
+                winner.appendChild(option0);
+                
+                const option1 = document.createElement('option');
+                option1.value = players1Value;
+                option1.innerText = players1.options[players1.selectedIndex].innerText;
+                winner.appendChild(option1);
+                
+                const option2 = document.createElement('option');
+                option2.value = players2Value;
+                option2.innerText = players2.options[players2.selectedIndex].innerText;
+                winner.appendChild(option2);
+            }
+        }
+        
+        players1.addEventListener('change', updateWinner);
+        players2.addEventListener('change', updateWinner);
+        
+
         toggle.addEventListener('change', () => {
+
+
             if (toggle.checked) {
                 players1.setAttribute('multiple', 'multiple');
                 players2.setAttribute('multiple', 'multiple');
@@ -91,7 +170,11 @@
                 players1.removeAttribute('multiple');
                 players2.removeAttribute('multiple');
             }
+
+            updateWinner();
         });
+
+        updateWinner();
 
     </script>
 

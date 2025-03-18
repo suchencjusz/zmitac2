@@ -31,6 +31,8 @@ def game():
 def add():
 
     if request.method == "POST":
+        print(request.form)
+
         pass
 
     players = get_players(get_db())
