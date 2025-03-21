@@ -1,0 +1,249 @@
+id,a,b,winner,date,multi_game
+67dd3f652aef101c279ab864,"['Filip Rusztowicz', 'kb316244', 'kondrix', 'rafał radosław malczyk']","['filip_pro', 'marta', 'suchix', 'topol']",b,2025-03-21 11:04:00,True
+67dd39972aef101c279ab863,"['Filip Rusztowicz', 'kb316244', 'kondrix', 'rafał radosław malczyk']","['filip_pro', 'marta', 'suchix', 'topol']",b,2025-03-21 11:03:00,True
+67dd378c2aef101c279ab862,"['Filip Rusztowicz', 'kb316244', 'kondrix', 'rafał radosław malczyk']","['filip_pro', 'marta', 'suchix', 'topol']",b,2025-03-21 10:53:00,True
+67dd30b42aef101c279ab861,"['Filip Rusztowicz', 'kb316244', 'rafał radosław malczyk']","['filip_pro', 'marta', 'piloniak']",b,2025-03-21 10:25:00,True
+67dd2e5b2aef101c279ab860,"['filip_pro', 'marta', 'piloniak']","['Filip Rusztowicz', 'kb316244', 'rafał radosław malczyk']",b,2025-03-21 10:14:00,True
+67dd2ba02aef101c279ab85e,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'piloniak']",b,2025-03-21 09:53:00,True
+67dd290c2aef101c279ab85d,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'piloniak']",b,2025-03-21 09:53:00,True
+67dc4dc12aef101c279ab85c,"['karol', 'oskarito']","['remzak', 'suchix']",b,2025-03-20 18:17:00,True
+67dc4b972aef101c279ab85b,"['oskarito', 'remzak']","['karol', 'michal']",b,2025-03-20 18:08:00,True
+67dc48092aef101c279ab85a,"['oskarito', 'suchix']","['karol', 'michal']",b,2025-03-20 17:52:00,True
+67dc44d82aef101c279ab859,"['karol', 'michal']","['oskarito', 'suchix']",b,2025-03-20 17:39:00,True
+67dc42212aef101c279ab858,"['karol', 'michal']","['oskarito', 'suchix']",b,2025-03-20 17:28:00,True
+67dc402d2aef101c279ab857,"['oskarito', 'suchix']","['karol', 'michal']",b,2025-03-20 17:19:00,True
+67db0c652aef101c279ab856,"['filip_pro', 'suchix']","['oskarito', 'remzak']",b,2025-03-19 19:26:00,True
+67db09042aef101c279ab855,"['filip_pro', 'suchix']","['oskarito', 'remzak']",b,2025-03-19 19:12:00,True
+67db06cb2aef101c279ab854,"['filip_pro', 'suchix']","['oskarito', 'remzak']",b,2025-03-19 19:02:00,True
+67db03682aef101c279ab853,['filip_pro'],['remzak'],b,2025-03-19 18:48:00,False
+67db01f42aef101c279ab852,['filip_pro'],['suchix'],a,2025-03-19 18:42:00,False
+67dafff52aef101c279ab851,['filip_pro'],['suchix'],b,2025-03-19 18:33:00,False
+67d4c1b02aef101c279ab850,['michal'],['karol'],b,2025-03-14 23:05:00,False
+67d4c1592aef101c279ab84f,['ż'],['karol'],a,2025-03-14 22:50:00,False
+67d4c11f2aef101c279ab84e,['ż'],['michal'],b,2025-03-14 22:40:00,False
+67d4c1102aef101c279ab84d,['michal'],['ż'],a,2025-03-14 22:30:00,False
+67d401742aef101c279ab84b,"['Filip Rusztowicz', 'filip_pro', 'rafał radosław malczyk']","['kondrix', 'marta', 'piloniak']",b,2025-03-14 11:13:00,True
+67d3ff302aef101c279ab84a,"['Filip Rusztowicz', 'filip_pro', 'rafał radosław malczyk']","['kondrix', 'marta', 'piloniak']",b,2025-03-14 11:04:00,True
+67d3fd332aef101c279ab849,"['Filip Rusztowicz', 'filip_pro', 'rafał radosław malczyk']","['kondrix', 'marta', 'piloniak']",b,2025-03-14 10:55:00,True
+67d3fb992aef101c279ab848,"['Filip Rusztowicz', 'filip_pro', 'rafał radosław malczyk']","['kondrix', 'marta', 'piloniak']",b,2025-03-14 10:48:00,True
+67d3f7fe2aef101c279ab847,"['Filip Rusztowicz', 'filip_pro', 'rafał radosław malczyk']","['kondrix', 'marta', 'piloniak']",b,2025-03-14 10:33:00,True
+67d3f41c2aef101c279ab844,"['Filip Rusztowicz', 'marta']","['filip_pro', 'rafał radosław malczyk']",b,2025-03-14 10:16:00,True
+67d3f0312aef101c279ab843,"['Filip Rusztowicz', 'marta']","['filip_pro', 'rafał radosław malczyk']",b,2025-03-14 10:00:00,True
+67d3eff92aef101c279ab842,"['Filip Rusztowicz', 'marta']","['filip_pro', 'rafał radosław malczyk']",b,2025-03-14 09:55:00,True
+67d191d52aef101c279ab841,['remzak'],['oskarito'],a,2025-03-12 14:52:00,False
+67d18f7c2aef101c279ab840,['remzak'],['suchix'],b,2025-03-12 14:43:00,False
+67d18cb22aef101c279ab83f,['remzak'],['suchix'],b,2025-03-12 14:31:00,False
+67d18b562aef101c279ab83e,['suchix'],['oskarito'],a,2025-03-12 14:25:00,False
+67d189e32aef101c279ab83a,['suchix'],['oskarito'],a,2025-03-12 14:19:00,False
+67d18a7f2aef101c279ab83c,['remzak'],['oskarito'],a,2025-03-12 14:19:00,False
+67d189172aef101c279ab835,['remzak'],['oskarito'],b,2025-03-12 14:15:00,False
+67d188312aef101c279ab831,['oskarito'],['remzak'],b,2025-03-12 14:12:00,False
+67d188282aef101c279ab830,['oskarito'],['remzak'],b,2025-03-12 14:08:00,False
+67d188092aef101c279ab82f,['remzak'],['oskarito'],a,2025-03-12 14:04:00,False
+67d187f02aef101c279ab82e,['oskarito'],['remzak'],b,2025-03-12 13:55:00,False
+67d187e32aef101c279ab82d,['oskarito'],['remzak'],b,2025-03-12 13:51:00,False
+67d187ca2aef101c279ab82c,['oskarito'],['remzak'],a,2025-03-12 13:45:00,False
+67d17afc2aef101c279ab82b,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-12 11:10:00,True
+67d15ccc2aef101c279ab82a,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-12 11:06:00,True
+67d071292aef101c279ab829,['topol'],['suchix'],a,2025-03-11 18:21:00,False
+67d06e2c2aef101c279ab828,['suchix'],['topol'],a,2025-03-11 18:08:00,False
+67d06bba2aef101c279ab827,['suchix'],['topol'],a,2025-03-11 17:58:00,False
+67d068bc2aef101c279ab826,['remzak'],['topol'],a,2025-03-11 17:45:00,False
+67d0664c2aef101c279ab825,['remzak'],['suchix'],a,2025-03-11 17:35:00,False
+67d064e82aef101c279ab824,['suchix'],['remzak'],a,2025-03-11 17:23:00,False
+67d063832aef101c279ab823,['remzak'],['suchix'],b,2025-03-11 17:23:00,False
+67d022302aef101c279ab821,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-11 12:44:00,True
+67d03c572aef101c279ab822,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-11 12:44:00,True
+67d01ef42aef101c279ab820,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-11 12:30:00,True
+67d0193b2aef101c279ab81e,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-11 12:06:00,True
+67d01b4b2aef101c279ab81f,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-11 12:06:00,True
+67cb550ac0223a3cb2ef7b74,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-07 10:40:00,True
+67cb54e9c0223a3cb2ef7b73,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 10:30:00,True
+67cb54afc0223a3cb2ef7b72,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-07 10:20:00,True
+67cb5485c0223a3cb2ef7b71,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-07 10:10:00,True
+67cb53bdc0223a3cb2ef7b70,"['filip_pro', 'rafał radosław malczyk']","['Filip Rusztowicz', 'marta']",b,2025-03-07 09:45:00,True
+67cb534ac0223a3cb2ef7b6f,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-07 09:30:00,True
+67cb52b1c0223a3cb2ef7b6e,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 09:25:00,True
+67cb5286c0223a3cb2ef7b6d,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 09:20:00,True
+67cb5231c0223a3cb2ef7b6c,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 09:15:00,True
+67cb51e0c0223a3cb2ef7b6b,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 09:10:00,True
+67cb51a7c0223a3cb2ef7b6a,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 09:05:00,True
+67cb5166c0223a3cb2ef7b69,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 09:00:00,True
+67c864a5c0223a3cb2ef7b67,"['suchix', 'topol']","['oskarito', 'remzak']",b,2025-03-05 15:50:00,True
+67c863a8c0223a3cb2ef7b66,"['suchix', 'topol']","['oskarito', 'remzak']",b,2025-03-05 15:45:00,True
+67c861dfc0223a3cb2ef7b65,"['suchix', 'topol']","['oskarito', 'remzak']",b,2025-03-05 15:38:00,True
+67c8606cc0223a3cb2ef7b64,"['oskarito', 'remzak']","['suchix', 'topol']",b,2025-03-05 15:31:00,True
+67c85ef0c0223a3cb2ef7b63,['oskarito'],['remzak'],a,2025-03-05 15:25:00,False
+67d18a8a2aef101c279ab83d,['remzak'],['oskarito'],a,2025-03-05 14:22:00,False
+67d189ec2aef101c279ab83b,['remzak'],['oskarito'],a,2025-03-05 14:19:00,False
+67d189e02aef101c279ab839,['remzak'],['oskarito'],a,2025-03-05 14:18:00,False
+67d189ab2aef101c279ab838,['remzak'],['oskarito'],a,2025-03-05 14:17:00,False
+67d1896a2aef101c279ab837,['remzak'],['oskarito'],a,2025-03-05 14:16:00,False
+67d189262aef101c279ab836,['remzak'],['oskarito'],b,2025-03-05 14:16:00,False
+67d188ff2aef101c279ab833,['remzak'],['oskarito'],b,2025-03-05 14:15:00,False
+67d189092aef101c279ab834,['oskarito'],['remzak'],a,2025-03-05 14:15:00,False
+67d188e62aef101c279ab832,['oskarito'],['remzak'],a,2025-03-05 14:14:00,False
+67c73b11c0223a3cb2ef7b62,['filip_pro'],['suchix'],b,2025-03-04 18:40:00,False
+67c73925c0223a3cb2ef7b61,['filip_pro'],['suchix'],a,2025-03-04 18:32:00,False
+67c7373ec0223a3cb2ef7b60,['filip_pro'],['suchix'],a,2025-03-04 18:24:00,False
+67c73626c0223a3cb2ef7b5f,['filip_pro'],['suchix'],b,2025-03-04 18:19:00,False
+67c70d9bc0223a3cb2ef7b5e,['marta'],['rafał radosław malczyk'],b,2025-03-04 14:39:00,False
+67c70d51c0223a3cb2ef7b5c,['rafał radosław malczyk'],['filip_pro'],a,2025-03-04 14:24:00,False
+67c5f169c0223a3cb2ef7b59,"['karol', 'michal', 'remzak']","['filip_pro', 'oskarito', 'suchix']",b,2025-03-03 19:13:00,True
+67c5ef62c0223a3cb2ef7b58,"['filip_pro', 'oskarito', 'suchix']","['karol', 'michal', 'remzak']",b,2025-03-03 19:04:00,True
+67c5ec94c0223a3cb2ef7b57,"['filip_pro', 'oskarito', 'suchix']","['karol', 'michal', 'remzak']",b,2025-03-03 18:53:00,True
+67c5ea65c0223a3cb2ef7b56,"['michal', 'oskarito', 'remzak']","['filip_pro', 'suchix', 'topol']",b,2025-03-03 18:43:00,True
+67c5e800c0223a3cb2ef7b55,"['filip_pro', 'suchix', 'topol']","['karol', 'oskarito', 'remzak']",b,2025-03-03 18:33:00,True
+67c5e616c0223a3cb2ef7b54,"['filip_pro', 'oskarito']","['karol', 'michal']",b,2025-03-03 18:25:00,True
+67c5e341c0223a3cb2ef7b53,['topol'],['suchix'],a,2025-03-03 18:13:00,False
+67c5dfe2c0223a3cb2ef7b52,['filip_pro'],['topol'],b,2025-03-03 17:59:00,False
+67c5dec7c0223a3cb2ef7b51,['filip_pro'],['suchix'],b,2025-03-03 17:54:00,False
+67bda53ac0223a3cb2ef7b50,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
+67bda532c0223a3cb2ef7b4f,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
+67bda528c0223a3cb2ef7b4e,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
+67bda51cc0223a3cb2ef7b4d,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
+67bda4fbc0223a3cb2ef7b4a,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
+67bda503c0223a3cb2ef7b4b,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
+67bda50fc0223a3cb2ef7b4c,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
+67bda4d3c0223a3cb2ef7b49,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
+67bda4cac0223a3cb2ef7b48,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
+67bda4c3c0223a3cb2ef7b47,['oskarito'],['michal'],a,2025-02-24 12:08:00,False
+67ab880522ce49472134f6ec,['michal'],['oskarito'],a,2025-02-11 18:40:00,False
+67ab87fb22ce49472134f6eb,['oskarito'],['michal'],a,2025-02-11 18:39:00,False
+67ab87ee22ce49472134f6ea,['michal'],['remzak'],a,2025-02-11 18:34:00,False
+67ab82c922ce49472134f6e9,['michal'],['oskarito'],a,2025-02-11 18:31:00,False
+67ab82be22ce49472134f6e8,['michal'],['remzak'],a,2025-02-11 18:25:00,False
+67ab82b222ce49472134f6e7,['michal'],['remzak'],a,2025-02-11 18:20:00,False
+67ab829b22ce49472134f6e6,['oskarito'],['remzak'],a,2025-02-11 18:18:00,False
+67ab828122ce49472134f6e5,['remzak'],['oskarito'],a,2025-02-11 18:10:00,False
+67ab827322ce49472134f6e4,['remzak'],['oskarito'],a,2025-02-11 18:00:00,False
+67a49c3122ce49472134f6e3,['TenOdHighGrounda'],['michal'],a,2025-02-06 12:19:00,False
+67a49c2022ce49472134f6e2,['michal'],['TenOdHighGrounda'],a,2025-02-06 12:08:00,False
+67a49c1522ce49472134f6e1,['TenOdHighGrounda'],['michal'],a,2025-02-06 12:00:00,False
+67a3558f22ce49472134f6df,['suchix'],['filip_pro'],b,2025-02-05 13:11:00,False
+67a3528922ce49472134f6de,['filip_pro'],['suchix'],b,2025-02-05 12:58:00,False
+67a3504622ce49472134f6dd,['suchix'],['filip_pro'],a,2025-02-05 12:49:00,False
+67a34e9322ce49472134f6dc,['suchix'],['filip_pro'],a,2025-02-05 12:41:00,False
+679d44ac22ce49472134f6db,['oskarito'],['karol'],a,2025-01-31 22:44:00,False
+679d3fa122ce49472134f6da,['karol'],['oskarito'],a,2025-01-31 22:24:00,False
+679d3dca22ce49472134f6d9,['karol'],['oskarito'],a,2025-01-31 22:16:00,False
+679d3dc122ce49472134f6d8,['karol'],['oskarito'],a,2025-01-31 22:04:00,False
+679d37b322ce49472134f6d7,['karol'],['oskarito'],b,2025-01-31 21:50:00,False
+679b8c3422ce49472134f6d5,['suchix'],['filip_pro'],b,2025-01-30 15:26:00,False
+679b8a6e22ce49472134f6d4,['suchix'],['remzak'],a,2025-01-30 15:19:00,False
+679b888d22ce49472134f6d3,['filip_pro'],['remzak'],a,2025-01-30 15:11:00,False
+679b87f022ce49472134f6d2,['filip_pro'],['suchix'],a,2025-01-30 15:08:00,False
+679b853e22ce49472134f6d1,['suchix'],['remzak'],a,2025-01-30 14:57:00,False
+679b831f22ce49472134f6d0,['remzak'],['filip_pro'],a,2025-01-30 14:48:00,False
+67940f9222ce49472134f6cf,['tirstus'],['suchix'],b,2025-01-24 23:09:00,False
+67940c4522ce49472134f6ce,['suchix'],['tirstus'],b,2025-01-24 22:55:00,False
+67940b1122ce49472134f6cd,['tirstus'],['suchix'],a,2025-01-24 22:38:00,False
+6794085f22ce49472134f6cc,['suchix'],['tirstus'],a,2025-01-24 22:38:00,False
+6794052922ce49472134f6cb,['suchix'],['tirstus'],b,2025-01-24 22:24:00,False
+678fff2922ce49472134f6c9,['suchix'],['remzak'],a,2025-01-21 21:10:00,False
+678ffdcb22ce49472134f6c8,['egzorcysta'],['remzak'],a,2025-01-21 21:04:00,False
+678ffc3b22ce49472134f6c7,['egzorcysta'],['suchix'],a,2025-01-21 20:57:00,False
+678ff9a122ce49472134f6c6,['suchix'],['remzak'],a,2025-01-21 20:46:00,False
+678ff7c522ce49472134f6c5,['egzorcysta'],['remzak'],b,2025-01-21 20:38:00,False
+678ff4af22ce49472134f6c4,['egzorcysta'],['suchix'],a,2025-01-21 20:25:00,False
+678ff3c622ce49472134f6c3,['suchix'],['remzak'],b,2025-01-21 20:21:00,False
+678ff23f22ce49472134f6c2,['egzorcysta'],['remzak'],b,2025-01-21 20:15:00,False
+678e8f5f2876fbe30360b7f8,['suchix'],['remzak'],b,2025-01-20 19:00:00,False
+678e8dc12876fbe30360b7f7,"['michal', 'suchix']","['karol', 'remzak']",b,2025-01-20 18:53:00,True
+678e8add2876fbe30360b7f6,"['karol', 'remzak']","['michal', 'suchix']",b,2025-01-20 18:41:00,True
+678e89722876fbe30360b7f5,"['karol', 'michal']","['remzak', 'suchix']",b,2025-01-20 18:35:00,True
+678e88d42876fbe30360b7f4,['suchix'],['remzak'],a,2025-01-20 18:33:00,False
+678e86bb2876fbe30360b7f3,['suchix'],['karol'],b,2025-01-20 18:24:00,False
+678e84c52876fbe30360b7f2,['karol'],['remzak'],a,2025-01-20 18:15:00,False
+678e83bc2876fbe30360b7f1,['suchix'],['remzak'],a,2025-01-20 18:11:00,False
+678e823e2876fbe30360b7f0,['karol'],['suchix'],a,2025-01-20 18:04:00,False
+678e80d72876fbe30360b7ef,['remzak'],['karol'],b,2025-01-20 17:58:00,False
+678ac6f62876fbe30360b7ee,['filip_pro'],['suchix'],b,2025-01-17 22:09:00,False
+678ac3082876fbe30360b7ed,['suchix'],['filip_pro'],a,2025-01-17 21:51:00,False
+678ac0852876fbe30360b7ec,['filip_pro'],['suchix'],a,2025-01-17 21:41:00,False
+678abdda2876fbe30360b7eb,['suchix'],['filip_pro'],a,2025-01-17 21:29:00,False
+678ab9c12876fbe30360b7ea,['suchix'],['filip_pro'],a,2025-01-17 21:12:00,False
+678ab67b2876fbe30360b7e9,['suchix'],['filip_pro'],a,2025-01-17 20:58:00,False
+678ab48c2876fbe30360b7e8,['filip_pro'],['suchix'],a,2025-01-17 20:50:00,False
+678ab2292876fbe30360b7e7,['filip_pro'],['suchix'],a,2025-01-17 20:40:00,False
+678ab05d2876fbe30360b7e6,['filip_pro'],['suchix'],b,2025-01-17 20:32:00,False
+678aae652876fbe30360b7e5,['suchix'],['filip_pro'],b,2025-01-17 20:23:00,False
+678aac452876fbe30360b7e4,['suchix'],['filip_pro'],a,2025-01-17 20:15:00,False
+678aab6e2876fbe30360b7e3,['filip_pro'],['suchix'],a,2025-01-17 20:11:00,False
+678aa8db2876fbe30360b7e2,['filip_pro'],['suchix'],a,2025-01-17 20:00:00,False
+678aa6912876fbe30360b7e1,['suchix'],['filip_pro'],a,2025-01-17 19:50:00,False
+678aa55a2876fbe30360b7e0,['suchix'],['filip_pro'],a,2025-01-17 19:45:00,False
+678921788388146adc4e4206,['suchix'],['remzak'],a,2025-01-16 16:10:00,False
+67891f118388146adc4e4205,['remzak'],['suchix'],b,2025-01-16 16:00:00,False
+6787c08f49b554bfff0902e9,['suchix'],['filip_pro'],b,2025-01-15 15:04:00,False
+6787bea849b554bfff0902e8,"['filip_pro', 'topol']","['remzak', 'suchix']",b,2025-01-15 14:56:00,True
+6787bbd949b554bfff0902e7,"['filip_pro', 'remzak']","['suchix', 'topol']",b,2025-01-15 14:44:00,True
+6787b9dc49b554bfff0902e6,"['filip_pro', 'suchix']","['remzak', 'topol']",b,2025-01-15 14:36:00,True
+6787b7c349b554bfff0902e5,['remzak'],['topol'],a,2025-01-15 14:27:00,False
+6787b56949b554bfff0902e4,['topol'],['filip_pro'],a,2025-01-15 14:17:00,False
+6787b49349b554bfff0902e3,['suchix'],['filip_pro'],b,2025-01-15 14:13:00,False
+6787b3eb49b554bfff0902e2,['filip_pro'],['suchix'],a,2025-01-15 14:10:00,False
+6787b1c849b554bfff0902e1,['suchix'],['filip_pro'],a,2025-01-15 14:01:00,False
+6787aef549b554bfff0902e0,['suchix'],['filip_pro'],a,2025-01-15 13:49:00,False
+6787ac7a49b554bfff0902df,['filip_pro'],['suchix'],a,2025-01-15 13:39:00,False
+6786aabd49b554bfff0902de,['remzak'],['suchix'],a,2025-01-14 19:19:00,False
+6786a88c49b554bfff0902dd,['suchix'],['remzak'],a,2025-01-14 19:10:00,False
+6786a82b49b554bfff0902dc,['suchix'],['remzak'],b,2025-01-14 19:08:00,False
+6786a60e49b554bfff0902db,['remzak'],['suchix'],b,2025-01-14 18:59:00,False
+6786a5b349b554bfff0902da,['karol'],['remzak'],a,2025-01-14 18:57:00,False
+6786a36349b554bfff0902d9,['karol'],['michal'],a,2025-01-14 18:48:00,False
+67869fad49b554bfff0902d8,['remzak'],['suchix'],a,2025-01-14 18:32:00,False
+67869e1349b554bfff0902d7,['suchix'],['remzak'],b,2025-01-14 18:25:00,False
+67869bfa49b554bfff0902d6,['suchix'],['remzak'],a,2025-01-14 18:16:00,False
+67869b7d49b554bfff0902d5,['remzak'],['suchix'],a,2025-01-14 18:14:00,False
+6786998f49b554bfff0902d4,['remzak'],['suchix'],a,2025-01-14 18:06:00,False
+678697e249b554bfff0902d3,['suchix'],['remzak'],a,2025-01-14 17:58:00,False
+6786958f49b554bfff0902d2,['remzak'],['suchix'],a,2025-01-14 17:49:00,False
+6786940d49b554bfff0902d1,['suchix'],['remzak'],a,2025-01-14 17:42:00,False
+6785690cc6ca6c44ce7965e8,['suchix'],['remzak'],a,2025-01-13 20:26:00,False
+6785679bc6ca6c44ce7965e7,['suchix'],['michal'],b,2025-01-13 20:20:00,False
+6785659cc6ca6c44ce7965e6,['michal'],['remzak'],a,2025-01-13 20:12:00,False
+6785633ec6ca6c44ce7965e5,['suchix'],['michal'],a,2025-01-13 20:02:00,False
+678561b2c6ca6c44ce7965e4,['remzak'],['michal'],b,2025-01-13 19:55:00,False
+67855dd9c6ca6c44ce7965e3,['remzak'],['suchix'],a,2025-01-13 19:39:00,False
+67855c3cc6ca6c44ce7965e2,['remzak'],['suchix'],a,2025-01-13 19:32:00,False
+67855b85c6ca6c44ce7965e1,['remzak'],['suchix'],a,2025-01-13 19:29:00,False
+67855985c6ca6c44ce7965e0,['suchix'],['remzak'],a,2025-01-13 19:20:00,False
+6785573dc6ca6c44ce7965df,['remzak'],['suchix'],a,2025-01-13 19:11:00,False
+678554dcc6ca6c44ce7965de,['suchix'],['remzak'],b,2025-01-13 19:00:00,False
+6785535bc6ca6c44ce7965dd,['remzak'],['suchix'],b,2025-01-13 18:54:00,False
+678550e5c6ca6c44ce7965dc,['remzak'],['suchix'],b,2025-01-13 18:43:00,False
+6784db68867edc0f8e2e835e,['remzak'],['suchix'],a,2025-01-13 10:20:00,False
+67829529fbcff7420b76f744,['filip_pro'],['suchix'],b,2025-01-11 16:58:00,False
+67829605fbcff7420b76f74c,['remzak'],['filip_pro'],a,2025-01-09 17:02:00,False
+678295fcfbcff7420b76f74b,['filip_pro'],['remzak'],a,2025-01-09 17:00:00,False
+6782959afbcff7420b76f74a,['suchix'],['remzak'],a,2025-01-09 17:00:00,False
+67829588fbcff7420b76f749,['suchix'],['remzak'],b,2025-01-09 16:59:00,False
+6782957afbcff7420b76f748,['remzak'],['filip_pro'],b,2025-01-09 16:59:00,False
+6782955ffbcff7420b76f747,['filip_pro'],['suchix'],a,2025-01-09 16:59:00,False
+6782954afbcff7420b76f746,['filip_pro'],['suchix'],a,2025-01-09 16:58:00,False
+67829537fbcff7420b76f745,['filip_pro'],['suchix'],b,2025-01-09 16:58:00,False
+67829518fbcff7420b76f743,['filip_pro'],['suchix'],b,2025-01-09 16:57:00,False
+678292dafbcff7420b76f739,"['karol', 'michal']","['remzak', 'suchix']",b,2024-12-18 16:48:00,True
+678294defbcff7420b76f741,['suchix'],['topol'],a,2024-12-17 16:56:00,False
+678292effbcff7420b76f73a,"['karol', 'michal']","['remzak', 'suchix']",b,2024-12-17 16:48:00,True
+6782928bfbcff7420b76f737,['suchix'],['remzak'],a,2024-12-17 16:47:00,False
+678292b2fbcff7420b76f738,['suchix'],['jacek'],a,2024-12-17 16:47:00,False
+6782927afbcff7420b76f736,['remzak'],['jacek'],a,2024-12-17 16:46:00,False
+678294fafbcff7420b76f742,['remzak'],['topol'],b,2024-12-11 16:57:00,False
+67829446fbcff7420b76f73f,['remzak'],['filip_pro'],a,2024-12-11 16:54:00,False
+6782945efbcff7420b76f740,['remzak'],['filip_pro'],a,2024-12-11 16:54:00,False
+67829251fbcff7420b76f734,['suchix'],['remzak'],a,2024-12-11 16:46:00,False
+67829263fbcff7420b76f735,['suchix'],['topol'],a,2024-12-11 16:46:00,False
+67829243fbcff7420b76f733,['suchix'],['remzak'],a,2024-12-11 16:45:00,False
+67829230fbcff7420b76f732,['suchix'],['topol'],a,2024-12-11 16:45:00,False
+6782921ffbcff7420b76f731,['remzak'],['topol'],b,2024-12-11 16:45:00,False
+6782920ffbcff7420b76f730,['suchix'],['remzak'],a,2024-12-11 16:44:00,False
+678291f5fbcff7420b76f72f,['suchix'],['topol'],a,2024-12-11 16:44:00,False
+6782940dfbcff7420b76f73d,['remzak'],['filip_pro'],a,2024-12-10 16:53:00,False
+6782941cfbcff7420b76f73e,['filip_pro'],['remzak'],a,2024-12-10 16:53:00,False
+678293ddfbcff7420b76f73c,['filip_pro'],['remzak'],a,2024-12-10 16:52:00,False
+678293c7fbcff7420b76f73b,['remzak'],['filip_pro'],b,2024-12-10 16:51:00,False
+678291b1fbcff7420b76f72e,['remzak'],['suchix'],b,2024-12-10 16:43:00,False
+6782918cfbcff7420b76f72d,['remzak'],['suchix'],a,2024-12-10 16:42:00,False
+67829174fbcff7420b76f72c,['remzak'],['suchix'],a,2024-12-10 16:41:00,False
