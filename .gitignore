@@ -10,6 +10,7 @@ venv/
 # Environment variables and miscellaneous
 .env
 *.env
+venv_old
 
 # Distribution / packaging
 build/

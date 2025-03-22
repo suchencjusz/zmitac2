@@ -183,7 +183,10 @@ def export():
                 a.append(get_player_by_id(m["player1id"])["nickname"])
                 b.append(get_player_by_id(m["player2id"])["nickname"])
 
-            writer.writerow([m["_id"], a, b, "a" if m["who_won"] == ("player1" or "players1") else "b", m["date"], m["multi_game"]])
+            if m["who_won"] == "player1" or m["who_won"] == "players1":
+                writer.writerow([m["_id"], a, b, "a", m["date"], m["multi_game"]])
+            else:
+                writer.writerow([m["_id"], a, b, "b", m["date"], m["multi_game"]])
 
     return send_file(csv_path, as_attachment=True, download_name="matches.csv")
 
