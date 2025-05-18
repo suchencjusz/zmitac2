@@ -1,4 +1,50 @@
 id,a,b,winner,date,multi_game
+682757a71b178f6f830052b2,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-05-16 10:30:00,True
+682757521b178f6f830052b0,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-05-16 10:00:00,True
+682757741b178f6f830052b1,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-05-16 09:15:00,True
+682211411b178f6f830052af,"['filip_pro', 'michal']","['oskarito', 'suchix']",a,2025-05-12 17:18:00,True
+68220f211b178f6f830052ae,"['filip_pro', 'oskarito', 'remzak']","['karol', 'michal', 'suchix']",b,2025-05-12 17:08:00,True
+68220e7c1b178f6f830052ad,"['karol', 'michal']","['filip_pro', 'oskarito']",a,2025-05-12 17:06:00,True
+6821ea291b178f6f830052ac,['filip_pro'],['suchix'],b,2025-05-12 14:30:00,False
+6821e70f1b178f6f830052ab,['filip_pro'],['suchix'],a,2025-05-12 14:18:00,False
+680a8a801b178f6f830052aa,"['oskarito', 'remzak']","['karol', 'michal']",b,2025-04-23 21:37:00,True
+680a8a661b178f6f830052a9,"['oskarito', 'remzak']","['karol', 'michal']",a,2025-04-23 21:00:00,True
+680a89f91b178f6f830052a7,['karol'],['michal'],a,2025-04-23 17:00:00,False
+680a8a3a1b178f6f830052a8,"['oskarito', 'remzak']","['karol', 'michal']",a,2025-04-23 16:15:00,True
+67ff9c131b178f6f830052a6,['filip_pro'],['suchix'],a,2025-04-16 14:01:00,False
+67ff990c1b178f6f830052a5,['filip_pro'],['suchix'],b,2025-04-16 13:48:00,False
+67ff958b1b178f6f830052a4,['filip_pro'],['suchix'],a,2025-04-16 13:33:00,False
+67ff94301b178f6f830052a3,['filip_pro'],['suchix'],b,2025-04-16 13:27:00,False
+67fd29461b178f6f830052a2,['remzak'],['suchix'],b,2025-04-14 17:26:00,False
+67fd26641b178f6f830052a1,['remzak'],['oskarito'],b,2025-04-14 17:14:00,False
+67fd23931b178f6f830052a0,['suchix'],['oskarito'],a,2025-04-14 17:02:00,False
+67fd20e91b178f6f8300529f,['suchix'],['oskarito'],a,2025-04-14 16:51:00,False
+67fd1f301b178f6f8300529e,['suchix'],['oskarito'],a,2025-04-14 16:43:00,False
+67f6b9d61b178f6f8300529d,['remzak'],['suchix'],b,2025-04-09 20:17:00,False
+67f6b6931b178f6f8300529c,['remzak'],['suchix'],b,2025-04-09 20:03:00,False
+67f6b4dd1b178f6f8300529b,['suchix'],['remzak'],a,2025-04-09 19:56:00,False
+67f3ba241b178f6f8300529a,['filip_pro'],['rafał radosław malczyk'],b,2025-04-07 13:42:00,False
+67f3b6631b178f6f83005299,['filip_pro'],['suchix'],b,2025-04-07 13:26:00,False
+67f3b5b81b178f6f83005298,['rafał radosław malczyk'],['suchix'],a,2025-04-07 13:23:00,False
+67f3b3ed1b178f6f83005297,['filip_pro'],['rafał radosław malczyk'],b,2025-04-07 13:15:00,False
+67f3b2a41b178f6f83005296,['filip_pro'],['suchix'],a,2025-04-07 13:10:00,False
+67f3b1361b178f6f83005295,['rafał radosław malczyk'],['suchix'],a,2025-04-07 13:04:00,False
+67f3af271b178f6f83005294,['rafał radosław malczyk'],['filip_pro'],a,2025-04-07 12:55:00,False
+67ebbed21b178f6f83005293,['Filip Rusztowicz'],['filip_pro'],a,2025-04-01 12:23:00,False
+67ebbb4d1b178f6f83005292,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",a,2025-04-01 12:01:00,True
+67ebb98a1b178f6f83005291,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-04-01 11:48:00,True
+67ebb6681b178f6f83005290,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",a,2025-04-01 11:44:00,True
+67ebb58d1b178f6f8300528f,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-04-01 11:42:00,True
+67ead41a1b178f6f8300528e,['karol'],['suchix'],b,2025-03-31 19:42:00,False
+67ead1a71b178f6f8300528d,"['jacek', 'karol']","['remzak', 'suchix']",a,2025-03-31 19:31:00,True
+67eacec21b178f6f8300528c,"['jacek', 'karol']","['oskarito', 'suchix']",b,2025-03-31 19:18:00,True
+67eacc4b1b178f6f8300528b,['karol'],['jacek'],a,2025-03-31 19:07:00,False
+67e6799a1b178f6f8300528a,"['Filip Rusztowicz', 'filip_pro']","['marta', 'rafał radosław malczyk']",a,2025-03-28 11:27:00,True
+67e672601b178f6f83005289,"['Filip Rusztowicz', 'filip_pro']","['marta', 'rafał radosław malczyk']",b,2025-03-28 10:55:00,True
+67e66fc31b178f6f83005288,"['Filip Rusztowicz', 'filip_pro']","['marta', 'rafał radosław malczyk']",b,2025-03-28 10:31:00,True
+67e66c681b178f6f83005287,"['marta', 'rafał radosław malczyk']","['Filip Rusztowicz', 'filip_pro']",a,2025-03-28 10:29:00,True
+67e669aa1b178f6f83005286,"['Filip Rusztowicz', 'filip_pro']","['marta', 'rafał radosław malczyk']",b,2025-03-28 10:17:00,True
+67e666d71b178f6f83005285,"['Filip Rusztowicz', 'filip_pro']","['marta', 'rafał radosław malczyk']",b,2025-03-28 10:06:00,True
 67e592ba1b178f6f83005284,['oskarito'],['remzak'],a,2025-03-27 19:02:00,False
 67e5904f1b178f6f83005283,['suchix'],['oskarito'],a,2025-03-27 18:52:00,False
 67e58f391b178f6f83005282,['suchix'],['remzak'],a,2025-03-27 18:47:00,False
@@ -82,8 +128,8 @@ id,a,b,winner,date,multi_game
 67d18f7c2aef101c279ab840,['remzak'],['suchix'],b,2025-03-12 14:43:00,False
 67d18cb22aef101c279ab83f,['remzak'],['suchix'],b,2025-03-12 14:31:00,False
 67d18b562aef101c279ab83e,['suchix'],['oskarito'],a,2025-03-12 14:25:00,False
-67d18a7f2aef101c279ab83c,['remzak'],['oskarito'],a,2025-03-12 14:19:00,False
 67d189e32aef101c279ab83a,['suchix'],['oskarito'],a,2025-03-12 14:19:00,False
+67d18a7f2aef101c279ab83c,['remzak'],['oskarito'],a,2025-03-12 14:19:00,False
 67d189172aef101c279ab835,['remzak'],['oskarito'],b,2025-03-12 14:15:00,False
 67d188312aef101c279ab831,['oskarito'],['remzak'],b,2025-03-12 14:12:00,False
 67d188282aef101c279ab830,['oskarito'],['remzak'],b,2025-03-12 14:08:00,False
@@ -100,11 +146,11 @@ id,a,b,winner,date,multi_game
 67d0664c2aef101c279ab825,['remzak'],['suchix'],a,2025-03-11 17:35:00,False
 67d064e82aef101c279ab824,['suchix'],['remzak'],a,2025-03-11 17:23:00,False
 67d063832aef101c279ab823,['remzak'],['suchix'],b,2025-03-11 17:23:00,False
-67d022302aef101c279ab821,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-11 12:44:00,True
 67d03c572aef101c279ab822,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-11 12:44:00,True
+67d022302aef101c279ab821,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-11 12:44:00,True
 67d01ef42aef101c279ab820,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",a,2025-03-11 12:30:00,True
-67d0193b2aef101c279ab81e,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-11 12:06:00,True
 67d01b4b2aef101c279ab81f,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",a,2025-03-11 12:06:00,True
+67d0193b2aef101c279ab81e,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-11 12:06:00,True
 67cb550ac0223a3cb2ef7b74,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-03-07 10:40:00,True
 67cb54e9c0223a3cb2ef7b73,"['filip_pro', 'marta']","['Filip Rusztowicz', 'rafał radosław malczyk']",b,2025-03-07 10:30:00,True
 67cb54afc0223a3cb2ef7b72,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",a,2025-03-07 10:20:00,True
@@ -128,8 +174,8 @@ id,a,b,winner,date,multi_game
 67d189ab2aef101c279ab838,['remzak'],['oskarito'],a,2025-03-05 14:17:00,False
 67d1896a2aef101c279ab837,['remzak'],['oskarito'],a,2025-03-05 14:16:00,False
 67d189262aef101c279ab836,['remzak'],['oskarito'],b,2025-03-05 14:16:00,False
-67d188ff2aef101c279ab833,['remzak'],['oskarito'],b,2025-03-05 14:15:00,False
 67d189092aef101c279ab834,['oskarito'],['remzak'],a,2025-03-05 14:15:00,False
+67d188ff2aef101c279ab833,['remzak'],['oskarito'],b,2025-03-05 14:15:00,False
 67d188e62aef101c279ab832,['oskarito'],['remzak'],a,2025-03-05 14:14:00,False
 67c73b11c0223a3cb2ef7b62,['filip_pro'],['suchix'],b,2025-03-04 18:40:00,False
 67c73925c0223a3cb2ef7b61,['filip_pro'],['suchix'],a,2025-03-04 18:32:00,False
@@ -150,11 +196,11 @@ id,a,b,winner,date,multi_game
 67bda532c0223a3cb2ef7b4f,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
 67bda528c0223a3cb2ef7b4e,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
 67bda51cc0223a3cb2ef7b4d,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
-67bda50fc0223a3cb2ef7b4c,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
 67bda503c0223a3cb2ef7b4b,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
 67bda4fbc0223a3cb2ef7b4a,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
-67bda4d3c0223a3cb2ef7b49,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
+67bda50fc0223a3cb2ef7b4c,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
 67bda4cac0223a3cb2ef7b48,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
+67bda4d3c0223a3cb2ef7b49,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
 67bda4c3c0223a3cb2ef7b47,['oskarito'],['michal'],a,2025-02-24 12:08:00,False
 67ab880522ce49472134f6ec,['michal'],['oskarito'],a,2025-02-11 18:40:00,False
 67ab87fb22ce49472134f6eb,['oskarito'],['michal'],a,2025-02-11 18:39:00,False
