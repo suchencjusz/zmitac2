@@ -1,4 +1,4 @@
-from typing import List, Tuple
+
 
 from models.models import Player
 
@@ -13,15 +13,14 @@ class EloService:
 
     @staticmethod
     def calculate_new_elo(current_elo: float, expected_score: float, actual_score: float, is_solo: bool) -> float:
-        K_FACTOR = EloService.K_FACTOR_SOLO if is_solo else EloService.K_FACTOR_TEAM
+        k_factor = EloService.K_FACTOR_SOLO if is_solo else EloService.K_FACTOR_TEAM
 
-        return current_elo + K_FACTOR * (actual_score - expected_score)
+        return current_elo + k_factor * (actual_score - expected_score)
 
     @staticmethod
     def calculate_elo_changes(
-        winners: List[Player], losers: List[Player]
-    ) -> Tuple[List[Tuple[Player, float]], List[Tuple[Player, float]]] | None:
-
+        winners: list[Player], losers: list[Player]
+    ) -> tuple[list[tuple[Player, float]], list[tuple[Player, float]]] | None:
         if not winners or not losers:
             raise ValueError("Both winners and losers lists must be non-empty and non-null.")
 

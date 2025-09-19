@@ -2,7 +2,6 @@ import datetime
 
 from extensions import db
 from flask_login import UserMixin
-from sqlalchemy.orm import backref
 
 
 class GameMode(db.Model):

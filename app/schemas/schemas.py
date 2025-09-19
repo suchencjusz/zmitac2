@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, Dict, List, Optional
+from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
 
@@ -84,7 +84,7 @@ class PlayerLogin(BaseModel):
 
 
 class MatchBase(BaseModel):
-    date: datetime.datetime = datetime.timezone.utc  # todo: zmienic datetime.timezone (cos pozmieniali w noszej libce)
+    date: datetime.datetime = datetime.datetime.now()  # todo: sprawdz czy dzialaa ten dateime
     is_ranked: bool = True
     additional_info: Optional[str] = None
     game_mode_id: int
@@ -92,8 +92,8 @@ class MatchBase(BaseModel):
 
 class MatchCreate(MatchBase):
     creator_id: int
-    players_ids_winners: List[int]
-    players_ids_losers: List[int]
+    players_ids_winners: list[int]
+    players_ids_losers: list[int]
 
 
 class MatchOut(MatchBase):

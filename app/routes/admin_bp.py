@@ -1,15 +1,12 @@
-from crud.game_mode import (create_game_mode, get_game_mode,
-                            get_game_mode_by_name, get_game_modes,
-                            update_game_mode)
-from crud.player import get_player_by_nick, get_players
+from crud.game_mode import create_game_mode, get_game_mode_by_name, get_game_modes, update_game_mode
+from crud.player import get_all_players
 from decorators import admin_required
 from extensions import db
-from flask import (Blueprint, flash, jsonify, redirect, render_template,
-                   request, url_for)
-from flask_login import current_user, login_required
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_login import login_required
 from flask_wtf.csrf import CSRFProtect
 from models.models import GameMode, Player
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 
 csrf = CSRFProtect()
 
@@ -43,7 +40,7 @@ def change_someone_password():
         flash("Hasło zmienione pomyślnie!", "success")
         return redirect(url_for("admin.change_someone_password"))
 
-    players = get_players(db.session)
+    players = get_all_players(db.session)
     return render_template("admin/change_someone_password.html", players=players)
 
 
@@ -71,7 +68,7 @@ def change_someone_permissions():
         flash("Uprawnienia zaktualizowane pomyślnie!", "success")
         return redirect(url_for("admin.change_someone_permissions"))
 
-    players = get_players(db.session)
+    players = get_all_players(db.session)
     return render_template("admin/change_someone_permissions.html", players=players)
 
 

@@ -1,6 +1,4 @@
-import pytest
-from crud.game_mode import (create_game_mode, get_game_mode, get_game_modes,
-                            update_game_mode)
+from crud.game_mode import create_game_mode, get_game_mode, get_game_modes, update_game_mode
 from models.models import GameMode
 
 

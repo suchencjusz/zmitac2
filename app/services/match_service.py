@@ -1,44 +1,53 @@
-from typing import List, Tuple
 
-from models.models import Player
+from crud.match import create_match, create_match_player
+from crud.player import get_player_by_id, update_player_elo
+from schemas.schemas import MatchCreate
+from services.elo_service import EloService
 
 
-class EloService:
-    K_FACTOR_SOLO = 38
-    K_FACTOR_TEAM = 24
-
+class MatchService:
     @staticmethod
-    def calculate_expected_score(player_elo: float, opponent_elo: float) -> float:
-        return 1 / (1 + 10 ** ((opponent_elo - player_elo) / 400))
+    def process_match(db, match_data: MatchCreate) -> None:
+        """
+        Process a match with full transaction support.
+        If anything fails, all changes are rolled back.
+        """
+        try:
+            # Start transaction (already started by SQLAlchemy session)
+            winners = [get_player_by_id(db, player_id) for player_id in match_data.winner_ids]
+            losers = [get_player_by_id(db, player_id) for player_id in match_data.loser_ids]
 
-    @staticmethod
-    def calculate_new_elo(current_elo: float, expected_score: float, actual_score: float, is_solo: bool) -> float:
-        K_FACTOR = EloService.K_FACTOR_SOLO if is_solo else EloService.K_FACTOR_TEAM
-        return current_elo + K_FACTOR * (actual_score - expected_score)
+            # Calculate ELO changes
+            elo_changes = EloService.calculate_elo_changes(winners, losers)
 
-    @staticmethod
-    def calculate_elo_changes(
-        winners: List[Player], losers: List[Player]
-    ) -> Tuple[List[Tuple[Player, float]], List[Tuple[Player, float]]]:
-        winners_avg_elo = sum(player.elo for player in winners) / len(winners)
-        losers_avg_elo = sum(player.elo for player in losers) / len(losers)
+            if elo_changes is None:
+                db.rollback()
+                raise ValueError("Could not calculate ELO changes")
 
-        winners_expected_score = EloService.calculate_expected_score(winners_avg_elo, losers_avg_elo)
-        losers_expected_score = 1 - winners_expected_score
+            winners_elos_change, losers_elos_change = elo_changes
 
-        is_solo = len(winners) == 1 and len(losers) == 1
+            # Update player ELO ratings
+            for player, elo_change in winners_elos_change + losers_elos_change:
+                player.elo += elo_change
+                update_player_elo(db, player, player.elo)
 
-        winners_elos_change = []
-        losers_elos_change = []
+            # Create the match record
+            match_record = create_match(db, match_data)
 
-        for player in winners:
-            new_elo = EloService.calculate_new_elo(player.elo, winners_expected_score, 1, is_solo)
-            elo_change = new_elo - player.elo
-            winners_elos_change.append((player, elo_change))
+            # Create match-player relationships
+            # Winners
+            for player in winners:
+                create_match_player(db, match_record.id, player.id, won=True)
 
-        for player in losers:
-            new_elo = EloService.calculate_new_elo(player.elo, losers_expected_score, 0, is_solo)
-            elo_change = new_elo - player.elo
-            losers_elos_change.append((player, elo_change))
+            # Losers
+            for player in losers:
+                create_match_player(db, match_record.id, player.id, won=False)
 
-        return winners_elos_change, losers_elos_change
+            # Commit all changes
+            db.commit()
+            return match_record
+
+        except Exception as e:
+            # Rollback all changes if anything goes wrong
+            db.rollback()
+            raise e

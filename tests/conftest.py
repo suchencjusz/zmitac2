@@ -42,9 +42,8 @@ def app() -> Flask:
 
 @pytest.fixture(scope="function")
 def test_client(app):
-    with app.test_client() as client:
-        with app.app_context():
-            yield client
+    with app.test_client() as client, app.app_context():
+        yield client
 
 
 @pytest.fixture(scope="function")
@@ -64,9 +63,8 @@ def db_session(engine):
 
 @pytest.fixture(scope="function")
 def test_client(app):
-    with app.test_client() as client:
-        with app.app_context():
-            yield client
+    with app.test_client() as client, app.app_context():
+        yield client
 
 
 @pytest.fixture(scope="function")

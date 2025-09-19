@@ -1,6 +1,3 @@
-import os
-
-import pytest
 from extensions import db, ensure_admin_user, get_db, init_db, login_manager
 from flask import Flask
 from models.models import Player
@@ -25,6 +22,7 @@ def test_db_initialization():
     app = create_test_app()
     with app.app_context():
         players = Player.query.all()
+
         assert players == []
 
 
@@ -49,11 +47,13 @@ def test_ensure_admin_user(monkeypatch):
     app = create_test_app()
     with app.app_context():
         admin = Player.query.filter_by(nick="admin").first()
+
         assert admin is None
 
         ensure_admin_user()
 
         admin = Player.query.filter_by(nick="admin").first()
+
         assert admin is not None
         assert check_password_hash(admin.password, "adminpass")
         assert admin.admin is True

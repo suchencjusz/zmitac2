@@ -1,12 +1,11 @@
-from dotenv import load_dotenv
-
-load_dotenv()
-
 from datetime import timedelta
 
+from dotenv import load_dotenv
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pytz import timezone
+
+load_dotenv()
 
 
 class Config(BaseSettings):
@@ -15,7 +14,9 @@ class Config(BaseSettings):
     ADMIN_NICK: str = Field(None, description="Admin nick")
     ADMIN_PASSWORD: SecretStr = Field(None, description="Admin password")
     TIMEZONE: str = Field(default="Europe/Warsaw", description="Application timezone")
-    PERMANENT_SESSION_LIFETIME: int = Field(default=259200, description="Session lifetime in seconds")  # 3 days
+    PERMANENT_SESSION_LIFETIME: int = Field(
+        default=259200, description="Session lifetime in seconds"
+    )  # 3 days
     WTF_CSRF_ENABLED: bool = Field(True, description="CSRF protection flag")
     DEBUG: bool = Field(False, description="Debug mode flag")
     TESTING: bool = Field(False, description="Testing mode flag")
@@ -54,5 +55,5 @@ class TestConfig(Config):
             DEBUG=False,
             ADMIN_NICK="admin",
             ADMIN_PASSWORD="admin123",
-            **kwargs
+            **kwargs,
         )

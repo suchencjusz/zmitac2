@@ -1,4 +1,4 @@
-from crud.player import get_players
+from crud.player import get_all_players
 from decorators import judge_required
 from extensions import get_db
 from flask import Blueprint, render_template, request
@@ -26,13 +26,12 @@ def game():
 @login_required
 @judge_required
 def add():
-
     if request.method == "POST":
         print(request.form)
 
         pass
 
-    players = get_players(get_db())
+    players = get_all_players(get_db())
 
     return render_template(
         "match/add.html",

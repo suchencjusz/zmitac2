@@ -8,7 +8,6 @@ from services.elo_service import EloService
 
 
 class TestEloService:
-
     def test_calculate_expected_score_equal_players(self):
         """Test: Gracze o równym ELO mają expected score = 0.5"""
 

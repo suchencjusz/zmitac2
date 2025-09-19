@@ -1,7 +1,6 @@
 from crud.player import get_player_by_nick
 from extensions import db
 from flask import Blueprint, flash, redirect, render_template, url_for
-from flask_login import login_required
 from flask_wtf.csrf import CSRFProtect
 
 csrf = CSRFProtect()

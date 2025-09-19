@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from bson import ObjectId
 from config import Config
@@ -247,7 +247,6 @@ def get_all_player_matches_by_id(player_id) -> list:
 
 
 def get_nemesis_and_victim(nickname):
-
     #
     # dziekuje chatugpt za pomoc w tym query <3
     #
@@ -525,9 +524,7 @@ def get_player_matches_data_by_nickname(nickname) -> dict:
                     player_id = player_obj["_id"]
                     if match["who_won"] == "draw":
                         draws_count += 1
-                    elif player_id in match["players1"] and match["who_won"] == "players1":
-                        wins_count += 1
-                    elif player_id in match["players2"] and match["who_won"] == "players2":
+                    elif player_id in match["players1"] and match["who_won"] == "players1" or player_id in match["players2"] and match["who_won"] == "players2":
                         wins_count += 1
                     elif match["who_won"] != "none":
                         losses_count += 1
@@ -554,9 +551,7 @@ def get_player_matches_data_by_nickname(nickname) -> dict:
         if last_match["multi_game"]:
             if current_player_obj:
                 current_player_id = current_player_obj["_id"]
-                if last_match["who_won"] == "players1" and current_player_id in last_match["players1"]:
-                    last_match_who_won = nickname
-                elif last_match["who_won"] == "players2" and current_player_id in last_match["players2"]:
+                if last_match["who_won"] == "players1" and current_player_id in last_match["players1"] or last_match["who_won"] == "players2" and current_player_id in last_match["players2"]:
                     last_match_who_won = nickname
                 else:
                     winning_team = (

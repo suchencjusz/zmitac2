@@ -15,7 +15,7 @@ def create_app(config: Config) -> Flask:
         static_url_path="/static",
     )
 
-    csrf = CSRFProtect(app)
+    CSRFProtect(app)
 
     #
     # config & patch for tests
@@ -98,7 +98,4 @@ def create_app(config: Config) -> Flask:
     return app
 
 
-if os.getenv("TESTING") == "True":
-    app = create_app(TestConfig())
-else:
-    app = create_app(Config())
+app = create_app(TestConfig()) if os.getenv("TESTING") == "True" else create_app(Config())

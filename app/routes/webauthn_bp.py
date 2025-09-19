@@ -1,18 +1,16 @@
-import datetime
-from urllib.parse import urlparse
 
-from crud.player import get_player, get_player_by_nick
+from crud.player import get_player_by_nick
 from extensions import db
-from flask import (Blueprint, abort, flash, make_response, redirect,
-                   render_template, request, session, url_for)
-from flask_login import current_user, login_required, login_user, logout_user
-from models.models import Player, WebAuthnCredential
-from utils.auth import (prepare_credential_authentication,
-                        prepare_credential_creation,
-                        verify_and_save_credential, verify_credential)
+from flask import Blueprint, flash, make_response, redirect, render_template, request, session, url_for
+from flask_login import current_user, login_required, login_user
+from models.models import WebAuthnCredential
+from utils.auth import (
+    prepare_credential_authentication,
+    prepare_credential_creation,
+    verify_and_save_credential,
+    verify_credential,
+)
 from webauthn.helpers.exceptions import InvalidRegistrationResponse
-from webauthn.helpers.structs import RegistrationCredential
-from werkzeug.security import check_password_hash, generate_password_hash
 
 webauthn_bp = Blueprint("webauthn", __name__)
 
@@ -62,7 +60,6 @@ def login_webauthn_partial():
 @webauthn_bp.route("/add_webauthn_partial", methods=["GET", "POST"])
 @login_required
 def add_webauthn_partial():
-
     pcco_json = prepare_credential_creation(current_user)
 
     session["registration_user_id"] = current_user.id

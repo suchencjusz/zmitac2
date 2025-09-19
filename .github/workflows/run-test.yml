@@ -24,7 +24,12 @@ jobs:
 
     strategy:  
       matrix:  
-        python-version: ["3.10", "3.11", "3.12"]  
+        python-version: ["3.10", "3.11", "3.12"]
+      include:
+        - python-version: "3.13"
+          experimental: true
+      allow-failure:
+        - python-version: "3.13"  
   
     steps:
       - uses: actions/checkout@v3  
@@ -39,22 +44,19 @@ jobs:
           python -m pip install --upgrade pip  
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi  
 
-      - name: Lint with Black 
-        run: |  
-          pip install black  
-          black . --check --diff
-        continue-on-error: true  
-
-      - name: Lint with isort  
-        run: |  
-          pip install isort  
-          isort . --check --diff
-        continue-on-error: true
+      - name: Lint with Ruff
+        run: |
+          ruff check app/
+      
+      - name: Format with Ruff
+        run: |
+          ruff format --check app/
 
       - name: Test with pytest  
         run: |  
-          pip install pytest pytest-cov coverage
           pytest --cov --junitxml=junit.xml -o junit_family=legacy
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/zmitac_test
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
