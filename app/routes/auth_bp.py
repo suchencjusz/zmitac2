@@ -3,7 +3,8 @@ from urllib.parse import urlparse
 
 from crud.player import get_player, get_player_by_nick
 from extensions import db
-from flask import Blueprint, abort, flash, make_response, redirect, render_template, request, session, url_for
+from flask import (Blueprint, abort, flash, make_response, redirect,
+                   render_template, request, session, url_for)
 from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 

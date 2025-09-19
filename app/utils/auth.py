@@ -4,11 +4,14 @@ from urllib.parse import urlparse
 
 import webauthn
 from config import Config
-from crud.webauthn import create_webauthncredential, get_webauthncredential, update_webauthncredential
+from crud.webauthn import (create_webauthncredential, get_webauthncredential,
+                           update_webauthncredential)
 from extensions import db
 from flask import request
 from models.models import Player, WebAuthnCredential
-from webauthn.helpers.structs import PublicKeyCredentialDescriptor, PublicKeyCredentialType, UserVerificationRequirement
+from webauthn.helpers.structs import (PublicKeyCredentialDescriptor,
+                                      PublicKeyCredentialType,
+                                      UserVerificationRequirement)
 
 REGISTRATION_CHALLENGES = {}
 

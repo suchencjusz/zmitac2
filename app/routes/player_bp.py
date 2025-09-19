@@ -1,17 +1,14 @@
-from flask import Blueprint, render_template
+from crud.player import get_player_by_nick
+from extensions import db
+from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import login_required
 from flask_wtf.csrf import CSRFProtect
-
-from extensions import db
-
-from flask import Blueprint, render_template, flash, redirect, url_for
-
-from crud.player import get_player_by_nick
 
 csrf = CSRFProtect()
 
 
 player_bp = Blueprint("player_bp", __name__)
+
 
 @player_bp.route("/info/<string:player_nick>", methods=["GET"])
 def info(player_nick):
@@ -22,4 +19,3 @@ def info(player_nick):
         return redirect(url_for("index"))
 
     return render_template("player/info.html", player=player)
-

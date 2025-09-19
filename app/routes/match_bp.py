@@ -1,12 +1,9 @@
-from flask import Blueprint, render_template, request
-from flask_login import login_required, current_user
-from flask_wtf.csrf import CSRFProtect
-
-from extensions import get_db
-
 from crud.player import get_players
-
 from decorators import judge_required
+from extensions import get_db
+from flask import Blueprint, render_template, request
+from flask_login import current_user, login_required
+from flask_wtf.csrf import CSRFProtect
 
 csrf = CSRFProtect()
 

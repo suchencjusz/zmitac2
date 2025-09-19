@@ -84,14 +84,16 @@ class PlayerLogin(BaseModel):
 
 
 class MatchBase(BaseModel):
-    date: datetime.datetime = datetime.timezone.utc
+    date: datetime.datetime = datetime.timezone.utc  # todo: zmienic datetime.timezone (cos pozmieniali w noszej libce)
     is_ranked: bool = True
     additional_info: Optional[str] = None
     game_mode_id: int
 
 
 class MatchCreate(MatchBase):
-    pass
+    creator_id: int
+    players_ids_winners: List[int]
+    players_ids_losers: List[int]
 
 
 class MatchOut(MatchBase):

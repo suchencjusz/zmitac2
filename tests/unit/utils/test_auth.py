@@ -7,17 +7,11 @@ from config import Config
 from extensions import db
 from flask import Flask
 from models.models import Player, WebAuthnCredential
-from utils.auth import (
-    REGISTRATION_CHALLENGES,
-    _get_current_time,
-    _get_from_registration_challenges,
-    _hostname,
-    _origin,
-    prepare_credential_authentication,
-    prepare_credential_creation,
-    verify_and_save_credential,
-    verify_credential,
-)
+from utils.auth import (REGISTRATION_CHALLENGES, _get_current_time,
+                        _get_from_registration_challenges, _hostname, _origin,
+                        prepare_credential_authentication,
+                        prepare_credential_creation,
+                        verify_and_save_credential, verify_credential)
 from webauthn.helpers.exceptions import InvalidRegistrationResponse
 
 

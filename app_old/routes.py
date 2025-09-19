@@ -7,19 +7,13 @@ from flask_limiter.util import get_remote_address
 from pytz import timezone
 
 from app import app
-from app.queries import (
-    add_match,
-    add_player,
-    check_player_exists,
-    get_all_matches,
-    get_all_player_matches_by_nickname,
-    get_all_players,
-    get_matches_from_today,
-    get_most_active_player_today,
-    get_most_winning_player_today,
-    get_player_matches_data_by_nickname,
-    get_players_with_best_win_ratio,
-)
+from app.queries import (add_match, add_player, check_player_exists,
+                         get_all_matches, get_all_player_matches_by_nickname,
+                         get_all_players, get_matches_from_today,
+                         get_most_active_player_today,
+                         get_most_winning_player_today,
+                         get_player_matches_data_by_nickname,
+                         get_players_with_best_win_ratio)
 
 limiter = Limiter(
     app=app,

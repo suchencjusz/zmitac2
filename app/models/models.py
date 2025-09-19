@@ -24,6 +24,7 @@ class Player(UserMixin, db.Model):
     judge = db.Column(db.Boolean, default=False)
     admin = db.Column(db.Boolean, default=False)
     elo = db.Column(db.Float, default=1000.0)
+    info = db.Column(db.String, nullable=True)  # info odnosnie sie gracza dla adminow, rozszyfrowanie nicku np.
 
     matches = db.relationship("MatchPlayer", back_populates="player")
     webauthn_credentials = db.relationship("WebAuthnCredential", back_populates="player", cascade="all, delete-orphan")
@@ -58,7 +59,6 @@ class Match(db.Model):
 
     game_mode = db.relationship("GameMode", back_populates="matches")
     players = db.relationship("MatchPlayer", back_populates="match")
-
 
 
 class MatchPlayer(db.Model):

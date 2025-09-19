@@ -1,4 +1,52 @@
 id,a,b,winner,date,multi_game
+6865169d6d430f74ed1ea3dc,['remzak'],['michal'],b,2025-07-02 13:22:00,False
+6865155a6d430f74ed1ea3db,['remzak'],['oskarito'],a,2025-07-02 13:17:00,False
+686513086d430f74ed1ea3da,"['filip_pro', 'oskarito', 'suchix']","['FasolowySpioch', 'TenOdHighGrounda', 'michal']",a,2025-07-02 13:07:00,True
+686510af6d430f74ed1ea3d9,"['filip_pro', 'oskarito', 'suchix']","['FasolowySpioch', 'TenOdHighGrounda', 'michal']",a,2025-07-02 12:56:00,True
+6863e0cd6d430f74ed1ea3d8,"['karol', 'remzak']","['michal', 'oskarito']",a,2025-07-01 15:21:00,True
+6863ddae6d430f74ed1ea3d7,"['karol', 'remzak']","['michal', 'oskarito']",a,2025-07-01 14:56:00,True
+6863daf06d430f74ed1ea3d6,"['karol', 'remzak']","['michal', 'oskarito']",b,2025-07-01 14:54:00,True
+685d37f36d430f74ed1ea3d5,['remzak'],['michal'],b,2025-06-26 13:56:00,False
+685d35636d430f74ed1ea3d4,['remzak'],['bryła'],b,2025-06-26 13:50:00,False
+685d341b6d430f74ed1ea3d3,"['Michuj', 'bryła', 'czpi czipi czapa czapa']","['karol', 'michal', 'oskarito']",b,2025-06-26 13:50:00,True
+685d317d6d430f74ed1ea3d2,"['bryła', 'michal']","['Michuj', 'czpi czipi czapa czapa']",a,2025-06-26 13:29:00,True
+685d2f066d430f74ed1ea3d1,"['bryła', 'oskarito']","['karol', 'remzak']",b,2025-06-26 13:19:00,True
+685d2cce6d430f74ed1ea3d0,"['michal', 'remzak']","['Michuj', 'karol']",a,2025-06-26 13:04:00,True
+685d293d6d430f74ed1ea3cf,"['bryła', 'czpi czipi czapa czapa']","['michal', 'oskarito']",b,2025-06-26 13:04:00,True
+685a81ed6d430f74ed1ea3cc,"['bryła', 'michal']","['karol', 'oskarito']",b,2025-06-24 12:35:00,True
+685a7f6a6d430f74ed1ea3cb,"['TenOdHighGrounda', 'karol']","['michal', 'remzak']",a,2025-06-24 12:22:00,True
+685a7c6a6d430f74ed1ea3ca,"['TenOdHighGrounda', 'michal']","['oskarito', 'remzak']",a,2025-06-24 12:14:00,True
+685a7a886d430f74ed1ea3c9,"['TenOdHighGrounda', 'michal']","['oskarito', 'remzak']",b,2025-06-24 12:06:00,True
+685a78b96d430f74ed1ea3c8,"['TenOdHighGrounda', 'oskarito']","['karol', 'michal']",a,2025-06-24 11:51:00,True
+685a75156d430f74ed1ea3c7,"['TenOdHighGrounda', 'oskarito']","['karol', 'michal']",a,2025-06-24 11:47:00,True
+685286ee6d430f74ed1ea3c6,['FasolowySpioch'],['michal'],b,2025-06-18 11:13:00,False
+685283576d430f74ed1ea3c5,['Morświniec'],['michal'],a,2025-06-18 11:00:00,False
+6852802a6d430f74ed1ea3c4,['Morświniec'],['FasolowySpioch'],a,2025-06-18 10:50:00,False
+68527dea6d430f74ed1ea3c3,"['FasolowySpioch', 'Morświniec']","['TenOdHighGrounda', 'michal']",a,2025-06-18 10:37:00,True
+68527acd6d430f74ed1ea3c2,"['FasolowySpioch', 'Morświniec']","['TenOdHighGrounda', 'michal']",a,2025-06-18 10:37:00,True
+685168206d430f74ed1ea3c0,"['bryła', 'michal']","['oskarito', 'remzak']",b,2025-06-17 14:47:00,True
+685163c86d430f74ed1ea3be,['oskarito'],['michal'],a,2025-06-17 14:36:00,False
+685161486d430f74ed1ea3bd,['michal'],['remzak'],a,2025-06-17 14:24:00,False
+68515e9a6d430f74ed1ea3bc,['remzak'],['oskarito'],a,2025-06-17 14:24:00,False
+684b19586d430f74ed1ea3bb,['oskarito'],['suchix'],a,2025-06-12 20:15:00,False
+684b16906d430f74ed1ea3ba,['filip_pro'],['oskarito'],a,2025-06-12 20:03:00,False
+684b13ce6d430f74ed1ea3b9,['filip_pro'],['suchix'],a,2025-06-12 19:52:00,False
+68484a416d430f74ed1ea3b8,['karol'],['michal'],b,2025-06-10 17:07:00,False
+684847896d430f74ed1ea3b7,['oskarito'],['michal'],a,2025-06-10 16:55:00,False
+684845b86d430f74ed1ea3b6,['oskarito'],['karol'],b,2025-06-10 16:46:00,False
+68405e8b1b178f6f830052c0,"['karol', 'suchix']","['michal', 'oskarito']",b,2025-06-04 16:55:00,True
+684057b51b178f6f830052bf,"['karol', 'suchix']","['michal', 'oskarito']",a,2025-06-04 16:26:00,True
+684056111b178f6f830052be,"['karol', 'suchix']","['michal', 'oskarito']",a,2025-06-04 16:19:00,True
+6840541a1b178f6f830052bd,"['karol', 'suchix']","['michal', 'oskarito']",a,2025-06-04 16:11:00,True
+682dead41b178f6f830052bc,"['FasolowySpioch', 'michal']","['karol', 'oskarito']",a,2025-05-21 17:01:00,True
+682deac31b178f6f830052bb,"['FasolowySpioch', 'michal']","['karol', 'oskarito']",b,2025-05-21 17:00:00,True
+682dea9d1b178f6f830052ba,"['FasolowySpioch', 'michal']","['karol', 'oskarito']",b,2025-05-21 17:00:00,True
+682dea891b178f6f830052b9,"['FasolowySpioch', 'michal']","['karol', 'oskarito']",b,2025-05-21 16:59:00,True
+682b284f1b178f6f830052b7,['remzak'],['suchix'],b,2025-05-19 14:47:00,False
+682b23de1b178f6f830052b6,['filip_pro'],['remzak'],b,2025-05-19 14:28:00,False
+682b1f8a1b178f6f830052b5,['filip_pro'],['suchix'],b,2025-05-19 14:09:00,False
+682b1c2c1b178f6f830052b4,['remzak'],['suchix'],a,2025-05-19 13:55:00,False
+682b181c1b178f6f830052b3,['filip_pro'],['remzak'],b,2025-05-19 13:37:00,False
 682757a71b178f6f830052b2,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-05-16 10:30:00,True
 682757521b178f6f830052b0,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-05-16 10:00:00,True
 682757741b178f6f830052b1,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'marta']",b,2025-05-16 09:15:00,True
@@ -98,8 +146,8 @@ id,a,b,winner,date,multi_game
 67dd378c2aef101c279ab862,"['Filip Rusztowicz', 'kb316244', 'kondrix', 'rafał radosław malczyk']","['filip_pro', 'marta', 'suchix', 'topol']",a,2025-03-21 10:53:00,True
 67dd30b42aef101c279ab861,"['Filip Rusztowicz', 'kb316244', 'rafał radosław malczyk']","['filip_pro', 'marta', 'piloniak']",a,2025-03-21 10:25:00,True
 67dd2e5b2aef101c279ab860,"['filip_pro', 'marta', 'piloniak']","['Filip Rusztowicz', 'kb316244', 'rafał radosław malczyk']",a,2025-03-21 10:14:00,True
-67dd290c2aef101c279ab85d,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'piloniak']",b,2025-03-21 09:53:00,True
 67dd2ba02aef101c279ab85e,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'piloniak']",a,2025-03-21 09:53:00,True
+67dd290c2aef101c279ab85d,"['Filip Rusztowicz', 'rafał radosław malczyk']","['filip_pro', 'piloniak']",b,2025-03-21 09:53:00,True
 67dc4dc12aef101c279ab85c,"['karol', 'oskarito']","['remzak', 'suchix']",b,2025-03-20 18:17:00,True
 67dc4b972aef101c279ab85b,"['oskarito', 'remzak']","['karol', 'michal']",a,2025-03-20 18:08:00,True
 67dc48092aef101c279ab85a,"['oskarito', 'suchix']","['karol', 'michal']",b,2025-03-20 17:52:00,True
@@ -128,8 +176,8 @@ id,a,b,winner,date,multi_game
 67d18f7c2aef101c279ab840,['remzak'],['suchix'],b,2025-03-12 14:43:00,False
 67d18cb22aef101c279ab83f,['remzak'],['suchix'],b,2025-03-12 14:31:00,False
 67d18b562aef101c279ab83e,['suchix'],['oskarito'],a,2025-03-12 14:25:00,False
-67d189e32aef101c279ab83a,['suchix'],['oskarito'],a,2025-03-12 14:19:00,False
 67d18a7f2aef101c279ab83c,['remzak'],['oskarito'],a,2025-03-12 14:19:00,False
+67d189e32aef101c279ab83a,['suchix'],['oskarito'],a,2025-03-12 14:19:00,False
 67d189172aef101c279ab835,['remzak'],['oskarito'],b,2025-03-12 14:15:00,False
 67d188312aef101c279ab831,['oskarito'],['remzak'],b,2025-03-12 14:12:00,False
 67d188282aef101c279ab830,['oskarito'],['remzak'],b,2025-03-12 14:08:00,False
@@ -174,8 +222,8 @@ id,a,b,winner,date,multi_game
 67d189ab2aef101c279ab838,['remzak'],['oskarito'],a,2025-03-05 14:17:00,False
 67d1896a2aef101c279ab837,['remzak'],['oskarito'],a,2025-03-05 14:16:00,False
 67d189262aef101c279ab836,['remzak'],['oskarito'],b,2025-03-05 14:16:00,False
-67d189092aef101c279ab834,['oskarito'],['remzak'],a,2025-03-05 14:15:00,False
 67d188ff2aef101c279ab833,['remzak'],['oskarito'],b,2025-03-05 14:15:00,False
+67d189092aef101c279ab834,['oskarito'],['remzak'],a,2025-03-05 14:15:00,False
 67d188e62aef101c279ab832,['oskarito'],['remzak'],a,2025-03-05 14:14:00,False
 67c73b11c0223a3cb2ef7b62,['filip_pro'],['suchix'],b,2025-03-04 18:40:00,False
 67c73925c0223a3cb2ef7b61,['filip_pro'],['suchix'],a,2025-03-04 18:32:00,False
@@ -196,11 +244,11 @@ id,a,b,winner,date,multi_game
 67bda532c0223a3cb2ef7b4f,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
 67bda528c0223a3cb2ef7b4e,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
 67bda51cc0223a3cb2ef7b4d,['michal'],['oskarito'],a,2025-02-25 12:10:00,False
+67bda50fc0223a3cb2ef7b4c,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
 67bda503c0223a3cb2ef7b4b,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
 67bda4fbc0223a3cb2ef7b4a,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
-67bda50fc0223a3cb2ef7b4c,['michal'],['oskarito'],a,2025-02-25 12:09:00,False
-67bda4cac0223a3cb2ef7b48,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
 67bda4d3c0223a3cb2ef7b49,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
+67bda4cac0223a3cb2ef7b48,['oskarito'],['michal'],a,2025-02-25 12:08:00,False
 67bda4c3c0223a3cb2ef7b47,['oskarito'],['michal'],a,2025-02-24 12:08:00,False
 67ab880522ce49472134f6ec,['michal'],['oskarito'],a,2025-02-11 18:40:00,False
 67ab87fb22ce49472134f6eb,['oskarito'],['michal'],a,2025-02-11 18:39:00,False
@@ -321,19 +369,19 @@ id,a,b,winner,date,multi_game
 678292dafbcff7420b76f739,"['karol', 'michal']","['remzak', 'suchix']",a,2024-12-18 16:48:00,True
 678294defbcff7420b76f741,['suchix'],['topol'],a,2024-12-17 16:56:00,False
 678292effbcff7420b76f73a,"['karol', 'michal']","['remzak', 'suchix']",b,2024-12-17 16:48:00,True
-6782928bfbcff7420b76f737,['suchix'],['remzak'],a,2024-12-17 16:47:00,False
 678292b2fbcff7420b76f738,['suchix'],['jacek'],a,2024-12-17 16:47:00,False
+6782928bfbcff7420b76f737,['suchix'],['remzak'],a,2024-12-17 16:47:00,False
 6782927afbcff7420b76f736,['remzak'],['jacek'],a,2024-12-17 16:46:00,False
 678294fafbcff7420b76f742,['remzak'],['topol'],b,2024-12-11 16:57:00,False
 67829446fbcff7420b76f73f,['remzak'],['filip_pro'],a,2024-12-11 16:54:00,False
 6782945efbcff7420b76f740,['remzak'],['filip_pro'],a,2024-12-11 16:54:00,False
 67829263fbcff7420b76f735,['suchix'],['topol'],a,2024-12-11 16:46:00,False
 67829251fbcff7420b76f734,['suchix'],['remzak'],a,2024-12-11 16:46:00,False
-67829243fbcff7420b76f733,['suchix'],['remzak'],a,2024-12-11 16:45:00,False
-67829230fbcff7420b76f732,['suchix'],['topol'],a,2024-12-11 16:45:00,False
 6782921ffbcff7420b76f731,['remzak'],['topol'],b,2024-12-11 16:45:00,False
-6782920ffbcff7420b76f730,['suchix'],['remzak'],a,2024-12-11 16:44:00,False
+67829230fbcff7420b76f732,['suchix'],['topol'],a,2024-12-11 16:45:00,False
+67829243fbcff7420b76f733,['suchix'],['remzak'],a,2024-12-11 16:45:00,False
 678291f5fbcff7420b76f72f,['suchix'],['topol'],a,2024-12-11 16:44:00,False
+6782920ffbcff7420b76f730,['suchix'],['remzak'],a,2024-12-11 16:44:00,False
 6782940dfbcff7420b76f73d,['remzak'],['filip_pro'],a,2024-12-10 16:53:00,False
 6782941cfbcff7420b76f73e,['filip_pro'],['remzak'],a,2024-12-10 16:53:00,False
 678293ddfbcff7420b76f73c,['filip_pro'],['remzak'],a,2024-12-10 16:52:00,False
