@@ -734,7 +734,7 @@ def get_players_with_best_win_ratio():
                 },
             }
         },
-        {"$match": {"total_matches": {"$gt": 0}}},
+        {"$match": {"total_matches": {"$gte": 10}}},  # <-- tu zmiana
     ]
 
     results = list(db.matches.aggregate(pipeline))

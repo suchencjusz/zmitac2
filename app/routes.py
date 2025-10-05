@@ -84,6 +84,14 @@ def add_match_route():
                 if not players1 or not players2:
                     flash("Panocku wybierz tych graczy!", "error")
                     return redirect(url_for("add_match_route"))
+                
+                if len(players1) != len(players2):
+                    flash("Panocku liczba graczy w obu drużynach musi być równa!", "error")
+                    return redirect(url_for("add_match_route"))
+                
+                if set(players1) & set(players2):
+                    flash("Panocku wybierz różnych graczy w obu drużynach!", "error")
+                    return redirect(url_for("add_match_route"))
 
                 add_match(
                     who_won=who_won,
@@ -96,6 +104,14 @@ def add_match_route():
                 player1id = request.form["player1id"]
                 player2id = request.form["player2id"]
 
+                if not player1id or not player2id:
+                    flash("Panocku wybierz tych graczy!", "error")
+                    return redirect(url_for("add_match_route"))
+
+                if player1id == player2id:
+                    flash("Panocku wybierz różnych graczy!", "error")
+                    return redirect(url_for("add_match_route"))
+                
                 add_match(
                     player1id=player1id,
                     player2id=player2id,
@@ -112,7 +128,7 @@ def add_match_route():
     now = datetime.now(app.config["TIMEZONE"])
     return render_template(
         "add_match.html",
-        players=list(get_all_players()),
+        players=sorted(get_all_players(), key=lambda p: p["nickname"]),
         today=now.date().isoformat(),
         now=now.strftime("%H:%M"),
     )

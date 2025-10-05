@@ -257,3 +257,15 @@ a:visited {
     padding: 1rem;
     text-align: center;
 }
+
+/*  */
+/* add_match QoL */
+/*  */
+
+#single_fields {
+    margin: 10px 0;
+}
+
+#single_fields select {
+    margin: 5px;
+}
