@@ -1,5 +1,5 @@
 
-from crud.match import create_match, create_match_player
+from crud.match import create_match
 from crud.player import get_player_by_id, update_player_elo
 from schemas.schemas import MatchCreate
 from services.elo_service import EloService

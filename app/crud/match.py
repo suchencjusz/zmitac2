@@ -2,7 +2,7 @@ from models.models import Match
 from schemas.schemas import MatchCreate
 
 
-def create_match(db, match: MatchCreate):
+def create_match(db, match: MatchCreate): # po co to jest
     db_match = Match(
         date=match.date,
         is_ranked=match.is_ranked,
