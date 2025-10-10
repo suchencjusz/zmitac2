@@ -5,18 +5,21 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     FLASK_APP=app \
     FLASK_ENV=production
 
-WORKDIR /app
+WORKDIR /code
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     gcc \
+    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt /app/
-RUN pip install -r requirements.txt
+COPY requirements.txt /code/
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . /app/
+COPY . /code/
 
 EXPOSE 5000
 
-CMD ["python", "-u", "/app/run.py"]
+WORKDIR /code/app
+
+CMD ["python", "-u", "run.py"]

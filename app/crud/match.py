@@ -1,8 +1,9 @@
 from models.models import Match
 from schemas.schemas import MatchCreate
+from crud import commit_or_flush
 
 
-def create_match(db, match: MatchCreate): # po co to jest
+def create_match(db, match: MatchCreate, commit=True):
     db_match = Match(
         date=match.date,
         is_ranked=match.is_ranked,
@@ -12,10 +13,7 @@ def create_match(db, match: MatchCreate): # po co to jest
     )
 
     db.add(db_match)
-    db.flush()
-    # db.flush -> zwraca id bez commita
-    # ! logika zarzadza commitem !
-
+    commit_or_flush(db, db_match, commit)
     return db_match
 
 

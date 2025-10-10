@@ -47,32 +47,37 @@ def add():
             additional_info=additional_info,
             game_mode_id=game_mode_id,
             creator_id=creator_id,
-            winner_ids=players_ids_winners,
-            loser_ids=players_ids_losers,
+            players_ids_winners=players_ids_winners,
+            players_ids_losers=players_ids_losers,
         )
 
         try:
             MatchService.process_match(get_db(), match_data)
             flash("Mecz dodany pomyślnie.", "success")
         except Exception as e:
-            print("Error processing match:", e)  # Debug print
             flash(f"Wystąpił błąd podczas dodawania meczu: {str(e)}", "danger")
 
     if request.method == "POST":
         form = request.form
-
-        print("DEBUG: form data received:", form)  # Debug print
 
         teams = form.get("teams")
         ranked = form.get("ranked")
         players1 = form.getlist("players1")
         players2 = form.getlist("players2")
         winner = form.get("winner")
-        date = form.get("date")
-        time = form.get("time")
+        additional_info = form.get("additional_info", "").strip()
+
+        _date = form.get("date")
+        _time = form.get("time")
+
+        if not current_user.admin:
+            date = datetime.datetime.now()
+        else:
+            date = datetime.datetime.strptime(f"{_date} {_time}", "%Y-%m-%d %H:%M")
 
         teams = bool(teams)
-        ranked = bool(ranked)
+        is_ranked = bool(ranked)
+        additional_info = additional_info if additional_info else None
 
         if not players1 or not players2:
             flash("Musisz wybrać graczy.", "danger")
@@ -80,20 +85,38 @@ def add():
             flash("Gracze nie mogą się powtarzać.", "danger")
         elif not winner:
             flash("Musisz wybrać zwycięzcę.", "danger")
-        elif current_user.admin and (not date or not time):
-            flash("Musisz podać datę i godzinę.", "danger")
+        elif len(players1) != len(players2):
+            flash("Drużyny muszą mieć taki sam rozmiar.", "danger")
         else:
-            losers = players2 if players1 == winner else players1
+            _winners = []
+            _losers = []
+
+            if teams:
+                if winner == "A":
+                    _winners = [int(w) for w in players1]
+                    _losers = [int(l) for l in players2]
+                else:
+                    _winners = [int(w) for w in players2]
+                    _losers = [int(l) for l in players1]
+            else:
+                winner_id = int(winner)
+                
+                if winner in players1:
+                    _winners = [winner_id]
+                    _losers = [int(players2[0])]
+                else:
+                    _winners = [winner_id]
+                    _losers = [int(players1[0])]
 
             _create_match(
-                date=datetime.datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M"),
-                is_ranked=ranked,
-                additional_info=form.get("additional_info"),
-                game_mode_id=1,                 # narazie tylko basic 8
-                creator_id=current_user.id,     # sprawdz czy id jest ok w sensie czy flask ogarnia to id z bazy
-                players_ids_winners=winner,     # pydantic sie tu prul todo: !!
-                players_ids_losers=losers,
-            ) # wsm to nw czy to dziala xd todo:
+                date=date,
+                is_ranked=is_ranked,
+                additional_info=additional_info,
+                game_mode_id=1,
+                creator_id=current_user.id,
+                players_ids_winners=_winners,
+                players_ids_losers=_losers,
+            )
 
     players = get_all_players(get_db())
 

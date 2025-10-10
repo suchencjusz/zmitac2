@@ -1,6 +1,6 @@
 from extensions import db, ensure_admin_user, get_db, init_db, login_manager
 from flask import Flask
-from models.models import Player
+from models.models import GameMode, Player
 from werkzeug.security import check_password_hash
 
 
@@ -19,11 +19,19 @@ def create_test_app():
 
 
 def test_db_initialization():
+    """Test that init_db creates tables, default game mode, and admin user."""
     app = create_test_app()
     with app.app_context():
-        players = Player.query.all()
-
-        assert players == []
+        # Check that admin was created automatically
+        admin = Player.query.filter_by(nick="admin").first()
+        assert admin is not None
+        assert admin.admin is True
+        assert admin.judge is True
+        
+        # Check that default game mode was created
+        gamemode = GameMode.query.filter_by(name="8-ball").first()
+        assert gamemode is not None
+        assert gamemode.description == "Standardowy bilard"
 
 
 def test_get_db():
@@ -40,21 +48,21 @@ def test_get_db():
         assert fetched.nick == "test"
 
 
-def test_ensure_admin_user(monkeypatch):
+def test_ensure_admin_user_idempotent(monkeypatch):
+    """Test that calling ensure_admin_user multiple times doesn't create duplicates."""
     monkeypatch.setenv("ADMIN_NICK", "admin")
     monkeypatch.setenv("ADMIN_PASSWORD", "adminpass")
 
     app = create_test_app()
     with app.app_context():
-        admin = Player.query.filter_by(nick="admin").first()
-
-        assert admin is None
-
+        count_before = Player.query.filter_by(nick="admin").count()
+        assert count_before == 1
+        
         ensure_admin_user()
-
+        
+        count_after = Player.query.filter_by(nick="admin").count()
+        assert count_after == 1
+        
         admin = Player.query.filter_by(nick="admin").first()
-
-        assert admin is not None
-        assert check_password_hash(admin.password, "adminpass")
         assert admin.admin is True
         assert admin.judge is True

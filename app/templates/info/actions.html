@@ -19,6 +19,7 @@
             <li><a href="{{ url_for('admin.change_someone_password') }}">Zmień czyjeś hasło</a></li>
             <li><a href="{{ url_for('admin.change_someone_permissions') }}">Zmień czyjeś permisje</a></li>
             <li><a href="{{ url_for('admin.add_gamemode') }}">Dodaj tryb gry</a></li>
+            <li><a href="{{ url_for('admin.import_matches') }}">Importuj mecze z ZMiTAC <sup>1</sup></a></li>
             <!-- zmień czyjś nick -->
         </ul>
     </div>
@@ -28,7 +29,7 @@
     <div id="action-item">
         <h2>Sędzia</h2>
         <ul>
-            <!-- dodaj mecz -->
+            <li><a href="{{ url_for('match.add') }}">Dodaj mecz</a></li>
             <li><a href="{{ url_for('judge.new_player') }}">Dodaj gracza</a></li>
         </ul>
     </div>

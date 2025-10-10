@@ -1,12 +1,31 @@
 services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: zmitac
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: zmitac_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
   web:
     build: .
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=
-      - ADMIN_PASSWORD=dupa1234
+      - DATABASE_URL=postgresql://zmitac:dev_password@db:5432/zmitac_dev
+      - SECRET_KEY=dev_secret_key_change_in_production
+      - ADMIN_NICK=admin
+      - ADMIN_PASSWORD=admin123
+      - DEBUG=True
     volumes:
-      - .:/app
-      # - ./custom.css:/app/app/static/styles.css
+      - .:/code
+    depends_on:
+      - db
     restart: unless-stopped
+
+volumes:
+  postgres_dev_data:

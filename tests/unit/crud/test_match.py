@@ -16,11 +16,23 @@ def test_player(db_session):
 
 @pytest.fixture
 def test_gamemode(db_session):
-    gamemode = GameMode(name="8-ball", description="Standard 8-ball pool")
-    db_session.add(gamemode)
-    db_session.commit()
+    
+    # todo: cos tu nie gra
+    gamemode = db_session.query(GameMode).filter(GameMode.name == "8-ball").first()
+    
+    if not gamemode:
+        gamemode = GameMode(name="8-ball", description="Standardowy bilard")
+        db_session.add(gamemode)
+        db_session.commit()
+
     return gamemode
 
+def test_default_gamemode(db_session, test_gamemode):
+    # Test that the fixture creates the game mode correctly
+    gamemode = db_session.query(GameMode).filter(GameMode.name == "8-ball").first()
+    assert gamemode is not None
+    assert gamemode.description == "Standardowy bilard"
+    assert gamemode.id == test_gamemode.id
 
 def test_create_match(db_session, test_player, test_gamemode):
     match_data = MatchCreate(

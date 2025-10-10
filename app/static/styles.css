@@ -214,7 +214,7 @@ th {
 /*  matches  */
 /*           */
 
-#game-add-players {
+#game-add-players, #game-add-winners {
     aspect-ratio: auto; 
     display: flex;
     flex-direction: row;
@@ -228,7 +228,11 @@ th {
     white-space: nowrap;
 }
 
-#game-add-players select {
+#additional_info {
+    max-width: 80%;
+}
+
+#game-add-players select, #winner select {
     min-width: 160px;
     /* flex: 0 1 auto;  */
 }

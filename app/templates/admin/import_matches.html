@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Importuj mecze z ZMiTAC <sup>1</sup></h2>
+
+<div class="basic-form">
+    <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />  
+
+        <input type="file" id="file" name="file" accept=".csv" required>
+
+        <button type="submit">Importuj mecze</button>
+    </form>
+</div>
+
+{% endblock %}
