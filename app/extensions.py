@@ -10,7 +10,7 @@ login_manager = LoginManager()
 
 def init_db(app) -> None:
     """Create all database tables."""
-    
+
     from models.models import GameMode
 
     with app.app_context():
@@ -35,7 +35,7 @@ def get_db() -> SQLAlchemy:
 
 def ensure_admin_user():
     """Ensure that admin user exists, auto-create if not."""
-    
+
     from crud.player import get_player_by_nick
     from models.models import Player
 
@@ -53,7 +53,7 @@ def ensure_admin_user():
         )
         db.session.add(admin)
         db.session.commit()
-        
+
         print(f"Created admin user: {admin_nick}")
     else:
         print("Admin user already exists.")

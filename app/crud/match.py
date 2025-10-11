@@ -1,6 +1,6 @@
+from crud import commit_or_flush
 from models.models import Match
 from schemas.schemas import MatchCreate
-from crud import commit_or_flush
 
 
 def create_match(db, match: MatchCreate, commit=True):

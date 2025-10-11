@@ -1,7 +1,7 @@
+from crud import commit_or_flush
 from models.models import Player
 from schemas.schemas import PlayerCreate
 from sqlalchemy.orm import Session
-from crud import commit_or_flush
 
 
 def get_player_by_id(db: Session, player_id: int) -> Player:

@@ -1,14 +1,13 @@
+import datetime
+
 from crud.player import get_all_players
 from decorators import judge_required
 from extensions import get_db
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, flash, render_template, request
 from flask_login import current_user, login_required
 from flask_wtf.csrf import CSRFProtect
-
-import datetime
-
-from services.match_service import MatchService
 from schemas.schemas import MatchCreate
+from services.match_service import MatchService
 
 csrf = CSRFProtect()
 
@@ -100,7 +99,7 @@ def add():
                     _losers = [int(l) for l in players1]
             else:
                 winner_id = int(winner)
-                
+
                 if winner in players1:
                     _winners = [winner_id]
                     _losers = [int(players2[0])]

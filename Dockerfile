@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /code/
 
-EXPOSE 5000
+EXPOSE 5001
 
 WORKDIR /code/app
 

@@ -1,6 +1,6 @@
+from crud import commit_or_flush
 from models.models import MatchPlayer
 from schemas.schemas import MatchPlayerCreate
-from crud import commit_or_flush
 
 
 def create_match_player(db, match_player: MatchPlayerCreate, commit=True):

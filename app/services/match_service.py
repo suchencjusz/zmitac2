@@ -1,7 +1,6 @@
 from crud.match import create_match
-from crud.player import get_player_by_id, update_player_elo
 from crud.match_player import create_match_player
-
+from crud.player import get_player_by_id, update_player_elo
 from schemas.schemas import MatchCreate, MatchPlayerCreate
 from services.elo_service import EloService
 
@@ -11,7 +10,7 @@ class MatchService:
     #
     # logika meczowa, transkacja sql
     #
-    
+
     @staticmethod
     def process_match(db, match_data: MatchCreate):
         try:

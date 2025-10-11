@@ -1,3 +1,7 @@
+import ast
+import csv
+import datetime
+
 from crud.game_mode import create_game_mode, get_game_mode_by_name, get_game_modes, update_game_mode
 from crud.player import create_player, get_all_players, get_player_by_nick
 from decorators import admin_required
@@ -9,10 +13,6 @@ from models.models import GameMode, Player
 from schemas.schemas import MatchCreate, PlayerCreate
 from services.match_service import MatchService
 from werkzeug.security import generate_password_hash
-
-import ast
-import csv
-import datetime
 
 csrf = CSRFProtect()
 
@@ -143,27 +143,27 @@ def import_matches():
             csv_content = csv_file.stream.read().decode("utf-8").splitlines()
             csv_reader = csv.reader(csv_content)
             next(csv_reader)  # skip header
-            
+
             # Zbierz wszystkie wiersze i odwróć kolejność (od najstarszych)
             rows = list(csv_reader)
             rows.reverse()
-            
+
             # Pobierz domyślny game mode
             game_mode = get_game_mode_by_name(db.session, "8-ball")
             if not game_mode:
                 flash("Brak domyślnego trybu gry '8-ball'!", "error")
                 return redirect(url_for("admin.import_matches"))
-            
+
             imported_count = 0
             skipped_count = 0
-            
+
             for row in rows:
                 if len(row) != 6:
                     skipped_count += 1
                     continue
 
                 _, a_str, b_str, winner, date_str, multi_game_str = row
-                
+
                 # Parsuj listy graczy (z pojedynczych cudzysłowów)
                 # ['Dortex', 'topol'] lub ['filip_pro']
                 try:
@@ -172,17 +172,17 @@ def import_matches():
                 except:
                     skipped_count += 1
                     continue
-                
+
                 # Parsuj datę
                 try:
                     match_date = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
                 except:
                     match_date = datetime.datetime.now()
-                
+
                 # Sprawdź/utwórz graczy
                 team_a_ids = []
                 team_b_ids = []
-                
+
                 for nick in team_a:
                     player = get_player_by_nick(db.session, nick)
                     if not player:
@@ -196,7 +196,7 @@ def import_matches():
                         )
                         player = create_player(db.session, player_data)
                     team_a_ids.append(player.id)
-                
+
                 for nick in team_b:
                     player = get_player_by_nick(db.session, nick)
                     if not player:
@@ -209,7 +209,7 @@ def import_matches():
                         )
                         player = create_player(db.session, player_data)
                     team_b_ids.append(player.id)
-                
+
                 # Określ zwycięzców i przegranych
                 winner = winner.lower().strip()
                 if winner == 'a':
@@ -221,18 +221,18 @@ def import_matches():
                 else:
                     skipped_count += 1
                     continue
-                
+
                 # Utwórz mecz
                 match_data = MatchCreate(
                     date=match_date,
                     is_ranked=True,
-                    additional_info=f"Import z CSV",
+                    additional_info="Import z CSV",
                     game_mode_id=game_mode.id,
                     creator_id=current_user.id,
                     players_ids_winners=winners_ids,
                     players_ids_losers=losers_ids
                 )
-                
+
                 try:
                     MatchService.process_match(db.session, match_data)
                     imported_count += 1
@@ -240,9 +240,9 @@ def import_matches():
                     print(f"Error importing match: {e}")
                     skipped_count += 1
                     continue
-            
+
             flash(f"Zaimportowano {imported_count} meczy. Pominięto {skipped_count}.", "success")
-            
+
         except Exception as e:
             flash(f"Błąd podczas importu: {str(e)}", "error")
             return redirect(url_for("admin.import_matches"))
