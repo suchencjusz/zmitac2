@@ -290,6 +290,27 @@ select[multiple] option:checked {
     }
 }
 
+/* matches all */
+
+.match-ranked {
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    border-left: 3px solid rgba(255, 215, 0, 0.6);
+}
+
+.match-friendly {
+    box-shadow: 0 2px 8px rgba(100, 149, 237, 0.2);
+    border-left: 3px solid rgba(100, 149, 237, 0.4);
+}
+
+.match-ranked:hover {
+    /* box-shadow: 0 4px 16px rgba(255, 215, 0, 0.5); */
+    background-color: rgba(255, 217, 0, 0.1);
+}
+
+.match-friendly:hover {
+    /* box-shadow: 0 4px 12px rgba(100, 149, 237, 0.3); */
+    background-color: rgba(100, 149, 237, 0.1);
+}
 
 /* special marqque for fit-in */
 

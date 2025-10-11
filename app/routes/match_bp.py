@@ -1,5 +1,6 @@
 import datetime
 
+from crud.match_player import get_all_matches_with_nicknames
 from crud.player import get_all_players
 from decorators import judge_required
 from extensions import get_db
@@ -15,9 +16,10 @@ csrf = CSRFProtect()
 match_bp = Blueprint("match", __name__)
 
 
-@match_bp.route("/info", methods=["GET"])
-def info():
-    return render_template("match/info.html")
+@match_bp.route("/all", methods=["GET"])
+def all():
+    matches = get_all_matches_with_nicknames(get_db())
+    return render_template("match/all.html", matches=matches)
 
 
 # todo: game from db ofc

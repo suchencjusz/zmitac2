@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="stats-matches-short">
+    <h2>Wszystkie mecze ({{ matches|length }})</h2>
+
+    Ostatni mecz miał miejsce 3 dni temu. (to do:)
+
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Zwycięzcy</th>
+                <th>Przegrani</th>
+            </tr>
+
+            {% for match in matches %}
+            <tr class="{% if match.is_ranked %}match-ranked{% else %}match-friendly{% endif %}">
+                <td>{{ loop.revindex }}</td>
+                <td class="winners">
+                    {% for player in match.winners %}
+                        <a href="{{ url_for('player_bp.info', player_nick=player.nick) }}">{{ player.nick }}</a>
+                        {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td class="losers">
+                    {% for player in match.losers %}
+                        <a href="{{ url_for('player_bp.info', player_nick=player.nick) }}">{{ player.nick }}</a>
+                        {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

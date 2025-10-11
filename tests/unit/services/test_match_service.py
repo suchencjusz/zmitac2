@@ -1,7 +1,7 @@
 import pytest
 
 from models.models import GameMode
-from schemas.schemas import MatchCreate, PlayerCreate
+from schemas.schemas import PlayerCreate, MatchCreateWithPlayersID
 
 from crud.player import (
     create_player,
@@ -39,7 +39,7 @@ def test_1v1_unranked_match(db_session, create_test_players, create_test_gamemod
     players = create_test_players
     gamemodes = create_test_gamemodes
 
-    match_data = MatchCreate(
+    match_data = MatchCreateWithPlayersID(
         date=datetime.datetime.now(),
         is_ranked=False,
         additional_info="Test unranked 1v1 match",
@@ -62,7 +62,7 @@ def test_1v1_ranked_match(db_session, create_test_players, create_test_gamemodes
     players = create_test_players
     gamemodes = create_test_gamemodes
 
-    match_data = MatchCreate(
+    match_data = MatchCreateWithPlayersID(
         date=datetime.datetime.now(),
         is_ranked=True,
         additional_info="Test ranked 1v1 match",
@@ -88,7 +88,7 @@ def test_2v2_unranked_match(db_session, create_test_players, create_test_gamemod
     p1, p2, p3, p4, p5 = players
     gamemode = gamemode[0]
 
-    match_data = MatchCreate(
+    match_data = MatchCreateWithPlayersID(
         date=datetime.datetime.now(),
         is_ranked=False,
         additional_info="Test unranked 2v2 match",
@@ -119,7 +119,7 @@ def test_2v2_ranked_match(db_session, create_test_players, create_test_gamemodes
     p1, p2, p3, p4, p5 = players
     gamemode = gamemode[0]
 
-    match_data = MatchCreate(
+    match_data = MatchCreateWithPlayersID(
         date=datetime.datetime.now(),
         is_ranked=True,
         additional_info="Test ranked 2v2 match",
@@ -149,7 +149,7 @@ def test_none_vs_none_match(db_session, create_test_players, create_test_gamemod
     p1, p2, p3, p4, p5 = players
     gamemode = gamemode[0]
 
-    match_data = MatchCreate(
+    match_data = MatchCreateWithPlayersID(
         date=datetime.datetime.now(),
         is_ranked=True,
         additional_info="Test ranked none vs none match",

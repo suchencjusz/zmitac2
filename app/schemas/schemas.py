@@ -1,7 +1,7 @@
 import datetime
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 #
 # --- GAME MODE ---
@@ -84,14 +84,16 @@ class PlayerLogin(BaseModel):
 
 
 class MatchBase(BaseModel):
-    date: datetime.datetime = datetime.datetime.now()  # todo: sprawdz czy dzialaa ten dateime
+    date: datetime.datetime = Field(default_factory=datetime.datetime.now)
     is_ranked: bool = True
     additional_info: Optional[str] = None
     game_mode_id: int
 
-
 class MatchCreate(MatchBase):
     creator_id: int
+
+
+class MatchCreateWithPlayersID(MatchCreate):
     players_ids_winners: list[int]
     players_ids_losers: list[int]
 
@@ -114,12 +116,17 @@ class MatchPlayerBase(BaseModel):
     is_winner: bool
     elo_change: float
 
-
 class MatchPlayerCreate(MatchPlayerBase):
     pass
 
 
 class MatchPlayerOut(MatchPlayerBase):
     id: int
+    player: PlayerOut
+    match: MatchOut | None = None
 
     model_config = ConfigDict(from_attributes=True)
+
+class MatchWithPlayers(MatchOut):
+    winners: list[PlayerOut] = []
+    losers: list[PlayerOut] = []

@@ -10,7 +10,7 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from flask_wtf.csrf import CSRFProtect
 from models.models import GameMode, Player
-from schemas.schemas import MatchCreate, PlayerCreate
+from schemas.schemas import MatchCreateWithPlayersID, PlayerCreate
 from services.match_service import MatchService
 from werkzeug.security import generate_password_hash
 
@@ -139,16 +139,13 @@ def import_matches():
             return redirect(url_for("admin.import_matches"))
 
         try:
-            # Parsuj CSV
             csv_content = csv_file.stream.read().decode("utf-8").splitlines()
             csv_reader = csv.reader(csv_content)
             next(csv_reader)  # skip header
 
-            # Zbierz wszystkie wiersze i odwróć kolejność (od najstarszych)
             rows = list(csv_reader)
             rows.reverse()
 
-            # Pobierz domyślny game mode
             game_mode = get_game_mode_by_name(db.session, "8-ball")
             if not game_mode:
                 flash("Brak domyślnego trybu gry '8-ball'!", "error")
@@ -164,8 +161,6 @@ def import_matches():
 
                 _, a_str, b_str, winner, date_str, multi_game_str = row
 
-                # Parsuj listy graczy (z pojedynczych cudzysłowów)
-                # ['Dortex', 'topol'] lub ['filip_pro']
                 try:
                     team_a = ast.literal_eval(a_str)
                     team_b = ast.literal_eval(b_str)
@@ -173,20 +168,17 @@ def import_matches():
                     skipped_count += 1
                     continue
 
-                # Parsuj datę
                 try:
                     match_date = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
                 except:
                     match_date = datetime.datetime.now()
 
-                # Sprawdź/utwórz graczy
                 team_a_ids = []
                 team_b_ids = []
 
                 for nick in team_a:
                     player = get_player_by_nick(db.session, nick)
                     if not player:
-                        # Utwórz nowego gracza z domyślnym hasłem
                         player_data = PlayerCreate(
                             nick=nick,
                             password=generate_password_hash("default123"),
@@ -210,7 +202,6 @@ def import_matches():
                         player = create_player(db.session, player_data)
                     team_b_ids.append(player.id)
 
-                # Określ zwycięzców i przegranych
                 winner = winner.lower().strip()
                 if winner == 'a':
                     winners_ids = team_a_ids
@@ -222,8 +213,7 @@ def import_matches():
                     skipped_count += 1
                     continue
 
-                # Utwórz mecz
-                match_data = MatchCreate(
+                match_data = MatchCreateWithPlayersID(
                     date=match_date,
                     is_ranked=True,
                     additional_info="Import z CSV",

@@ -13,8 +13,3 @@ if __name__ == "__main__":
         debug=config.DEBUG,
     )
 
-# todo:
-# zrobic auto nightly build gdzies moze na mikrusie
-# albo na serwerze babilonskim niech to bedzie potem to wydupce
-# a potem zrobic basic wyswietlanie meczy i uzywkotnikow
-# i sprawdzic czy dziala update

@@ -2,10 +2,248 @@
 
 {% block content %}
 
-<h2>Zasady</h2>
+<div class="rules-container">
+    <h2>Zasady gry w ósemkę (8-ball)</h2>
 
-<p>
-    todo:
-</p>
+    <h3>Faule - sytuacje, w których gracz traci kolejkę:</h3>
+    
+    <div class="rules-grid">
+        <div class="rule-card">
+            <div class="rule-number">1</div>
+            <div class="rule-content">
+                Zawodnik <strong>nie trafi</strong> bilą białą w żadną bilę kolorową
+            </div>
+        </div>
+        
+        <div class="rule-card">
+            <div class="rule-number">2</div>
+            <div class="rule-content">
+                Zawodnik <strong>wbije bilę białą</strong>
+            </div>
+        </div>
+        
+        <div class="rule-card">
+            <div class="rule-number">4</div>
+            <div class="rule-content">
+                Zawodnik trafi jako pierwszą <strong>bilę przeciwnika</strong> lub <strong>bilę nr 8</strong> w sytuacji, gdy na stole wciąż znajdują się bile należące do jego grupy
+            </div>
+        </div>
+        
+        <div class="rule-card critical">
+            <div class="penalty-top">NATYCHMIASTOWA</div>
+            <div class="rule-number-critical">5</div>
+            <div class="rule-content">
+                Zawodnik wbije poza rozbiciem <strong>bilę nr 8</strong> przed wbiciem wszystkich pozostałych bil ze swojej grupy
+            </div>
+            <div class="penalty-bottom">PRZEGRANA ⚠️</div>
+        </div>
+        
+        <div class="rule-card critical">
+            <div class="penalty-top">NATYCHMIASTOWA</div>
+            <div class="rule-number-critical">6</div>
+            <div class="rule-content">
+                Zawodnik wbije <strong>bilę nr 8</strong> do innej łuzy, niż zadeklarowana
+            </div>
+            <div class="penalty-bottom">PRZEGRANA</div>
+        </div>
+        
+        <div class="rule-card">
+            <div class="rule-number">7</div>
+            <div class="rule-content">
+                Którakolwiek z bil zostanie <strong>wybita poza stół</strong>
+            </div>
+        </div>
+        
+        <div class="rule-card">
+            <div class="rule-number">8</div>
+            <div class="rule-content">
+                Zawodnik dotknie <strong>ręką, kijem lub częścią odzieży</strong> jakiejkolwiek bili na stole
+                <div class="note">(z wyjątkiem prawidłowego zagrania bili białej kapką kija i białej bili „w ręce")</div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <h3>Inne mniej lub bardziej oczywiste zjawiska na stole bilardowym:</h3>
+    <div class="rules-grid">
+        <div class="rule-card">
+            <div class="rule-number">1</div>
+            <div class="rule-content">
+                nw wsm xd
+            </div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">2</div>
+            <div class="rule-content">
+                nw wsm xd
+            </div>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">3</div>
+            <div class="rule-content">
+                nw wsm xd
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <p>📖 Więcej informacji o grze znajdziesz na:</p>
+        <a href="https://pl.wikipedia.org/wiki/%C3%93semka_(bilard)" target="_blank" class="external-link">
+            Wikipedia - Ósemka (bilard)
+        </a>
+    </div>
+</div>
+
+<style>
+.rules-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.rule-card {
+    background-color: #000000;
+    border: 4px ridge #C0C0C0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 150px;
+}
+
+.rule-card.critical {
+    background-color: #000000;
+    border: 4px ridge #FF0000;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+.penalty-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, #FF0000, #CC0000);
+    color: #FFFF00;
+    font-weight: bold;
+    font-size: 0.85em;
+    padding: 8px 10px;
+    text-align: center;
+    border-bottom: 2px solid #CC0000;
+    letter-spacing: 1px;
+}
+
+.penalty-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, #FF0000, #CC0000);
+    color: #FFFF00;
+    font-weight: bold;
+    font-size: 0.85em;
+    padding: 8px 10px;
+    text-align: center;
+    border-top: 2px solid #CC0000;
+    letter-spacing: 1px;
+}
+
+.rule-number {
+    background: linear-gradient(to bottom, #C0C0C0, #808080);
+    color: #000000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+    border: 3px outset #C0C0C0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.rule-number-critical {
+    background: linear-gradient(to bottom, #FF0000, #CC0000);
+    color: #FFFF00;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+    border: 3px outset #FF0000;
+    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.5);
+}
+
+.rule-content {
+    flex: 1;
+    line-height: 1.6;
+    text-align: center;
+    color: #00FF00;
+}
+
+.note {
+    margin-top: 12px;
+    font-size: 0.85em;
+    opacity: 0.7;
+    font-style: italic;
+    color: #00FFFF;
+}
+
+.info-box {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #000000;
+    border: 4px ridge #00FFFF;
+    text-align: center;
+}
+
+.external-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #FF00FF, #800080);
+    border: 3px outset #FF00FF;
+    text-decoration: none;
+    color: #00FF00;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.external-link:hover {
+    background: linear-gradient(to bottom, #800080, #FF00FF);
+    border: 3px inset #FF00FF;
+    transform: translateY(-2px);
+}
+
+@media screen and (max-width: 768px) {
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .penalty-top,
+    .penalty-bottom {
+        font-size: 0.75em;
+        padding: 6px 5px;
+    }
+}
+</style>
 
 {% endblock %}

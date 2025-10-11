@@ -69,7 +69,7 @@
         <div id="menu">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('info.rules') }}">Zasady</a>
-            <a href="{{ url_for('match.info') }}">Mecze</a>
+            <a href="{{ url_for('match.all') }}">Mecze</a>
             <a href="{{ url_for('info.about') }}">Info</a>
 
             {% if current_user.is_authenticated %}
@@ -85,7 +85,7 @@
         </div>
 
         <div id="footer">
-            <p>2025 &copy; ZMiTAC²</p>
+            <p>2025 - Niech żyje ZMiTAC²</p>
         </div>
 
     </div>
