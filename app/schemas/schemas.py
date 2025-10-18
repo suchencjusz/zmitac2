@@ -100,7 +100,6 @@ class MatchCreateWithPlayersID(MatchCreate):
 
 class MatchOut(MatchBase):
     id: int
-    game_mode: GameModeOut
 
     model_config = ConfigDict(from_attributes=True)
 

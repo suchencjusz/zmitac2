@@ -22,23 +22,53 @@ def create_match_player(db, match_player: MatchPlayerCreate, commit=True):
     return db_match_player
 
 
-def get_match_player(db, match_player_id: int) -> MatchPlayerOut | None:
-    db_match_player = (
-        db.query(MatchPlayer).filter(MatchPlayer.id == match_player_id).first()
+# def get_match_player(db, match_player_id: int) -> MatchPlayerOut | None:
+#     db_match_player = (
+#         db.query(MatchPlayer).filter(MatchPlayer.id == match_player_id).first()
+#     )
+#     if db_match_player:
+#         return MatchPlayerOut(
+#             id=db_match_player.id,
+#             player_id=db_match_player.player_id,
+#             match_id=db_match_player.match_id,
+#             elo_change=db_match_player.elo_change,
+#             is_winner=db_match_player.is_winner,
+#         )
+#     return None
+
+
+# def get_all_match_players(db) -> list[MatchPlayerOut]:
+#     db_match_players = db.query(MatchPlayer).all()
+#     return [
+#         MatchPlayerOut(
+#             id=mp.id,
+#             player_id=mp.player_id,
+#             match_id=mp.match_id,
+#             elo_change=mp.elo_change,
+#             is_winner=mp.is_winner,
+#         )
+#         for mp in db_match_players
+#     ]
+
+def get_match_players_by_match_id(db, match_id: int) -> list[MatchPlayerOut]:
+    db_match_players = (
+        db.query(MatchPlayer).filter(MatchPlayer.match_id == match_id).all()
     )
-    if db_match_player:
-        return MatchPlayerOut(
-            id=db_match_player.id,
-            player_id=db_match_player.player_id,
-            match_id=db_match_player.match_id,
-            elo_change=db_match_player.elo_change,
-            is_winner=db_match_player.is_winner,
+    return [
+        MatchPlayerOut(
+            id=mp.id,
+            player_id=mp.player_id,
+            match_id=mp.match_id,
+            elo_change=mp.elo_change,
+            is_winner=mp.is_winner,
         )
-    return None
+        for mp in db_match_players
+    ]
 
-
-def get_all_match_players(db) -> list[MatchPlayerOut]:
-    db_match_players = db.query(MatchPlayer).all()
+def get_match_players_elo_changes_by_match_id(db, match_id: int) -> list[MatchPlayerOut]:
+    db_match_players = (
+        db.query(MatchPlayer).filter(MatchPlayer.match_id == match_id).all()
+    )
     return [
         MatchPlayerOut(
             id=mp.id,

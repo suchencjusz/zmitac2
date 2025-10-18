@@ -4,10 +4,10 @@ from crud.match_player import get_all_matches_with_nicknames
 from crud.player import get_all_players
 from decorators import judge_required
 from extensions import get_db
-from flask import Blueprint, flash, render_template, request
+from flask import Blueprint, flash, render_template, request, redirect
 from flask_login import current_user, login_required
 from flask_wtf.csrf import CSRFProtect
-from schemas.schemas import MatchCreate
+from schemas.schemas import MatchCreateWithPlayersID
 from services.match_service import MatchService
 
 csrf = CSRFProtect()
@@ -23,9 +23,30 @@ def all():
 
 
 # todo: game from db ofc
-@match_bp.route("/game", methods=["GET"])
-def game():
-    return render_template("match/game.html")
+# @match_bp.route("/info", methods=["GET"])
+# def game():
+#     return render_template("match/info.html")
+
+@match_bp.route("/info/<int:match_id>", methods=["GET"])
+def info(match_id):
+    match_players, match_record = MatchService.get_match_details_by_id(get_db(), match_id)
+
+    if not match_record:
+        flash("Mecz o podanym ID nie istnieje.", "danger")
+        return redirect("/match/all")
+    # to do:
+    # tu skonczyles i
+    # https://127.0.0.1:5001/match/info/1 nie dziala
+
+    print(match_players)
+    print(match_record)
+
+    return render_template(
+        "match/info.html",
+        match=match_record,
+        match_players=match_players,
+    )
+    
 
 
 @match_bp.route("/add", methods=["GET", "POST"])
@@ -42,7 +63,7 @@ def add():
         players_ids_winners: list[int],
         players_ids_losers: list[int],
     ):
-        match_data = MatchCreate(
+        match_data = MatchCreateWithPlayersID(
             date=date,
             is_ranked=is_ranked,
             additional_info=additional_info,

@@ -1,7 +1,7 @@
-from crud.match import create_match
-from crud.match_player import create_match_player
+from crud.match import create_match, get_match_by_id
+from crud.match_player import create_match_player, get_match_players_elo_changes_by_match_id
 from crud.player import get_player_by_id, update_player_elo
-from schemas.schemas import MatchCreate, MatchPlayerCreate
+from schemas.schemas import MatchCreate, MatchPlayerCreate, MatchWithPlayers, MatchPlayerOut, MatchOut
 from services.elo_service import EloService
 
 
@@ -10,6 +10,13 @@ class MatchService:
     #
     # logika meczowa, transkacja sql
     #
+
+    @staticmethod
+    def get_match_details_by_id(db, match_id: int) -> tuple[list[MatchPlayerOut], MatchOut]:
+        match_players_details = get_match_players_elo_changes_by_match_id(db, match_id)
+        match_record = get_match_by_id(db, match_id)
+        return match_players_details, match_record
+
 
     @staticmethod
     def process_match(db, match_data: MatchCreate):
