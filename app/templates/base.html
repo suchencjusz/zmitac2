@@ -27,7 +27,7 @@
     <meta property="og:title" content="ZMiTAC² - Bilard">
     <meta property="og:description" content="Nowoczesny system do zarządzania meczami bilardowymi">
     <meta property="og:image" content="{{ url_for('static', filename='logo.gif') }}">
-    <meta property="og:url" content="{{ url_for('index') }}">
+    <meta property="og:url" content="{{ url_for('index.index') }}">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pl_PL">
   
@@ -67,7 +67,7 @@
         </div>
 
         <div id="menu">
-            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('index.index') }}">Home</a>
             <a href="{{ url_for('info.rules') }}">Zasady</a>
             <a href="{{ url_for('match.all') }}">Mecze</a>
             <a href="{{ url_for('player.all') }}">Ranking</a>

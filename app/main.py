@@ -59,6 +59,7 @@ def create_app(config: Config) -> Flask:
     #
     # blueprints
     #
+    from routes.index_bp import index_bp
     from routes.admin_bp import admin_bp
     from routes.auth_bp import auth_bp
     from routes.info_bp import info_bp
@@ -67,6 +68,7 @@ def create_app(config: Config) -> Flask:
     from routes.player_bp import player_bp
     from routes.webauthn_bp import webauthn_bp
 
+    app.register_blueprint(index_bp, url_prefix="/")
     app.register_blueprint(admin_bp, url_prefix="/admin")
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(info_bp, url_prefix="/info")
@@ -78,9 +80,9 @@ def create_app(config: Config) -> Flask:
     #
     # deafault routes
     #
-    @app.route("/")
-    def index():
-        return render_template("index.html")
+    # @app.route("/")
+    # def index():
+    #     return render_template("index.html")
 
     @app.route("/test_flash")
     def test_flash():

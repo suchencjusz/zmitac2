@@ -10,7 +10,13 @@ player_bp = Blueprint("player", __name__)
 
 @player_bp.route("/all", methods=["GET"])
 def all():
-    players = get_all_players(db.session) # to do: zaokraglic to trzeba i sortowac po elo i wywalic w indeksie link
+    players = get_all_players(db.session)
+    
+    players.sort(key=lambda p: p.elo, reverse=True)
+    
+    for player in players:
+        player.elo = round(player.elo, 1)
+
     return render_template("player/all.html", players=players)
 
 

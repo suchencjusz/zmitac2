@@ -8,14 +8,14 @@
     <div class="grid-item info">
 
         {% if match_players[0].is_winner %}
-            <p><b>Zwycięzca:</b> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[0].player.nick) }}"> {{ match_players[0].player.nick }} </a> </p>
+            <p><b>Zwycięzca:</b> <a class="clear-a" href="{{ url_for('player.info', player_nick=match_players[0].player.nick) }}"> {{ match_players[0].player.nick }} </a> </p>
         {% else %}
-            <p><b>Zwycięzca:</b> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[1].player.nick) }}"> {{ match_players[1].player.nick }} </a> </p>
+            <p><b>Zwycięzca:</b> <a class="clear-a" href="{{ url_for('player.info', player_nick=match_players[1].player.nick) }}"> {{ match_players[1].player.nick }} </a> </p>
         {% endif %}
 
         
         <p><b>Rozegrany:</b> {{ match.date }}       </p>
-        <p><b>Sędzia:</b> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=judge_player.nick) }}"> {{ judge_player.nick}} </a> </p>
+        <p><b>Sędzia:</b> <a class="clear-a" href="{{ url_for('player.info', player_nick=judge_player.nick) }}"> {{ judge_player.nick}} </a> </p>
         <p style="margin-bottom: 10px;"></p>
         <p><i>{% if match.additional_info %} {{ match.additional_info }} {% else %} {% endif %}</i></p>
     </div>
@@ -23,13 +23,13 @@
     <div class="grid-item versus">
 
         {% if match_players[0].is_winner %}
-            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[0].player.nick) }}"> <u><b> {{ match_players[0].player.nick }} </u></b> </a></p>
+            <p> <a class="clear-a" href="{{ url_for('player.info', player_nick=match_players[0].player.nick) }}"> <u><b> {{ match_players[0].player.nick }} </u></b> </a></p>
             <p>vs</p>
-            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[1].player.nick) }}"> <b> {{ match_players[1].player.nick }} </b> </a></p>                      
+            <p> <a class="clear-a" href="{{ url_for('player.info', player_nick=match_players[1].player.nick) }}"> <b> {{ match_players[1].player.nick }} </b> </a></p>                      
         {% else %}
-            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[0].player.nick) }}"> <u><b> {{ match_players[1].player.nick }} </u></b> </a></p>
+            <p> <a class="clear-a" href="{{ url_for('player.info', player_nick=match_players[0].player.nick) }}"> <u><b> {{ match_players[1].player.nick }} </u></b> </a></p>
             <p>vs</p>
-            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[1].player.nick) }}"> <b> {{ match_players[0].player.nick }} </b> </a></p>  
+            <p> <a class="clear-a" href="{{ url_for('player.info', player_nick=match_players[1].player.nick) }}"> <b> {{ match_players[0].player.nick }} </b> </a></p>  
         {% endif %}
 
     </div>
