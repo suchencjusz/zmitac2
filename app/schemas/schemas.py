@@ -88,6 +88,7 @@ class MatchBase(BaseModel):
     is_ranked: bool = True
     additional_info: Optional[str] = None
     game_mode_id: int
+    creator_id: int
 
 class MatchCreate(MatchBase):
     creator_id: int
@@ -121,8 +122,7 @@ class MatchPlayerCreate(MatchPlayerBase):
 
 class MatchPlayerOut(MatchPlayerBase):
     id: int
-    player: PlayerOut
-    match: MatchOut | None = None
+    player: Optional[PlayerOut] = None
 
     model_config = ConfigDict(from_attributes=True)
 

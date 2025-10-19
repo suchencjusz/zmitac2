@@ -17,23 +17,52 @@
 
             {% for match in matches %}
             <tr class="{% if match.is_ranked %}match-ranked{% else %}match-friendly{% endif %}">
-                <td>{{ loop.revindex }}</td>
+
+                <td class="clickable-cell">
+                    <a class="cell-link" href="{{ url_for('match.info', match_id=match.id) }}"> {{ loop.revindex }} </a>
+                </td>
+
                 <td class="winners">
                     {% for player in match.winners %}
-                        <a href="{{ url_for('player_bp.info', player_nick=player.nick) }}">{{ player.nick }}</a>
+                        <a href="{{ url_for('player.info', player_nick=player.nick) }}">{{ player.nick }}</a>
                         {% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </td>
+                
                 <td class="losers">
                     {% for player in match.losers %}
-                        <a href="{{ url_for('player_bp.info', player_nick=player.nick) }}">{{ player.nick }}</a>
+                        <a href="{{ url_for('player.info', player_nick=player.nick) }}">{{ player.nick }}</a>
                         {% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </td>
+
             </tr>
             {% endfor %}
         </table>
     </div>
 </div>
+
+<style>
+.clickable-cell {
+    /* zostaw domyślny padding td jak w reszcie tabeli */
+    vertical-align: middle;
+}
+
+/* link pokrywa cały obszar wizualny komórki bez psucia layoutu */
+.clickable-cell .cell-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+
+    /* ustaw tyle samo co padding td i skompensuj marginesem */
+    padding: 8px;     /* dopasuj do paddingu twoich komórek */
+    margin: -8px;     /* dokładnie odwrotność powyższego */
+}
+
+.clickable-cell .cell-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+</style>
 
 {% endblock %}

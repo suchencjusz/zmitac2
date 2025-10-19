@@ -12,9 +12,12 @@ class MatchService:
     #
 
     @staticmethod
-    def get_match_details_by_id(db, match_id: int) -> tuple[list[MatchPlayerOut], MatchOut]:
+    def get_match_details_by_id(db, match_id: int) -> tuple[list[MatchPlayerOut] | None, MatchOut | None]:
         match_players_details = get_match_players_elo_changes_by_match_id(db, match_id)
         match_record = get_match_by_id(db, match_id)
+
+
+        
         return match_players_details, match_record
 
 

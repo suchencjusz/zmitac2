@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Info o meczu</h2>
+
+<h3>to do: skonczyc</h3>
+
+dev:
+<div id="game-solo">
+    <!-- {{ match }}
+    {{ match_players }} -->
+</div>
+
+<div id="game-solo">
+    <div class="grid-item info">
+
+        {% if match_players[0].is_winner %}
+            <p><b>Zwycięzca:</b> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[0].player.nick) }}"> {{ match_players[0].player.nick }} </a> </p>
+        {% else %}
+            <p><b>Zwycięzca:</b> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[1].player.nick) }}"> {{ match_players[1].player.nick }} </a> </p>
+        {% endif %}
+
+        
+        <p><b>Rozegrany:</b> {{ match.date }}       </p>
+        <p><b>Sędzia:</b> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=judge_player.nick) }}"> {{ judge_player.nick}} </a> </p>
+        <p style="margin-bottom: 10px;"></p>
+        <p><i>{{ match.additional_info }}</i></p>
+    </div>
+
+    <div class="grid-item versus">
+
+        {% if match_players[0].is_winner %}
+            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[0].player.nick) }}"> <u><b> {{ match_players[0].player.nick }} </u></b> </a></p>
+            <p>vs</p>
+            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[1].player.nick) }}"> <b> {{ match_players[1].player.nick }} </b> </a></p>                      
+        {% else %}
+            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[0].player.nick) }}"> <u><b> {{ match_players[1].player.nick }} </u></b> </a></p>
+            <p>vs</p>
+            <p> <a class="clear-a" href="{{ url_for('player_bp.info', player_nick=match_players[1].player.nick) }}"> <b> {{ match_players[0].player.nick }} </b> </a></p>  
+        {% endif %}
+
+    </div>
+
+    <div class="grid-item">
+
+        <table>
+            <tr>
+                <!-- <th>#</th> -->
+                <th>Gracz</th>
+                <th>Zmiana</th>
+                <th>ELO</th>
+            </tr>
+
+            {% for mp in match_players %}
+            <tr>
+                <td> {{ mp.player.nick }} </td>
+                <td> {{ mp.elo_change }}  </td>
+                <td> {{ mp.player.elo }}  </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+{% endblock %}

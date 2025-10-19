@@ -1,12 +1,15 @@
 from crud import commit_or_flush
-from models.models import Match, MatchPlayer
+from models.models import Match, MatchPlayer, Player
 from schemas.schemas import (
     MatchPlayerCreate,
     MatchPlayerOut,
     MatchWithPlayers,
     PlayerOut,
 )
+
 from sqlalchemy.orm import joinedload
+from sqlalchemy import func, and_, or_, select
+
 
 
 def create_match_player(db, match_player: MatchPlayerCreate, commit=True):
@@ -65,20 +68,111 @@ def get_match_players_by_match_id(db, match_id: int) -> list[MatchPlayerOut]:
         for mp in db_match_players
     ]
 
-def get_match_players_elo_changes_by_match_id(db, match_id: int) -> list[MatchPlayerOut]:
-    db_match_players = (
-        db.query(MatchPlayer).filter(MatchPlayer.match_id == match_id).all()
+def get_match_players_elo_changes_by_match_id(db, match_id: int) -> list[MatchPlayerOut] | None:
+
+    # z racji z jakiegos pwoodu nie zapisduje elo_beofre i elo_after, sumuje zmieione elo :D
+
+    BASE_ELO = 1000.0
+
+    match_ref = db.query(Match.id, Match.date).filter(Match.id == match_id).one_or_none()
+    if not match_ref:
+        return None
+    target_date, target_id = match_ref.date, match_ref.id
+
+    players_subq = (
+        db.query(MatchPlayer.player_id)
+        .filter(MatchPlayer.match_id == match_id)
+        .subquery()
     )
-    return [
-        MatchPlayerOut(
-            id=mp.id,
-            player_id=mp.player_id,
-            match_id=mp.match_id,
-            elo_change=mp.elo_change,
-            is_winner=mp.is_winner,
+
+    hist = (
+        db.query(
+            MatchPlayer.id.label("mp_id"),
+            MatchPlayer.match_id.label("match_id"),
+            MatchPlayer.player_id.label("player_id"),
+            MatchPlayer.is_winner.label("is_winner"),
+            MatchPlayer.elo_change.label("elo_change"),
+            func.sum(MatchPlayer.elo_change)
+            .over(
+                partition_by=MatchPlayer.player_id,
+                order_by=(Match.date, Match.id),
+            )
+            .label("cum_delta"),
         )
-        for mp in db_match_players
-    ]
+        .join(Match, Match.id == MatchPlayer.match_id)
+        .filter(
+            MatchPlayer.player_id.in_(select(players_subq.c.player_id)),
+            or_(
+                Match.date < target_date,
+                and_(Match.date == target_date, Match.id <= target_id),
+            ),
+        )
+        .subquery()
+    )
+
+    rows = (
+        db.query(
+            hist.c.match_id,
+            hist.c.player_id,
+            hist.c.is_winner,
+            hist.c.elo_change,
+            hist.c.cum_delta,
+            MatchPlayer.id,
+        )
+        .join(MatchPlayer, MatchPlayer.id == hist.c.mp_id)
+        .join(Player, Player.id == hist.c.player_id)
+        .filter(hist.c.match_id == match_id)
+        .add_columns(Player)
+        .all()
+    )
+
+    results: list[MatchPlayerOut] = []
+    for match_id_, player_id, is_winner, elo_change, cum_delta, mp_id, player in rows:
+        elo_after = BASE_ELO + float(cum_delta or 0.0)
+        player_out = PlayerOut.model_validate(player).model_copy(
+            update={"elo": round(elo_after, 1)}
+        )
+        results.append(
+            MatchPlayerOut(
+                match_id=match_id_,
+                player_id=player_id,
+                is_winner=is_winner,
+                elo_change=round(float(elo_change or 0.0), 1),
+                player=player_out,
+                id=mp_id,
+            )
+        )
+    return results
+
+# def get_match_players_elo_changes_by_match_id(db, match_id: int) -> list[MatchPlayerOut] | None:
+#     db_match_players = (
+#         db.query(MatchPlayer)
+#         .options(joinedload(MatchPlayer.player))
+#         .filter(MatchPlayer.match_id == match_id)
+#         .all()
+#     )
+#
+#     results: list[MatchPlayerOut] = []
+#
+#     for mp in db_match_players:
+#         elo_change_rounded = round(mp.elo_change, 1)
+#
+#         player_out = PlayerOut.model_validate(mp.player) if mp.player else None
+#         if player_out and getattr(player_out, "elo", None) is not None:
+#             player_out = player_out.model_copy(update={"elo": round(player_out.elo, 1)})
+#
+#         results.append(
+#             MatchPlayerOut(
+#                 match_id=mp.match_id,
+#                 player_id=mp.player_id,
+#                 is_winner=mp.is_winner,
+#                 elo_change=elo_change_rounded,
+#                 player=player_out,
+#                 id=mp.id,
+#             )
+#         )
+#
+#     return results
 
 
 def get_all_matches_with_nicknames(db) -> list[MatchWithPlayers]:
@@ -107,6 +201,7 @@ def get_all_matches_with_nicknames(db) -> list[MatchWithPlayers]:
             additional_info=match.additional_info,
             game_mode_id=match.game_mode_id,
             game_mode=match.game_mode,
+            creator_id=match.creator_id,
             winners=[PlayerOut.model_validate(w) for w in winners],
             losers=[PlayerOut.model_validate(l) for l in losers],
         )

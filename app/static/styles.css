@@ -352,16 +352,24 @@ select[multiple] option:checked {
 
 /* a links */
 
+
+
+
 a {
     color: #ff0085;
     text-decoration: blink;
     font-weight: bold;
 }
 
-
 a:hover {
     
     animation: a_hover 1s infinite;
+}
+
+a.clear-a {
+    color: #00FF00;
+    text-decoration: none;
+    font-weight: normal;
 }
 
 @keyframes a_hover {

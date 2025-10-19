@@ -1,7 +1,7 @@
 import datetime
 
 from crud.match_player import get_all_matches_with_nicknames
-from crud.player import get_all_players
+from crud.player import get_all_players, get_player_by_id
 from decorators import judge_required
 from extensions import get_db
 from flask import Blueprint, flash, render_template, request, redirect
@@ -27,7 +27,7 @@ def all():
 # def game():
 #     return render_template("match/info.html")
 
-@match_bp.route("/info/<int:match_id>", methods=["GET"])
+@match_bp.route("/<int:match_id>", methods=["GET"])
 def info(match_id):
     match_players, match_record = MatchService.get_match_details_by_id(get_db(), match_id)
 
@@ -41,10 +41,22 @@ def info(match_id):
     print(match_players)
     print(match_record)
 
+    judge_player = get_player_by_id(get_db(), match_record.creator_id)
+
+    if len(match_players) > 2:
+        return render_template(
+            "match/info_team.html",
+            match=match_record,
+            match_players=match_players,
+            judge_player=judge_player,
+        )
+
+
     return render_template(
-        "match/info.html",
+        "match/info_solo.html",
         match=match_record,
         match_players=match_players,
+        judge_player=judge_player,
     )
     
 

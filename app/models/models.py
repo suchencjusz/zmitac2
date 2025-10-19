@@ -59,6 +59,12 @@ class Match(db.Model):
     game_mode = db.relationship("GameMode", back_populates="matches")
     players = db.relationship("MatchPlayer", back_populates="match")
 
+    __table_args__ = (
+        db.Index("ix_match_date_id", "date", "id"),
+        db.Index("ix_match_creator", "creator_id"),
+        db.Index("ix_match_game_mode", "game_mode_id"),
+    )
+
 
 class MatchPlayer(db.Model):
     __tablename__ = "match_players"
@@ -71,3 +77,10 @@ class MatchPlayer(db.Model):
 
     match = db.relationship("Match", back_populates="players")
     player = db.relationship("Player", back_populates="matches")
+
+    __table_args__ = (
+        db.Index("ix_mp_match", "match_id"),
+        db.Index("ix_mp_player", "player_id"),
+        db.Index("ix_mp_player_match", "player_id", "match_id"),
+        db.UniqueConstraint("match_id", "player_id", name="uq_mp_match_player"),  # zapobiega duplikatom
+    )

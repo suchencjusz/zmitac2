@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="stats-matches-short">
+    <h2>Ranking graczy ({{ players|length }})</h2>
+
+    <div class="table-wrapper">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Nick</th>
+                <th>Elo</th>
+            </tr>
+
+            {% for player in players %}
+            <tr>
+
+                <td class="clickable-cell">
+                    <a class="cell-link" href="{{ url_for('player.info', player_nick=player.nick) }}"> {{ loop.index }} </a>
+                </td>
+
+                <td class="nick">
+                    <a href="{{ url_for('player.info', player_nick=player.nick) }}">{{ player.nick }}</a>
+                </td>
+                
+                <td class="elo">
+                    {{ player.elo }}
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

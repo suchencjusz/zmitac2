@@ -240,3 +240,21 @@ def import_matches():
         return redirect(url_for("admin.import_matches"))
 
     return render_template("admin/import_matches.html")
+
+@admin_bp.route("/clear_db", methods=["GET", "POST"])
+@login_required
+@admin_required
+def clear_db():
+    if request.method == "POST":
+        try:
+            meta = db.metadata
+            for table in reversed(meta.sorted_tables):
+                db.session.execute(table.delete())
+            db.session.commit()
+            flash("Baza danych została wyczyszczona pomyślnie.", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Wystąpił błąd podczas czyszczenia bazy danych: {str(e)}", "error")
+        return redirect(url_for("admin.clear_db"))
+
+    return render_template("admin/clear_db.html")
