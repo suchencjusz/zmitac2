@@ -28,7 +28,7 @@ def login():
                 next_page = next_page.replace("\\", "")
                 if not urlparse(next_page).netloc and not urlparse(next_page).scheme:
                     return redirect(next_page)
-            return redirect(url_for("index"))
+            return redirect(url_for("index.index"))
 
         flash("Nieprawidłowy nick lub hasło!", "error")
 
@@ -63,7 +63,7 @@ def change_password():
 
         db.session.commit()
         flash("Hasło zostało zmienione!", "success")
-        return redirect(url_for("index"))
+        return redirect(url_for("index.index"))
 
     return render_template("auth/change_password.html")
 
@@ -73,4 +73,4 @@ def change_password():
 def logout():
     logout_user()
     flash("Zostałeś wylogowany.", "info")
-    return redirect(url_for("index"))
+    return redirect(url_for("index.index"))

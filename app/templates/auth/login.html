@@ -53,7 +53,7 @@
                 });
                 const verificationJSON = await verificationResp.json();
                 if (verificationJSON && verificationJSON.verified) {
-                    window.location.href = "{{ url_for('index') }}";
+                    window.location.href = "{{ url_for('index.index') }}";
                 } else {
                     alert("Authentication failed");
                 }

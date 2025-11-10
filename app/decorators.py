@@ -10,7 +10,7 @@ def admin_required(func):
     def decorated_view(*args, **kwargs):
         if not current_user.admin:
             flash("Wymagane uprawnienia administratora.", "error")
-            return redirect(url_for("index"))
+            return redirect(url_for("index.index"))
         return func(*args, **kwargs)
 
     return decorated_view
@@ -22,7 +22,7 @@ def judge_required(func):
     def decorated_view(*args, **kwargs):
         if not (current_user.judge or current_user.admin):
             flash("Wymagane uprawnienia sędziego.", "error")
-            return redirect(url_for("index"))
+            return redirect(url_for("index.index"))
         return func(*args, **kwargs)
 
     return decorated_view

@@ -26,6 +26,6 @@ def info(player_nick):
 
     if player is None:
         flash("Nie znaleziono gracza o podanym nicku", "error")
-        return redirect(url_for("index"))
+        return redirect(url_for("index.index"))
 
     return render_template("player/info.html", player=player)
